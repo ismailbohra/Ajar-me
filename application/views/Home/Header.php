@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <title>RMS</title>
-
-</head>
 <style>
-  body {
-    width: 100%;
-    height: 100%;
-    background: lightgrey;
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
   }
-
+  body{
+    margin:0;
+    padding:0;
+  }
   main {
+    top:0;
     width: 100%;
   }
 
@@ -49,7 +47,6 @@
         display: none;
       }
     }
-
 
   }
 
@@ -88,7 +85,9 @@
     font-size: 15px;
   }
 
-  li {
+  #navbar li {
+    margin:0;
+    border:none;
     cursor: pointer;
   }
 
@@ -110,10 +109,6 @@
     margin-top: 5rem;
   }
 </style>
-
-<body>
-
-
   <main id="main">
     <nav>
       <ul id="navbar">
@@ -141,7 +136,3 @@
       </ul>
     </nav>
   </main>
-
-</body>
-
-</html>
