@@ -67,6 +67,13 @@
     }
   }
 
+  #navbar-small li {
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+  }
+
   .icons {
     display: flex;
     gap: 1rem;
@@ -83,12 +90,13 @@
     font-size: 20px;
   }
 
-  .glyphicon-menu-down {
-    font-size: 15px;
+  .glyphicon-chevron-down {
+    font-size: 12px;
   }
 
   #navbar li {
     margin: 0;
+    padding: 0;
     border: none;
     cursor: pointer;
   }
@@ -110,6 +118,35 @@
     justify-content: center;
     margin-top: 5rem;
   }
+
+  .dropdown {
+    position: absolute;
+    list-style-type: none;
+    background-color: white;
+    padding: 1rem;
+    display: none;
+    border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .dropdown-item {
+    font-size: 18px;
+    margin: 2rem;
+    white-space: nowrap;
+    display: block;
+  }
+
+  .dropdown-item:hover {
+    background-color: #ddd;
+  }
+
+  #products:hover .products {
+    display: block;
+  }
+
+  .products:hover .products {
+    display: block;
+  }
 </style>
 <main id="main">
   <nav>
@@ -120,9 +157,19 @@
       </li>
       <li>HOME</li>
       <li>ABOUT US</li>
-      <li>PRODUCTS <span class="glyphicon glyphicon-menu-down"></span></li>
-      <li>DOWNLOADS <span class="glyphicon glyphicon-menu-down"></span></li>
-      <li>SHOWROOM <span class="glyphicon glyphicon-menu-down"></span></li>
+      <li style="position:relative;" id="products">PRODUCTS <span class="glyphicon glyphicon-chevron-down"></span>
+        <ul class="products dropdown">
+          <li class="dropdown-item">AJAR <span class="glyphicon glyphicon-chevron-right"></span></li>
+          <li class="dropdown-item">EBCO</li>
+          <li class="dropdown-item">CES</li>
+          <li class="dropdown-item">BWS (Breuer + Schmitz)</li>
+          <li class="dropdown-item">FSB</li>
+          <li class="dropdown-item">HELM</li>
+          <li class="dropdown-item">NORSEAL</li>
+        </ul>
+      </li>
+      <li>DOWNLOADS <span class="glyphicon glyphicon-chevron-down"></span></li>
+      <li>SHOWROOM <span class="glyphicon glyphicon-chevron-down"></span></li>
       <li>CONTACT US</li>
       <li><span class="glyphicon glyphicon-search"></span></li>
     </ul>
@@ -138,82 +185,3 @@
     </ul>
   </nav>
 </main>
-
-  <!-- 
-
-  <div id="navbarBasicExample" class="navbar-menu">
-    <a class="navbar-item">
-      Home
-    </a>
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        More
-      </a>
-      <div class="navbar-dropdown">
-        <div class="nested dropdown">
-          <a class="navbar-item">
-            <span class="icon-text ">
-              <span>Dropdown</span>
-              <span class="icon">
-                <i class="fas fa-chevron-right"></i>
-              </span>
-            </span>
-          </a>
-
-          <div class="dropdown-menu" id="dropdown-menu" role="menu">
-            <div class="dropdown-content">
-              <a href="/" class="dropdown-item">
-                Dropdown item
-              </a>
-              <a class="dropdown-item">
-                Other dropdown item
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="nested dropdown">
-          <a class="navbar-item">
-            <span class="icon-text ">
-              <span>Dropdown</span>
-              <span class="icon">
-                <i class="fas fa-chevron-right"></i>
-              </span>
-            </span>
-          </a>
-
-          <div class="dropdown-menu" id="dropdown-menu" role="menu">
-            <div class="dropdown-content">
-              <a href="/" class="dropdown-item">
-                Dropdown item
-              </a>
-              <a class="dropdown-item">
-                Other dropdown item
-              </a>
-              <a class="dropdown-item">
-                Other dropdown item
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <style>
-    .nested.dropdown:hover>.dropdown-menu {
-      display: block;
-    }
-
-    .nested.dropdown .dropdown-menu {
-      top: -12px;
-      margin-left: 100%;
-    }
-
-    .nested.dropdown .dropdown-trigger button::after {}
-
-    .nested.dropdown .dropdown-trigger button {
-      padding: 0px 0px;
-      border: 0px;
-      font-size: 14px;
-      font-weight: 400;
-    }
-  </style> -->
