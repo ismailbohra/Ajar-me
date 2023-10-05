@@ -90,8 +90,8 @@
     font-size: 20px;
   }
 
-  .glyphicon-chevron-down {
-    font-size: 12px;
+  .glyphicon-menu-down {
+    font-size: 15px;
   }
 
   #navbar li {
@@ -118,35 +118,6 @@
     justify-content: center;
     margin-top: 5rem;
   }
-
-  .dropdown {
-    position: absolute;
-    list-style-type: none;
-    background-color: white;
-    padding: 1rem;
-    display: none;
-    border-radius: 7px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-
-  .dropdown-item {
-    font-size: 18px;
-    margin: 2rem;
-    white-space: nowrap;
-    display: block;
-  }
-
-  .dropdown-item:hover {
-    background-color: #ddd;
-  }
-
-  #products:hover .products {
-    display: block;
-  }
-
-  .products:hover .products {
-    display: block;
-  }
 </style>
 <main id="main">
   <nav>
@@ -157,19 +128,9 @@
       </li>
       <li>HOME</li>
       <li>ABOUT US</li>
-      <li style="position:relative;" id="products">PRODUCTS <span class="glyphicon glyphicon-chevron-down"></span>
-        <ul class="products dropdown">
-          <li class="dropdown-item">AJAR <span class="glyphicon glyphicon-chevron-right"></span></li>
-          <li class="dropdown-item">EBCO</li>
-          <li class="dropdown-item">CES</li>
-          <li class="dropdown-item">BWS (Breuer + Schmitz)</li>
-          <li class="dropdown-item">FSB</li>
-          <li class="dropdown-item">HELM</li>
-          <li class="dropdown-item">NORSEAL</li>
-        </ul>
-      </li>
-      <li>DOWNLOADS <span class="glyphicon glyphicon-chevron-down"></span></li>
-      <li>SHOWROOM <span class="glyphicon glyphicon-chevron-down"></span></li>
+      <li>PRODUCTS <span class="glyphicon glyphicon-menu-down"></span></li>
+      <li>DOWNLOADS <span class="glyphicon glyphicon-menu-down"></span></li>
+      <li>SHOWROOM <span class="glyphicon glyphicon-menu-down"></span></li>
       <li>CONTACT US</li>
       <li><span class="glyphicon glyphicon-search"></span></li>
     </ul>
