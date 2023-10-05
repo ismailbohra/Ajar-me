@@ -1,95 +1,163 @@
 <style>
-    .footer{
-        height:300px;
-        width:100%;
-        background-color:white;    
-    }
-    .upper{
-        height:260px;
-        display:flex;        
-        justify-content: center;
-        align-items: center;
-        padding:2.5rem;
-    }
-    .first {
-        height:100%;
-        width:250px;
-        display:flex;
-        flex-direction:column;
-        justify-content: center;
-        align-items: center;
-        border-right:2px solid lightgrey;
-    }
-    #first-logo{
-        height:40%;
-        margin-bottom:3rem;
+    .footer {
+
+        width: 100%;
+        background-color: white;
+
+        @media screen and (min-width:551px) {
+            height: 300px;
+        }
     }
 
-    .first-input i{
-        position:absolute;                
-        padding:5px;   
-        margin-left:-40px;     
-        font-size:22px;
-        cursor:pointer;
+    .upper {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2.5rem;
+
+        @media screen and (min-width:551px) {
+            height: 260px;
+            flex-direction: row;
+        }
     }
-    .newsletter-input{
+
+    .first {
+        height: 100%;
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-right: 2px solid lightgrey;
+
+        @media screen and (max-width:550px) {
+            width: 100%;
+            align-items: flex-start;
+            padding-left: 1.5rem;
+            border-right: none;
+            border-bottom: 2px solid lightgrey;
+            padding-bottom: 1.5rem;
+        }
+    }
+
+    #first-logo {
+        height: 40%;
+        margin-bottom: 3rem;
+
+        @media screen and (max-width:550px) {
+            height: 100px;
+            margin-bottom: 2rem;
+        }
+    }
+
+    .first-input i {
+        position: absolute;
+        padding: 5px;
+        margin-left: -40px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    .newsletter-input {
         border: 2px solid #717070;
-        border-radius:7px; 
-        padding:0.5rem 1rem;
-        margin-right:5px;
+        border-radius: 7px;
+        padding: 0.5rem 4rem 0.5rem 1rem;
+        margin-right: 5px;
+
+        @media screen and (max-width:768px) {
+            font-size: 12px;
+            max-width: 130px;
+        }
     }
-    
-    .second{    
-        height:100%;
-        width:250px;        
-        border-right:2px solid lightgrey;
+
+    .second {
+        height: 100%;
+        width: 250px;
+        border-right: 2px solid lightgrey;
+
+        @media screen and (max-width:550px) {
+            width: 100%;
+            border-right: none;
+            border-bottom: 2px solid lightgrey;
+            padding-top: 1.5rem;
+        }
     }
-    .third{
-        height:100%;
-        width:250px;        
-        border-right:2px solid lightgrey;
+
+    .third {
+        height: 100%;
+        width: 250px;
+        border-right: 2px solid lightgrey;
+
+        @media screen and (max-width:550px) {
+            width: 100%;
+            border-right: none;
+            border-bottom: 2px solid lightgrey;
+            padding-top: 1.5rem;
+        }
     }
-    .fourth{
-        height:100%;                   
+
+    .fourth {
+        height: 100%;
+
+        @media screen and (max-width:550px) {
+            width: 100%;
+            padding-top: 1.5rem;
+        }
     }
-    ul{
+
+    .footer ul {
         list-style-type: none;
-        padding-left:1.5rem;
+        padding-left: 1.5rem;
     }
-    li{
-        font-size:15px;
-        margin:0.5rem;
-        font-weight:bold;
-        cursor:pointer;
+
+    .footer li {
+        font-size: 15px;
+        margin: 0.5rem;
+        font-weight: bold;
+        cursor: pointer;
+
+        @media screen and (max-width:768px) {
+            font-size: 12px;
+        }
     }
-    li:first-child{
+
+    .footer li:first-child {
         border-bottom: 2px solid red;
-        width:65px;
-        padding-bottom:5px;
-        margin-bottom:1.5rem;
+        width: 65px;
+        padding-bottom: 5px;
+        margin-bottom: 1.5rem;
         white-space: nowrap;
     }
-    .icons{
-        margin-top:1rem;
+
+    .icons {
+        margin-top: 1rem;
     }
-    .icons img{
-        height:25px;
+
+    .icons img {
+        height: 25px;
+
+        @media screen and (max-width:768px) {
+            height: 20px;
+        }
     }
-    .lower{        
-        margin:0;
-        display:flex;
-        align-items: center;    
-        height:40px;
-        background-color:#717070;
-        font-size:16px;
-        padding-left:2rem;
-        color:white;
+
+    .lower {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        height: 40px;
+        background-color: #717070;
+        font-size: 16px;
+        padding-left: 2rem;
+        color: white;
     }
 </style>
 <div class="footer">
     <div class="upper">
         <div class="first">
-                <img src="<?php echo base_url('assets/logo.svg') ?>" alt="brand logo" id='first-logo'>
+            <img src="<?php echo base_url('assets/logo.svg') ?>" alt="brand logo" id='first-logo'>
             <div class="first-newsletter">
                 <p class="newsletter-heading">NEWSLETTER</p>
                 <div class="first-input">
@@ -108,7 +176,7 @@
             </ul>
         </div>
         <div class="third">
-        <ul>
+            <ul>
                 <li>PRODUCTS</li>
                 <li>HANDLES</li>
                 <li>HINGES</li>
@@ -118,16 +186,18 @@
             </ul>
         </div>
         <div class="fourth">
-        <ul>
+            <ul>
                 <li>REACH OUT</li>
                 <li>LOCATION</li>
                 <li>CONTACT US</li>
-                <li><div class="icons">
-                <img src="<?php echo base_url('/assets/icons/facebook.svg') ?>" alt="facebook">
-                <img src="<?php echo base_url('/assets/icons/instagram.svg') ?>" alt="instagram">
-                <img src="<?php echo base_url('/assets/icons/youtube.svg') ?>" alt="youtube">
-                <img src="<?php echo base_url('/assets/icons/tiktok.svg') ?>" alt="tiktok">
-                </div></li>                
+                <li>
+                    <div class="icons">
+                        <img src="<?php echo base_url('/assets/icons/facebook.svg') ?>" alt="facebook">
+                        <img src="<?php echo base_url('/assets/icons/instagram.svg') ?>" alt="instagram">
+                        <img src="<?php echo base_url('/assets/icons/youtube.svg') ?>" alt="youtube">
+                        <img src="<?php echo base_url('/assets/icons/tiktok.svg') ?>" alt="tiktok">
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
