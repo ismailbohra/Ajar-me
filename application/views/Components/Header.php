@@ -147,6 +147,7 @@
     display: none;
     top: 60;
     min-width: 200px;
+    transition:0.5s;
   }
 
   .dropdown-item {
@@ -162,6 +163,7 @@
 
   #about:hover .about {
     display: block;
+    transition:1s;
   }
 
   #about:hover .dropdown-item {
@@ -304,6 +306,7 @@
     display: none;
     background-color: white;
     padding-left: 8px;
+    transition: all 0.5s;
     /* transition: max-height 0.2s ease-out; */
   }
 
@@ -371,12 +374,12 @@
         <div class="logo"><img src="<?php echo base_url('/assets/logo.svg') ?>" alt="brand logo" style="height:50px;">
         </div>
       </li>
-      <li><a href="#">HOME</a></li>
+      <li><a href="<?php echo base_url(); ?>">HOME</a></li>
       <li id="about" onmouseover="on();" onmouseout="off();">ABOUT US <span
           class="glyphicon glyphicon-chevron-down"></span>
         <ul class="about dropdown">
           <li class="dropdown-item">&emsp;<a href="#">Company</a>&emsp;</li>
-          <li class="dropdown-item">&emsp;<a href="#">Certifications</a>&emsp;</li>
+          <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/About/Certifications'); ?>">Certifications</a>&emsp;</li>
         </ul>
       </li>
       <li style="position:relative;" id="products" onmouseover="on();" onmouseout="off();">PRODUCTS <span
@@ -421,7 +424,7 @@
       <li id="contact" onmouseover="on();" onmouseout="off();">CONTACT US <span
           class="glyphicon glyphicon-chevron-down">
           <ul class="contact dropdown">
-            <li class="dropdown-item">&emsp;<a href="#">Office Location Map</a>&emsp;</li>
+            <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/Contact'); ?>">Office Location Map</a>&emsp;</li>
             <li class="dropdown-item">&emsp;<a href="#">Office Address</a>&emsp;</li>
           </ul>
       </li>
@@ -442,14 +445,14 @@
       <div class="sidenav-head">
         MENU <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="font-weight:100;">&times;</a>
       </div>
-      <a href="#">HOME</a>
+      <a href="<?php echo base_url(); ?>">HOME</a>
       <button class="dropdown-btn">ABOUT US
         <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i class="fa fa-minus dropdown-icon"></i>
         </div>
       </button>
       <div class="dropdown-container">
         <a href="#">Company</a>
-        <a href="#">Certifications</a>
+        <a href="<?php echo base_url('/About/Certifications'); ?>">Certifications</a>
       </div>
       <button class="dropdown-btn">PRODUCTS
         <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i class="fa fa-minus dropdown-icon"></i>
@@ -500,7 +503,7 @@
         </div>
       </button>
       <div class="dropdown-container">
-        <a href="#">Office Location Map</a>
+        <a href="<?php echo base_url('/Contact'); ?>">Office Location Map</a>
         <a href="#">Office Address</a>
       </div>
     </div>

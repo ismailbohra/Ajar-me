@@ -122,6 +122,13 @@
             font-size: 12px;
         }
     }
+    .footer li a{
+        color:rgb(51, 51, 51);
+    }
+    .footer li a:hover{
+        color:rgb(51, 51, 51);
+        text-decoration:none;
+    }
 
     .footer li:first-child {
         border-bottom: 2px solid red;
@@ -169,7 +176,7 @@
         <div class="second">
             <ul>
                 <li>INFORMATION</li>
-                <li>HOME</li>
+                <li><a href="<?php echo base_url(); ?>">HOME</a></li>
                 <li>ABOUT US</li>
                 <li>SHOWROOM</li>
                 <li>DOWNLOADS</li>
