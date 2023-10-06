@@ -54,7 +54,7 @@
         font-size: 20px;
     }
 </style>
-<div class="center">
+<div class="center" id="center">
     <div class="heading">
         <h1>We are Certified</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus nobis distinctio earum a facere quam
