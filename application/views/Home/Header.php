@@ -263,9 +263,6 @@
   }
 
   .sidenav .closebtn {
-    /* position: absolute;
-    top: 0;
-    right: 10; */
     font-size: 36px;
     width: 36px;
     height: 36px;
@@ -273,7 +270,6 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    /* margin-left: 200px; */
   }
 
   .sidenav-head {
@@ -286,11 +282,6 @@
     font-weight: bold;
     margin-bottom: 2rem;
   }
-
-  /* On mouse-over */
-  /* .sidenav a:hover, .dropdown-btn:hover {
-  color: #f1f1f1;
-} */
 
   /* Main content */
   .main {
@@ -306,7 +297,7 @@
     display: none;
     background-color: white;
     padding-left: 8px;
-    transition: all 0.5s;
+    transition: 0.5s;
     /* transition: max-height 0.2s ease-out; */
   }
 

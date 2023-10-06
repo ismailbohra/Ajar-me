@@ -12,9 +12,9 @@ class About extends CI_Controller
 
 	public function Certifications()
 	{		
-		$this->load->view('Components/Header');
+		$this->load->view('Home/Header');
 		$this->load->view('About/Certificate');
-		$this->load->view('Components/Footer');
+		$this->load->view('Home/Footer');
 	}
 
 }

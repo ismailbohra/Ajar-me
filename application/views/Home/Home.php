@@ -1,104 +1,181 @@
 <style>
-    .center {
-        width: 100%;
-        background-color: lightgrey;
-        padding-top: 60px;
-        padding-bottom: 5rem;
-    }
+.home {
+    width: 100%;
+    background-color: lightgrey;
+    padding-top: 60px;
+    padding-bottom: 5rem;
+}
 
-    .heading {
-        margin: 5rem;
+.mySlides {display: none; height: calc(100vh - 100px); width:calc(100vw - 50px); overflow:hidden; margin-top:20px;border-radius:10px;@media screen and (max-width:768px) {
+    height:350px;
+    width:calc(100vw - 30px);
+  }}
 
-        @media screen and (max-width:400px) {
-            margin: 5rem 2rem;
-        }
-    }
+img {vertical-align: middle;}
 
-    .heading h1 {
-        font-size: 45px;
-    }
+/* Slideshow container */
+.slideshow-container {
+  width:calc(100vw - 50px);
+  position: relative;
+  margin: auto;
+  overflow:hidden;
+  border-radius:10px;
+  @media screen and (max-width:768px) {
+    height:350px;
+    width:calc(100vw - 30px);
+  }
+}
 
-    .heading p {
-        font-size: 15px;
-    }
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
 
-    .certificates {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        place-items: center;
-        padding: 5rem;
-        grid-row-gap: 5rem;
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
 
-        @media screen and (max-width:400px) {
-            padding: 2rem;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-        }
-    }
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  text-decoration:none;
+}
 
-    .certificate {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 230px;
-        background-color: white;
-        border-radius: 7px;
-    }
+/* Fading animation */
+.fade {
+  opacity: 1;
+}
 
-    .certificate img {
-        height: 300px;
-    }
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
 
-    .certificate p {
-        text-align: center;
-        font-weight: bold;
-        font-size: 20px;
-    }
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next {font-size: 11px}
+}
+
+
+.featured{
+    margin:15rem 5rem 15rem 5rem;
+}
+.featured h1{
+    margin-left:3rem;
+    margin-bottom:5rem;
+}
+.featured-div{
+    display:flex;    
+}
+.featured-img-div{
+    min-height:300px;
+    min-width:600px;
+    border:5px solid #717070;
+    border-radius:10px;
+    position: relative;
+}
+.featured-img{
+    height:100%;
+    width:100%;
+    object-fit:cover;
+    border-radius:10px;
+    position:absolute;
+    top:-20;
+    left:20;
+}
+.featured-description{
+    margin-left:5rem;
+    font-size:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+}
+.featured-buttons{
+    margin-bottom:20px;
+    display:flex;
+    align-items: center;
+}
+.featured-buttons a{
+    color:#000505;
+    opacity:0.5;        
+    margin-right:3rem;    
+}
+.featured-buttons a:hover{
+    text-decoration:none;
+    cursor: pointer;
+}
+.featured-buttons a .fa{
+    font-size:30px;
+}
 </style>
-<div class="center" id="center">
-    <div class="heading">
-        <h1>We are Certified</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus nobis distinctio earum a facere quam
-            excepturi maxime odio molestiae sint maiores, magnam quaerat voluptas accusamus recusandae laudantium
-            expedita, numquam ex rem. Pariatur animi itaque vitae quos aspernatur exercitationem cupiditate, atque
-            quidem ad perspiciatis dolorem consequuntur ipsum modi culpa ducimus veritatis dignissimos quas? Dolore,
-            labore tempore.</p>
-    </div>
-    <div class="certificates">
-        <div class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 01</p>
+<div class="home" >
+
+<div class="slideshow-container">
+
+<div class="mySlides">
+  <img src="<?php echo base_url('/assets/Home.png');?>" style="height:100%; width:100%;object-fit:cover;overflow:hidden;">
+</div>
+
+<div class="mySlides">
+  <img src="<?php echo base_url('/assets/Home-img.png');?>" style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
+</div>
+
+<a class="prev" onclick="plusSlides(-1)">❮</a>
+<a class="next" onclick="plusSlides(1)">❯</a>
+
+</div>
+
+<div class="featured">
+    <h1>Featured Projects</h1>
+    <div class="featured-div">
+        <div class="featured-img-div">
+            <img src="<?php echo base_url('/assets/Home-img.png'); ?>" alt="featured product" class="featured-img">
         </div>
-        <div class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 02</p>
-        </div>
-        <div class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 03</p>
-        </div>
-        <div class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 04</p>
-        </div>
-        <div class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 05</p>
-        </div>
-        <div class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 06</p>
-        </div>
-        <div class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 07</p>
-        </div>
-        <div class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 08</p>
-        </div>
-        <div class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 09</p>
+        <div class="featured-description">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor quae ipsum mollitia ducimus, iste fuga doloribus ullam cum facere.</p>
+            <div class="featured-buttons">
+            <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Previous</a>
+            <a>Next&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            </div>
         </div>
     </div>
+</div>
+
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slides[slideIndex-1].style.display = "block";  
+}
+</script>
 </div>
