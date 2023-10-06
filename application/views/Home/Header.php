@@ -100,10 +100,17 @@
   }
 
   #navbar li {
+    height: 100%;
+    display: flex;
+    align-items: center;
     margin: 0;
     padding: 0;
     border: none;
     cursor: pointer;
+  }
+
+  #navbar li span {
+    margin-left: 5px;
   }
 
   #navbar li a {
@@ -137,10 +144,9 @@
     position: absolute;
     list-style-type: none;
     background-color: white;
-    padding: 1rem;
     display: none;
-    border-radius: 7px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    top: 60;
+    min-width: 200px;
   }
 
   .dropdown-item {
@@ -151,8 +157,7 @@
   }
 
   .dropdown-item:hover {
-    background-color: #ddd;
-    border-radius: 7px;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   #about:hover .about {
@@ -160,7 +165,7 @@
   }
 
   #about:hover .dropdown-item {
-    padding: 0.5rem 0rem;
+    padding: 1rem 0rem;
   }
 
   #products:hover .products {
@@ -168,7 +173,7 @@
   }
 
   #products:hover .dropdown-item {
-    padding: 0.5rem 0rem;
+    padding: 1rem 0rem;
   }
 
   #products:hover .dropdown-item:first-child {
@@ -180,8 +185,8 @@
   }
 
   .products-submenu {
-    top: 10;
-    left: 215;
+    top: 0;
+    left: 205;
   }
 
   #download:hover .download {
@@ -189,7 +194,7 @@
   }
 
   #download:hover .dropdown-item {
-    padding: 0.5rem 0rem;
+    padding: 1rem 0rem;
   }
 
   #showroom:hover .showroom {
@@ -197,7 +202,7 @@
   }
 
   #showroom:hover .dropdown-item {
-    padding: 0.5rem 0rem;
+    padding: 1rem 0rem;
   }
 
   #contact:hover .contact {
@@ -210,8 +215,9 @@
 
   .contact {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    top: 15;
+    top: 33;
     left: -95;
+
   }
 
 
@@ -346,6 +352,17 @@
   .fa-minus {
     display: none;
   }
+
+
+
+  #overlay {
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+  }
 </style>
 <main id="main">
   <nav>
@@ -355,13 +372,15 @@
         </div>
       </li>
       <li><a href="#">HOME</a></li>
-      <li id="about">ABOUT US <span class="glyphicon glyphicon-chevron-down"></span>
+      <li id="about" onmouseover="on();" onmouseout="off();">ABOUT US <span
+          class="glyphicon glyphicon-chevron-down"></span>
         <ul class="about dropdown">
           <li class="dropdown-item">&emsp;<a href="#">Company</a>&emsp;</li>
           <li class="dropdown-item">&emsp;<a href="#">Certifications</a>&emsp;</li>
         </ul>
       </li>
-      <li style="position:relative;" id="products">PRODUCTS <span class="glyphicon glyphicon-chevron-down"></span>
+      <li style="position:relative;" id="products" onmouseover="on();" onmouseout="off();">PRODUCTS <span
+          class="glyphicon glyphicon-chevron-down"></span>
         <ul class="products dropdown">
           <li class="dropdown-item" id="products-submenu" style="justify-content:space-between;">&emsp;AJAR <span
               class="glyphicon glyphicon-chevron-right"></span>
@@ -386,18 +405,21 @@
           <li class="dropdown-item">&emsp;<a href="#">NORSEAL</a>&emsp;</li>
         </ul>
       </li>
-      <li id="download">DOWNLOADS <span class="glyphicon glyphicon-chevron-down"></span>
+      <li id="download" onmouseover="on();" onmouseout="off();">DOWNLOADS <span
+          class="glyphicon glyphicon-chevron-down"></span>
         <ul class="download dropdown">
           <li class="dropdown-item">&emsp;<a href="#">Catalogues</a>&emsp;</li>
         </ul>
       </li>
-      <li id="showroom">SHOWROOM <span class="glyphicon glyphicon-chevron-down"></span>
+      <li id="showroom" onmouseover="on();" onmouseout="off();">SHOWROOM <span
+          class="glyphicon glyphicon-chevron-down"></span>
         <ul class="showroom dropdown">
           <li class="dropdown-item">&emsp;<a href="#">Showroom Tour Video</a>&emsp;</li>
           <li class="dropdown-item">&emsp;<a href="#">Showroom Pictures</a>&emsp;</li>
         </ul>
       </li>
-      <li id="contact">CONTACT US <span class="glyphicon glyphicon-chevron-down">
+      <li id="contact" onmouseover="on();" onmouseout="off();">CONTACT US <span
+          class="glyphicon glyphicon-chevron-down">
           <ul class="contact dropdown">
             <li class="dropdown-item">&emsp;<a href="#">Office Location Map</a>&emsp;</li>
             <li class="dropdown-item">&emsp;<a href="#">Office Address</a>&emsp;</li>
@@ -421,7 +443,7 @@
         MENU <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="font-weight:100;">&times;</a>
       </div>
       <a href="#">HOME</a>
-      <button class="dropdown-btn"></i>ABOUT US
+      <button class="dropdown-btn">ABOUT US
         <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i class="fa fa-minus dropdown-icon"></i>
         </div>
       </button>
@@ -429,7 +451,7 @@
         <a href="#">Company</a>
         <a href="#">Certifications</a>
       </div>
-      <button class="dropdown-btn"></i>PRODUCTS
+      <button class="dropdown-btn">PRODUCTS
         <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i class="fa fa-minus dropdown-icon"></i>
         </div>
       </button>
@@ -458,14 +480,14 @@
         <a href="#">HELM</a>
         <a href="#">NORSEAL</a>
       </div>
-      <button class="dropdown-btn"></i>DOWNLOADS
+      <button class="dropdown-btn">DOWNLOADS
         <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i class="fa fa-minus dropdown-icon"></i>
         </div>
       </button>
       <div class="dropdown-container">
         <a href="#">Catalogues</a>
       </div>
-      <button class="dropdown-btn"></i>SHOWROOM
+      <button class="dropdown-btn">SHOWROOM
         <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i class="fa fa-minus dropdown-icon"></i>
         </div>
       </button>
@@ -473,7 +495,7 @@
         <a href="#">Showroom Tour Video</a>
         <a href="#">Showroom Pictures</a>
       </div>
-      <button class="dropdown-btn"></i>CONTACT US
+      <button class="dropdown-btn">CONTACT US
         <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i class="fa fa-minus dropdown-icon"></i>
         </div>
       </button>
@@ -485,6 +507,7 @@
 
   </nav>
 </main>
+<div id="overlay"></div>
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
   var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -503,8 +526,6 @@
     });
   }
 
-
-
 </script>
 <script>
   function openNav() {
@@ -513,5 +534,12 @@
 
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+  }
+  function on() {
+    document.getElementById("overlay").style.display = "block";
+  }
+
+  function off() {
+    document.getElementById("overlay").style.display = "none";
   }
 </script>
