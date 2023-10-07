@@ -164,7 +164,7 @@
 <div class="footer">
     <div class="upper">
         <div class="first">
-            <img src="<?php echo base_url('assets/logo.svg') ?>" alt="brand logo" id='first-logo'>
+            <img src="<?php echo base_url('assets/ajar-logo.png') ?>" alt="brand logo" id='first-logo'>
             <div class="first-newsletter">
                 <p class="newsletter-heading">NEWSLETTER</p>
                 <div class="first-input">

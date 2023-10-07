@@ -27,7 +27,7 @@
   }
 
   nav {
-    height: 60px;
+    height: 90px;
     width: 100%;
     background-color: white;
     z-index: 10;
@@ -35,6 +35,10 @@
     justify-content: center;
     align-items: center;
     position: fixed;
+    
+    @media screen and (max-width:768px) {
+      height: 70px;
+    }
   }
 
   #navbar {
@@ -372,7 +376,7 @@
   <nav>
     <ul id="navbar">
       <li>
-        <div class="logo"><img src="<?php echo base_url('/assets/logo.svg') ?>" alt="brand logo" style="height:50px;">
+        <div class="logo"><img src="<?php echo base_url('/assets/ajar-logo.png') ?>" alt="brand logo" style="height:70px;">
         </div>
       </li>
       <li><a href="<?php echo base_url(); ?>" class="navbar-headings">HOME</a></li>
@@ -435,7 +439,7 @@
     </ul>
     <ul id="navbar-small">
       <li>
-        <div class="logo"><img src="<?php echo base_url('/assets/logo.svg') ?>" alt="brand logo" style="height:50px;">
+        <div class="logo"><img src="<?php echo base_url('/assets/ajar-logo.png') ?>" alt="brand logo" style="height:50px;">
         </div>
       </li>
       <li>

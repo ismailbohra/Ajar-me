@@ -2,7 +2,7 @@
     .center {
         width: 100%;
         background-color: lightgrey;
-        padding-top: 60px;
+        padding-top: 90px;
         padding-bottom: 5rem;
     }
 
