@@ -1,6 +1,6 @@
 
 <style>
-    .container {
+    .company-container {
         width: 100%;
         background-color: lightgrey;
         padding-top: 90px;
@@ -11,7 +11,7 @@
         }
     }
 
-    .heading {
+    .company-heading {
         margin: 8rem;
 
         @media screen and (max-width:400px) {
@@ -19,9 +19,10 @@
         }
     }
 
-    .heading h1 {
+    .company-heading h1 {
+        text-decoration:underline;
         font-size: 45px;
-
+        margin-bottom: 5rem;
         @media screen and (max-width:800px) {
             font-size: 35px;
         }
@@ -68,62 +69,45 @@
         }
     }
 
-    .banner {
-        display: flex;
+    .company-mission{
+        margin-top: 25rem;
+        margin-bottom: 20rem;
+    }
+    .mission-background{
+        width: 100%;
+        height:350px;
+        display:flex;
         justify-content: center;
+        background-color:white;
+        border-radius:15px;
+        position:relative;
+        padding:0rem 10rem 0rem 10rem;
     }
-
-    .boxcontainer {
-        width: 100%;
+    .mission-img-div{
+        width:50%;
+        height:110%;
+        margin-top:-7rem;
+        margin-right:-10rem;
+        z-index:5;
     }
-
-    .box1,
-    .box2 {
-        width: 50%;
+    .mission-img{
+        height:100%;
+        width:100%;        
     }
-
-    .box1 {
-        background-color: red;
-        z-index: 10;
-    }
-
-    .box2 {
-        z-index: 1;
-        background-color: blue;
-        top: 25%;
-        left: 25%;
-    }
-
-    .founder {
-        display: flex;
-        width: 100%;
-        margin-top: 5rem;
-        justify-content: space-around;
-        background: linear-gradient(to right, lightgrey 50%, white 50%);
-        padding-bottom: 15px;
-    }
-
-    .founder img {
-        margin-top: -5rem;
-        box-shadow: 14px 14px 0 -4px white, 14px 14px 0 0 #717070;
-        border-radius: 15px;
-    }
-    .image{
-        
-    }
-    .image img{
-        z-index: 10;
-    }
-    .border{
-        z-index: 1;
-        margin: 10;
-        height: 300;
-        aspect-ratio: 16/9;
+    .mission-div{
+        width:50%;
+        margin-top:7rem;
+        margin-bottom: -7rem;
+        padding-left:10rem;
+        padding-right:5rem;
+        background-color:#717070;
+        color:white;
+        border-radius:15px;
     }
 </style>
-<div class="container">
-    <div class="heading">
-        <h1>Our Story</h1>
+<div class="company-container">
+    <div class="company-heading">
+        <h1>Discover Our Journey</h1>
         <p class="story_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus nobis distinctio
             earum a facere quam
             excepturi maxime odio molestiae sint maiores, magnam quaerat voluptas accusamus recusandae laudantium
@@ -140,24 +124,18 @@
             Suspendisse finibus
             molestie mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet aliquam lorem.
             Suspendisse finibus molestie mattis.
-            molestie mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet aliquam lorem.
-            Suspendisse finibus molestie mattis.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet aliquam lorem.
-            Suspendisse finibus
-            molestie mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet aliquam lorem.
-            Suspendisse finibus molestie mattis.
         </p>
         <img src="<?php echo base_url('/assets/story_first.png') ?>" alt="certificate">
     </div>
-    <div class="heading">
-        <h1>Meet Our Founder</h1>
-    </div>
-    <div class="founder">
-        <div></div>
-        <div class="image">
-            <div class="border"></div>
-            <img height="300px" src="<?php echo base_url('/assets/story_first.png') ?>" alt="certificate">
+    <div class="company-mission">
+        <div class="mission-background">
+            <div class="mission-img-div">
+                <img src="<?php echo base_url('/assets/company-mission.png') ?>" alt="company mission" class="mission-img">
+            </div>
+            <div class="mission-div">
+                <h1>Our Mission</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio quos fugit voluptate! Est quas dolor voluptate atque neque corporis nihil doloribus alias laborum error aspernatur odio consequuntur suscipit impedit fugit quibusdam sequi, quidem ex accusamus ut! Eius, sint! Saepe, ipsam porro? Labore magni maiores voluptatibus libero vitae magnam adipisci. Aliquid.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio quos fugit voluptate! Est quas dolor voluptate atque neque corporis nihil doloribus alias laborum error aspernatur odio consequuntur suscipit impedit fugit quibusdam sequi, quidem ex accusamus ut! Eius, sint! Saepe, ipsam porro? Labore magni maiores voluptatibus libero vitae magnam adipisci. Aliquid.</p>
+            </div>
         </div>
-        <div></div>
     </div>
 </div>

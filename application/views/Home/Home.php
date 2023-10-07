@@ -616,8 +616,8 @@
 
   .self {
     background: transparent;
-    top: 230;
-    left: 230;
+    top: 182;
+    left: 182;
 
     @media screen and (max-width:768px) {
       top: 85;
@@ -631,12 +631,16 @@
   }
 
   .self img {
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
 
-    @media screen and (max-width:350px) {
-      height: 60px;
-      width: 60px;
+    @media screen and (max-width:768px) {
+      height:100px;
+      width:100px;
+      @media screen and (max-width:350px) {
+        height: 60px;
+        width: 60px;
+      }
     }
   }
 </style>

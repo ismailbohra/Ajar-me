@@ -383,7 +383,7 @@
       <li id="about" onmouseover="on();" onmouseout="off();" class="navbar-headings">ABOUT US <span
           class="glyphicon glyphicon-chevron-down"></span>
         <ul class="about dropdown">
-          <li class="dropdown-item">&emsp;<a href="#">Company</a>&emsp;</li>
+          <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/About/Company'); ?>">Company</a>&emsp;</li>
           <li class="dropdown-item">&emsp;<a
               href="<?php echo base_url('/About/Certifications'); ?>">Certifications</a>&emsp;</li>
         </ul>
@@ -458,7 +458,7 @@
         </div>
       </button>
       <div class="dropdown-container">
-        <a href="#">Company</a>
+        <a href="<?php echo base_url('/About/Company'); ?>">Company</a>
         <a href="<?php echo base_url('/About/Certifications'); ?>">Certifications</a>
       </div>
       <button class="dropdown-btn">PRODUCTS
