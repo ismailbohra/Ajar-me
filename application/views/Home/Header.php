@@ -1,5 +1,9 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
+  rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -9,6 +13,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Kumbh Sans', sans-serif;
   }
 
   body {
@@ -140,6 +145,10 @@
     margin-top: 5rem;
   }
 
+  .navbar-headings {
+    font-weight: 600;
+  }
+
   .dropdown {
     position: absolute;
     list-style-type: none;
@@ -147,11 +156,12 @@
     display: none;
     top: 60;
     min-width: 200px;
-    transition:0.5s;
+    transition: 0.5s;
   }
 
   .dropdown-item {
     font-size: 16px;
+    font-weight: 400;
     white-space: nowrap;
     display: flex;
     align-items: center;
@@ -163,7 +173,7 @@
 
   #about:hover .about {
     display: block;
-    transition:1s;
+    transition: 1s;
   }
 
   #about:hover .dropdown-item {
@@ -365,16 +375,17 @@
         <div class="logo"><img src="<?php echo base_url('/assets/logo.svg') ?>" alt="brand logo" style="height:50px;">
         </div>
       </li>
-      <li><a href="<?php echo base_url(); ?>">HOME</a></li>
-      <li id="about" onmouseover="on();" onmouseout="off();">ABOUT US <span
+      <li><a href="<?php echo base_url(); ?>" class="navbar-headings">HOME</a></li>
+      <li id="about" onmouseover="on();" onmouseout="off();" class="navbar-headings">ABOUT US <span
           class="glyphicon glyphicon-chevron-down"></span>
         <ul class="about dropdown">
           <li class="dropdown-item">&emsp;<a href="#">Company</a>&emsp;</li>
-          <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/About/Certifications'); ?>">Certifications</a>&emsp;</li>
+          <li class="dropdown-item">&emsp;<a
+              href="<?php echo base_url('/About/Certifications'); ?>">Certifications</a>&emsp;</li>
         </ul>
       </li>
-      <li style="position:relative;" id="products" onmouseover="on();" onmouseout="off();">PRODUCTS <span
-          class="glyphicon glyphicon-chevron-down"></span>
+      <li style="position:relative;" id="products" onmouseover="on();" onmouseout="off();" class="navbar-headings">
+        PRODUCTS <span class="glyphicon glyphicon-chevron-down"></span>
         <ul class="products dropdown">
           <li class="dropdown-item" id="products-submenu" style="justify-content:space-between;">&emsp;AJAR <span
               class="glyphicon glyphicon-chevron-right"></span>
@@ -399,23 +410,24 @@
           <li class="dropdown-item">&emsp;<a href="#">NORSEAL</a>&emsp;</li>
         </ul>
       </li>
-      <li id="download" onmouseover="on();" onmouseout="off();">DOWNLOADS <span
+      <li id="download" onmouseover="on();" onmouseout="off();" class="navbar-headings">DOWNLOADS <span
           class="glyphicon glyphicon-chevron-down"></span>
         <ul class="download dropdown">
           <li class="dropdown-item">&emsp;<a href="#">Catalogues</a>&emsp;</li>
         </ul>
       </li>
-      <li id="showroom" onmouseover="on();" onmouseout="off();">SHOWROOM <span
+      <li id="showroom" onmouseover="on();" onmouseout="off();" class="navbar-headings">SHOWROOM <span
           class="glyphicon glyphicon-chevron-down"></span>
         <ul class="showroom dropdown">
           <li class="dropdown-item">&emsp;<a href="#">Showroom Tour Video</a>&emsp;</li>
           <li class="dropdown-item">&emsp;<a href="#">Showroom Pictures</a>&emsp;</li>
         </ul>
       </li>
-      <li id="contact" onmouseover="on();" onmouseout="off();">CONTACT US <span
+      <li id="contact" onmouseover="on();" onmouseout="off();" class="navbar-headings">CONTACT US <span
           class="glyphicon glyphicon-chevron-down">
           <ul class="contact dropdown">
-            <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/Contact'); ?>">Office Location Map</a>&emsp;</li>
+            <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/Contact'); ?>">Office Location Map</a>&emsp;
+            </li>
             <li class="dropdown-item">&emsp;<a href="#">Office Address</a>&emsp;</li>
           </ul>
       </li>
