@@ -2,13 +2,13 @@
   .home {
     width: 100%;
     background-color: #EAEAEA;
-    padding-top: 60px;
+    padding-top: 90px;
     padding-bottom: 5rem;
   }
 
   .mySlides {
     display: none;
-    height: calc(100vh - 300px);
+    height: calc(100vh - 100px);
     width: calc(100vw - 50px);
     overflow: hidden;
     margin-top: 20px;
@@ -804,7 +804,7 @@
           <img src="<?php echo base_url('/assets/partner6.png'); ?>" alt="partner brand logo">
         </div>
         <div class="partners-logo self">
-          <img src="<?php echo base_url('/assets/logo.svg'); ?>" alt="brand logo">
+          <img src="<?php echo base_url('/assets/ajar-logo.png'); ?>" alt="brand logo">
         </div>
       </div>
     </div>

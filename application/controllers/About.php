@@ -16,6 +16,12 @@ class About extends CI_Controller
 		$this->load->view('About/Certificate');
 		$this->load->view('Home/Footer');
 	}
+	public function Company()
+	{		
+		$this->load->view('Home/Header');
+		$this->load->view('About/Company');
+		$this->load->view('Home/Footer');
+	}
 
 }
 ?>
