@@ -54,7 +54,7 @@
     @media only screen and (max-width:1200px) {
       width: 95%;
 
-      @media screen and (max-width:800px) {
+      @media screen and (max-width:900px) {
         display: none;
       }
     }
@@ -64,7 +64,7 @@
   #navbar-small {
     display: none;
 
-    @media screen and (max-width:800px) {
+    @media screen and (max-width:900px) {
       width: 100%;
       height: 100%;
       padding: 0rem 2rem;
@@ -389,8 +389,7 @@
               href="<?php echo base_url('/About/Certifications'); ?>">Certifications</a>&emsp;</li>
         </ul>
       </li>
-      <li style="position:relative;" id="products" onmouseover="on();" onmouseout="off();" class="navbar-headings">
-        PRODUCTS <span class="glyphicon glyphicon-chevron-down"></span>
+      <li style="position:relative;" id="products" onmouseover="on();" onmouseout="off();" class="navbar-headings"><a href="<?php echo base_url('/product'); ?>" class="navbar-headings">PRODUCTS <span class="glyphicon glyphicon-chevron-down"></span></a>        
         <ul class="products dropdown">
           <li class="dropdown-item" id="products-submenu" style="justify-content:space-between;">&emsp;AJAR <span
               class="glyphicon glyphicon-chevron-right"></span>
