@@ -35,7 +35,7 @@
     justify-content: center;
     align-items: center;
     position: fixed;
-    
+
     @media screen and (max-width:768px) {
       height: 70px;
     }
@@ -54,7 +54,7 @@
     @media only screen and (max-width:1200px) {
       width: 95%;
 
-      @media screen and (max-width:768px) {
+      @media screen and (max-width:800px) {
         display: none;
       }
     }
@@ -64,7 +64,7 @@
   #navbar-small {
     display: none;
 
-    @media screen and (max-width:768px) {
+    @media screen and (max-width:800px) {
       width: 100%;
       height: 100%;
       padding: 0rem 2rem;
@@ -376,7 +376,8 @@
   <nav>
     <ul id="navbar">
       <li>
-        <div class="logo"><img src="<?php echo base_url('/assets/ajar-logo.png') ?>" alt="brand logo" style="height:70px;">
+        <div class="logo"><img src="<?php echo base_url('/assets/ajar-logo.png') ?>" alt="brand logo"
+            style="height:70px;">
         </div>
       </li>
       <li><a href="<?php echo base_url(); ?>" class="navbar-headings">HOME</a></li>
@@ -439,7 +440,8 @@
     </ul>
     <ul id="navbar-small">
       <li>
-        <div class="logo"><img src="<?php echo base_url('/assets/ajar-logo.png') ?>" alt="brand logo" style="height:50px;">
+        <div class="logo"><img src="<?php echo base_url('/assets/ajar-logo.png') ?>" alt="brand logo"
+            style="height:50px;">
         </div>
       </li>
       <li>
