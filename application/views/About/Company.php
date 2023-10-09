@@ -136,9 +136,9 @@
         max-width: 670px;
         height: auto;
         margin-top: 7rem;
-        margin-bottom: -9rem;
+        margin-bottom: -17rem;
         padding-left: 10rem;
-        padding-right: 5rem;
+        padding-right: 3rem;
         background-color: #717070;
         color: white;
         border-radius: 15px;
@@ -146,6 +146,7 @@
 
         @media screen and (max-width:1000px) {
             padding-right: 2rem;
+            margin-bottom: -23rem;
             width: 60%;
 
             @media screen and (max-width:768px) {
@@ -180,13 +181,22 @@
     .foundation-heading h1 {
         font-size: 45px;
         text-align: center;
+        padding-top: 15rem;
 
         @media screen and (max-width:500px) {
-            padding-top: 10rem;
+            padding-top: 25rem;
             font-size: 35px;
 
-            @media screen and (max-width:350px) {
-                padding-top: 25rem;
+            @media screen and (max-width:400px) {
+                padding-top: 35rem;
+
+                @media screen and (max-width:350px) {
+                    padding-top: 45rem;
+
+                    @media screen and (max-width:300px) {
+                        padding-top: 60rem;
+                    }
+                }
             }
         }
     }
@@ -368,7 +378,7 @@
     </div>
     <div class="story_block">
         <p class="story_text">
-            <br/>
+            <br />
             Our commitment to quality transcends the surface appeal of our products. We understand
             that ironmongery must
             endure the test of time, delivering unwavering performance and reliability. As a result, we meticulously
