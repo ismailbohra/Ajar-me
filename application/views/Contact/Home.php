@@ -11,17 +11,22 @@
     }
 
     .heading {
+        margin-inline: 15rem;
         display: flex;
         justify-content: space-between;
         margin-top: 5rem;
-        margin-inline: 5rem;
         padding-inline: 5rem;
 
-        @media screen and (max-width:600px) {
-            flex-direction: column;
-            gap: 2rem;
-            align-items: center;
-            margin-bottom: 5rem;
+        @media screen and (max-width:1200px) {
+            margin-inline: 5rem;
+
+
+            @media screen and (max-width:600px) {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: center;
+                margin-bottom: 5rem;
+            }
         }
     }
 
@@ -40,16 +45,18 @@
         font-size: 70px;
         margin-bottom: -10px;
 
-        @media screen and (max-width:600px) {
-            font-size: 30px;
-        }
-        @media screen and (max-width:800px) {
-            font-size: 50px;
+        
+        @media screen and (max-width:900px) {
+            font-size: 28px;
+            @media screen and (max-width:600px) {
+                font-size: 28px;
+            }
         }
     }
 
     .map {
-        margin-inline: 5rem;
+        margin-inline: 15rem;
+
         margin-bottom: 5rem;
         background-color: white;
         padding: 2rem;
@@ -57,9 +64,14 @@
         z-index: 2;
         box-shadow: 15px 15px 6px rgba(0, 0, 0, 0.1);
 
-        @media screen and (max-width:600px) {
-            margin-inline: 0;
-            padding: 1rem;
+        @media screen and (max-width:1200px) {
+            margin-inline: 5rem;
+
+
+            @media screen and (max-width:600px) {
+                margin-inline: 0;
+                padding: 1rem;
+            }
         }
     }
 
@@ -76,18 +88,21 @@
         background-color: white;
         border-radius: 5px 5px 0 0px;
         height: 100%;
-        width: 140px;
         padding: 1rem;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-
-        @media screen and (max-width:600px) {
-
-            width: 100%;
-            border-radius: 5px 5px 5px 5px;
+        width: 140px;
+        @media screen and (max-width:700px) {
+            width: 100px;
+            
+            @media screen and (max-width:600px) {
+                
+                width: 100%;
+                border-radius: 5px 5px 5px 5px;
+            }
         }
 
     }
@@ -125,14 +140,20 @@
     }
 
     .wrap-form-address {
-        padding-inline: 5rem;
+        padding-inline: 15rem;
+
         display: flex;
         justify-content: center;
         gap: 5rem;
 
-        @media screen and (max-width:600px) {
-            flex-direction: column;
-            padding-inline: 2rem;
+        @media screen and (max-width:1200px) {
+            padding-inline: 5rem;
+
+
+            @media screen and (max-width:600px) {
+                flex-direction: column;
+                padding-inline: 2rem;
+            }
         }
     }
 
@@ -144,10 +165,15 @@
     }
 
     .wrap-addres {
-        width: 40%;
+        width:30%;
 
-        @media screen and (max-width:600px) {
-            width: 100%;
+        @media screen and (max-width:1200px) {
+
+            width: 40%;
+
+            @media screen and (max-width:600px) {
+                width: 100%;
+            }
         }
     }
 
@@ -174,11 +200,17 @@
     }
 
     .form-div {
-        width: 60%;
+        width: 40%;
         background-color: white;
         border-radius: 15px;
-        @media screen and (max-width:600px) {
-            width: 100%;
+
+        @media screen and (max-width:1200px) {
+            width: 60%;
+
+
+            @media screen and (max-width:600px) {
+                width: 100%;
+            }
         }
     }
 
@@ -203,6 +235,7 @@
         padding: 5rem;
         padding-top: 2rem;
         padding-bottom: 2rem;
+
         @media screen and (max-width:600px) {
             padding: 2rem;
         }
@@ -216,13 +249,16 @@
         padding-top: 1rem;
         padding-bottom: 2rem
     }
-    .submit{
+
+    .submit {
         display: flex;
         justify-content: flex-end;
+
         @media screen and (max-width:600px) {
             justify-content: center;
         }
     }
+
     .form-control {
         background-color: #D9D9D9;
         border-radius: 10px;
@@ -305,16 +341,16 @@
             </div>
             <form class="form">
                 <div class="form-group">
-                    <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" Required=true
-                        placeholder="Enter your name (Required)">
+                    <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        Required=true placeholder="Enter your name (Required)">
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" Required=true
-                        placeholder="Enter your Email (Required)">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        Required=true placeholder="Enter your Email (Required)">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" Required=true
-                        placeholder="Enter your Phone no (Required)">
+                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        Required=true placeholder="Enter your Phone no (Required)">
                 </div>
                 <div class="form-group">
                     <textarea placeholder="Type your message here and click submit" class="form-control"
