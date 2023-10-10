@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>AJAR</title>
 <style>
   * {
     margin: 0;
@@ -389,7 +390,9 @@
               href="<?php echo base_url('/About/Certifications'); ?>">Certifications</a>&emsp;</li>
         </ul>
       </li>
-      <li style="position:relative;" id="products" onmouseover="on();" onmouseout="off();" class="navbar-headings"><a href="<?php echo base_url('/product'); ?>" class="navbar-headings">PRODUCTS <span class="glyphicon glyphicon-chevron-down"></span></a>        
+      <li style="position:relative;" id="products" onmouseover="on();" onmouseout="off();" class="navbar-headings"><a
+          href="<?php echo base_url('/product'); ?>" class="navbar-headings">PRODUCTS <span
+            class="glyphicon glyphicon-chevron-down"></span></a>
         <ul class="products dropdown">
           <li class="dropdown-item" id="products-submenu" style="justify-content:space-between;">&emsp;AJAR <span
               class="glyphicon glyphicon-chevron-right"></span>
