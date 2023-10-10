@@ -13,7 +13,7 @@ class Admin extends CI_Controller
 
     public function index()
     {
-        $this->load->view('Login/Home');
+        $this->load->view('Admin/Login');
     }
 
     public function login()
@@ -33,7 +33,7 @@ class Admin extends CI_Controller
     {
         if ($_SESSION['user']) {
             $this->load->view('Admin/Header');
-            // $this->load->view('Admin/Home');
+            $this->load->view('Admin/AddProduct');
         } else {
             redirect(base_url('/admin'));
         }
