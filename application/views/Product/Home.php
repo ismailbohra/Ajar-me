@@ -12,7 +12,7 @@
 
     .product-home-heading {
         background-color: #D9D9D9;
-        height: 200px;
+        height: 150px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -58,18 +58,44 @@
 
     .filter {
         width: 100px;
+        position: relative;
 
         @media screen and (max-width:350px) {
             width: 80px;
         }
     }
 
-    .sort {
-        width: 150px;
+    #filter-dropdown {
+        display: none;
+        z-index: 3;
+        background-color: #fff;
+        position: absolute;
+        list-style-type: none;
+        padding: 1rem;
+        font-size: 15px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
 
-        @media screen and (max-width:350px) {
-            width: 90px;
-        }
+    #filter-dropdown li input {
+        margin-right: 1rem;
+    }
+
+    .sort {
+        margin-left: 5px;
+        padding: 0;
+    }
+
+    .sort select {
+        height: 100%;
+        width: 100%;
+        padding: 5px 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: #D9D9D9;
+    }
+
+    .sort select option {
+        background-color: #fff;
     }
 
     .right {
@@ -106,6 +132,7 @@
         background-color: #fff;
         border-radius: 10px;
         width: 200px;
+        cursor: pointer;
 
         @media screen and (max-width:489px) {
             width: 100%;
@@ -136,11 +163,15 @@
     .product-card-heading {
         padding: 0rem 1rem 1rem 1rem;
         font-size: 20px;
+        height: 34px;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
     }
 
     .product-card-buttons {
         display: flex;
-        /* flex-direction: column; */
         flex-wrap: wrap;
         justify-content: space-between;
         background-color: #D9D9D9;
@@ -163,7 +194,7 @@
     }
 
     .product-lists {
-        display: flex;
+        display: none;
         flex-direction: column;
         justify-content: center;
         padding: 5rem;
@@ -187,6 +218,7 @@
         background-color: #fff;
         border-radius: 10px;
         height: 170px;
+        cursor: pointer;
 
         @media screen and (max-width:400px) {
             position: relative;
@@ -232,13 +264,25 @@
 
     .product-list-heading {
         font-size: 20px;
+        height: 29px;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
     }
 
     .product-list-text {
         font-size: 18px;
+        overflow: hidden;
+        height: 53px;
+        width: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
 
         @media screen and (max-width:1000px) {
             font-size: 15px;
+            height: 47px;
         }
     }
 
@@ -268,25 +312,37 @@
     </div>
     <div class="product-navbar">
         <div class="left">
-            <div class="filter products-dropdown-btn">
+            <div class="filter products-dropdown-btn" onclick="toggle_filter_dropdown();">
                 Filter <i class="fa fa-angle-down"></i>
             </div>
+            <ul id="filter-dropdown">
+                <li><input type="checkbox">New Products</li>
+                <li><input type="checkbox">Products</li>
+                <li><input type="checkbox">Ebco</li>
+                <li><input type="checkbox">Livsmart</li>
+            </ul>
         </div>
         <div class="right">
             <div class="sort products-dropdown-btn">
-                Sort By <i class="fa fa-angle-down"></i>
+                <select name="product-sorting">
+                    <option value="">Sort By</option>
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="price-asc">Price (Low > High)</option>
+                    <option value="price-desc">Price (High > Low)</option>
+                </select>
             </div>
-            <i class="glyphicon glyphicon-th"></i>
-            <i class="fa fa-list-ul"></i>
+            <i class="glyphicon glyphicon-th" onclick="gridView();"></i>
+            <i class="fa fa-list-ul" onclick="listView();"></i>
         </div>
     </div>
-    <!-- <div class="product-cards">
+    <div class="product-cards" id="product-cards">
         <div class="product-card">
             <div class="product-card-img-div">
                 <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="product image" class="product-card-img">
             </div>
             <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
+                <div class="product-card-heading">Product Name is the name of product</div>
                 <div class="product-card-buttons">
                     <div class="send-button">
                         <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
@@ -473,8 +529,8 @@
                 </div>
             </div>
         </div>
-    </div> -->
-    <div class="product-lists">
+    </div>
+    <div class="product-lists" id="product-lists">
         <div class="product-list">
             <div class="product-list-img-div">
                 <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="product image" class="product-list-img">
@@ -482,8 +538,12 @@
             <div class="product-list-body">
                 <div class="product-list-heading">Product Name</div>
                 <div class="product-list-text">
-                    Lorem ipsum dolor sit amet....
-
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero
+                    eligendi nostrum omnis dolorum cum ex ut.
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero
+                    eligendi nostrum omnis dolorum cum ex ut.
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero
+                    eligendi nostrum omnis dolorum cum ex ut.
                 </div>
                 <div class="product-list-buttons">
                     <div class="send-button">
@@ -557,3 +617,28 @@
         </div>
     </div>
 </div>
+<script>
+    $('product-list-text').each(function () {
+        if ($(this)[0].scrollWidth > $(this).width()) {
+            $(this).prepend('<div class="hellip"">&hellip;</div>');
+        }
+    });
+    function gridView() {
+        document.getElementById("product-cards").style.display = "grid";
+        document.getElementById("product-lists").style.display = "none";
+    }
+
+    function listView() {
+        document.getElementById("product-cards").style.display = "none";
+        document.getElementById("product-lists").style.display = "flex";
+    }
+
+    function toggle_filter_dropdown() {
+        var dropdown = document.getElementById("filter-dropdown");
+        if (dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        } else {
+            dropdown.style.display = "block";
+        }
+    }
+</script>
