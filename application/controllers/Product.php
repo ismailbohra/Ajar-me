@@ -17,5 +17,13 @@ class Product extends CI_Controller
         $this->load->view('Home/Footer');
     }
 
+    public function product()
+    {
+        $this->load->view('Home/Header');
+        $this->load->view('Product/Product');
+        $this->load->view('Home/Footer');
+    }
+
+
 }
 ?>

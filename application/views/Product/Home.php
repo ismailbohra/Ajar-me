@@ -59,38 +59,45 @@
     .filter {
         width: 100px;
         position: relative;
+
         @media screen and (max-width:350px) {
             width: 80px;
         }
     }
-    #filter-dropdown{
-        display:none;
-        z-index:3;
+
+    #filter-dropdown {
+        display: none;
+        z-index: 3;
         background-color: #fff;
         position: absolute;
         list-style-type: none;
-        padding:1rem;
+        padding: 1rem;
         font-size: 15px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     }
-    #filter-dropdown li input{
+
+    #filter-dropdown li input {
         margin-right: 1rem;
     }
+
     .sort {
         margin-left: 5px;
-        padding:0;
+        padding: 0;
     }
-    .sort select{
-        height:100%;
-        width:100%;
-        padding: 5px 10px;        
+
+    .sort select {
+        height: 100%;
+        width: 100%;
+        padding: 5px 10px;
         border-radius: 10px;
-        border:none;
+        border: none;
         background-color: #D9D9D9;
     }
-    .sort select option{
+
+    .sort select option {
         background-color: #fff;
     }
+
     .right {
         display: flex;
         align-items: center;
@@ -99,7 +106,7 @@
 
     .right i {
         font-size: 20px;
-        cursor: pointer;        
+        cursor: pointer;
     }
 
     .right .glyphicon-th {
@@ -112,6 +119,7 @@
         place-items: center;
         padding: 5rem;
         gap: 5rem;
+
         @media screen and (max-width:800px) {
             padding: 5rem 3rem 3rem 3rem;
             gap: 3rem;
@@ -124,6 +132,7 @@
         background-color: #fff;
         border-radius: 10px;
         width: 200px;
+        cursor: pointer;
 
         @media screen and (max-width:489px) {
             width: 100%;
@@ -153,12 +162,12 @@
 
     .product-card-heading {
         padding: 0rem 1rem 1rem 1rem;
-        font-size: 20px;        
-        height:34px;
+        font-size: 20px;
+        height: 34px;
         overflow: hidden;
         -webkit-box-orient: vertical;
-         -webkit-line-clamp: 1;
-         display: -webkit-box;
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
     }
 
     .product-card-buttons {
@@ -185,7 +194,7 @@
     }
 
     .product-lists {
-        display:none;
+        display: none;
         flex-direction: column;
         justify-content: center;
         padding: 5rem;
@@ -209,6 +218,7 @@
         background-color: #fff;
         border-radius: 10px;
         height: 170px;
+        cursor: pointer;
 
         @media screen and (max-width:400px) {
             position: relative;
@@ -249,29 +259,30 @@
 
     .product-list-body {
         padding: 1rem 2rem;
-        height: 100%;        
+        height: 100%;
     }
 
     .product-list-heading {
         font-size: 20px;
-        height:29px;
+        height: 29px;
         overflow: hidden;
         -webkit-box-orient: vertical;
-         -webkit-line-clamp: 1;
-         display: -webkit-box;
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
     }
 
     .product-list-text {
-        font-size: 18px;        
-        overflow:hidden;
-        height:53px;
-        width: 100%;        
-          -webkit-box-orient: vertical;
-         -webkit-line-clamp: 2;
-         display: -webkit-box;
+        font-size: 18px;
+        overflow: hidden;
+        height: 53px;
+        width: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+
         @media screen and (max-width:1000px) {
             font-size: 15px;
-            height:47px;
+            height: 47px;
         }
     }
 
@@ -313,7 +324,7 @@
         </div>
         <div class="right">
             <div class="sort products-dropdown-btn">
-                <select name="product-sorting" >
+                <select name="product-sorting">
                     <option value="">Sort By</option>
                     <option value="name-asc">Name (A-Z)</option>
                     <option value="name-desc">Name (Z-A)</option>
@@ -527,9 +538,12 @@
             <div class="product-list-body">
                 <div class="product-list-heading">Product Name</div>
                 <div class="product-list-text">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero eligendi nostrum omnis dolorum cum ex ut.
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero eligendi nostrum omnis dolorum cum ex ut.
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero eligendi nostrum omnis dolorum cum ex ut.
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero
+                    eligendi nostrum omnis dolorum cum ex ut.
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero
+                    eligendi nostrum omnis dolorum cum ex ut.
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero
+                    eligendi nostrum omnis dolorum cum ex ut.
                 </div>
                 <div class="product-list-buttons">
                     <div class="send-button">
@@ -604,26 +618,26 @@
     </div>
 </div>
 <script>
-    $('product-list-text').each(function() {
-  if($(this)[0].scrollWidth > $(this).width()) {
-    $(this).prepend('<div class="hellip"">&hellip;</div>');
-  }
-});
-    function gridView(){
+    $('product-list-text').each(function () {
+        if ($(this)[0].scrollWidth > $(this).width()) {
+            $(this).prepend('<div class="hellip"">&hellip;</div>');
+        }
+    });
+    function gridView() {
         document.getElementById("product-cards").style.display = "grid";
         document.getElementById("product-lists").style.display = "none";
     }
 
-    function listView(){
+    function listView() {
         document.getElementById("product-cards").style.display = "none";
         document.getElementById("product-lists").style.display = "flex";
     }
 
-    function toggle_filter_dropdown(){
+    function toggle_filter_dropdown() {
         var dropdown = document.getElementById("filter-dropdown");
-        if(dropdown.style.display==="block"){
+        if (dropdown.style.display === "block") {
             dropdown.style.display = "none";
-        }else{
+        } else {
             dropdown.style.display = "block";
         }
     }
