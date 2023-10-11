@@ -60,7 +60,7 @@
             <img src="<?php echo base_url('/assets/ajar-logo.png'); ?>" alt="brand logo">
         </div>
         <div class="admin-sidebar-menu">
-            <a href="#"><i class="fa fa-image"></i> Slider</a>
+            <a href=<?php echo base_url('Admin/Slider')?>><i class="fa fa-image"></i> Slider</a>
             <a href="#"><i class="fa fa-gift"></i> Products</a>
             <a href="#"><i class="fa fa-envelope"></i> Enquiries</a>
         </div>
