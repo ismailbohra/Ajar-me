@@ -61,8 +61,8 @@
         </div>
         <div class="admin-sidebar-menu">
             <a href=<?php echo base_url('Admin/Slider')?>><i class="fa fa-image"></i> Slider</a>
-            <a href="#"><i class="fa fa-gift"></i> Products</a>
-            <a href="#"><i class="fa fa-envelope"></i> Enquiries</a>
+            <a href=<?php echo base_url('Admin/home')?>><i class="fa fa-gift"></i> Products</a>
+            <a href=<?php echo base_url('Admin/Enquirey')?>><i class="fa fa-envelope"></i> Enquiries</a>
         </div>
     </div>
 </div>
