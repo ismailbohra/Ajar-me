@@ -40,6 +40,7 @@
 
     .images {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         gap: 1rem;
     }
@@ -58,6 +59,8 @@
 
     .add-product-images {
         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 1rem;
     }
 
@@ -178,7 +181,8 @@
             <div class="add-product-image">
                 <div class="drop-zone">
                     <span class="drop-zone-text">Drop file here or click to upload</span>
-                    <input type="file" name="product-image" class="drop-zone-input" required onchange="previewImage(this)">
+                    <input type="file" name="product-image" class="drop-zone-input" required
+                        onchange="previewImage(this)">
                 </div>
             </div>
         </div>
@@ -189,7 +193,7 @@
         const file = input.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const newImage = document.createElement("div");
                 newImage.className = "product-images";
                 newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image"><p>Remove</p>`;

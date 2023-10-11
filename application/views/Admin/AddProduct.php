@@ -67,6 +67,7 @@
 
     .drop-zone-text {
         font-size: 18px;
+        text-align: center;
     }
 
     .drop-zone-input {
@@ -140,6 +141,75 @@
         text-align: center;
         font-size: 18px;
     }
+
+
+
+
+
+
+
+
+
+    .images {
+        display: none;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .drop-zone-small {
+        border: 2px dashed #D9D9D9;
+        padding: 1rem;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        min-height: 100px;
+        width: 200px;
+    }
+
+    .product-images {
+        width: 200px;
+        height: 150px;
+        border: 2px solid #D9D9D9;
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    .add-image {
+        border: 2px solid #D9D9D9;
+        padding: 1rem;
+        border-radius: 10px;
+        display: flex;
+        height: 100%;
+        min-height: 150px;
+    }
+
+    .product-images-div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .product-images img {
+        width: 100%;
+        height: 80%;
+    }
+
+    .product-images p {
+        height: 20%;
+        width: 100%;
+        text-align: center;
+        padding-top: 1rem;
+    }
+
+    .product-images p:hover {
+        cursor: pointer;
+    }
 </style>
 
 <div class="add-product-page">
@@ -166,14 +236,26 @@
                 <div class="add-product-image">
                     <div class="drop-zone">
                         <span class="drop-zone-text" id="drop-zone-text">Drop file here or click to upload</span>
-                        <div id="product-preview">
-                            <div id="product-preview-add-image">
-                                <p>add more images</p>
-                                <i class="fa fa-plus"></i>
-                            </div>
-                        </div>
                         <input type="file" name="product-image" id="product-image" class="drop-zone-input"
                             onchange="fetchFileName(event);" required>
+                    </div>
+                    <div class="images">
+
+                        <div class="product-images-div">
+                            <div class="product-images" id="product-images-0">
+                                <img id="first-product-image" src="">
+                                <p id="0" onclick="removeElement(this.id)">Remove</p>
+                            </div>
+                        </div>
+                        <div class="add-images">
+                            <div class="add-image">
+                                <div class="drop-zone-small">
+                                    <span class="drop-zone-text">Drop file here or click to upload</span>
+                                    <input type="file" name="product-image" class="drop-zone-input" required
+                                        onchange="previewImage(this)">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -199,13 +281,35 @@
 </div>
 <script>
     function fetchFileName(event) {
-        var productPreview = document.getElementById('product-preview');
+        document.querySelector(".drop-zone").style.display = "none";
+        document.querySelector(".images").style.display = "flex";
 
-        var img = document.createElement("img");
-        img.src = URL.createObjectURL(event.target.files[0]);;
-        productPreview.appendChild(img);
+        document.getElementById('first-product-image').src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
+<script>
+    var i = 0;
+    function previewImage(input) {
+        const file = input.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const newImage = document.createElement("div");
+                newImage.className = "product-images";
+                newImage.id = `product-images-${i}`;
+                newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image" ><p id="${i}" onclick="removeElement(this.id);">Remove</p>`;
+                const newImage2 = document.createElement("div");
+                newImage2.className = "mySlides";
+                newImage2.innerHTML = `<img src="${e.target.result}" alt="uploaded image">`;
 
-        productPreview.style.display = "flex";
-        document.getElementById("drop-zone-text").style.display = "none";
+                document.querySelector(".product-images-div").appendChild(newImage);
+            };
+            reader.readAsDataURL(file);
+        }
+        i++;
+    }
+
+    function removeElement(index) {
+        document.getElementById(`product-images-${index}`).remove();
     }
 </script>

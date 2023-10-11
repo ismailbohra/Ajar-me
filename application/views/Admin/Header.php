@@ -13,44 +13,51 @@
 <style>
     .admin-sidebar {
         position: fixed;
-        height:100vh;
+        min-height: 100vh;
         max-width: 250px;
         top: 0;
         left: 0;
-        border-right: 2px solid rgba(0,0,0,0.2);
+        border-right: 2px solid rgba(0, 0, 0, 0.2);
         z-index: 10;
         background-color: #EAEAEA;
     }
-    .admin-sidebar-logo{
-        display:flex;
+
+    .admin-sidebar-logo {
+        display: flex;
         justify-content: center;
-        margin:auto;
+        margin: auto;
         margin: 2rem 0rem 5rem 0rem;
     }
+
     .admin-sidebar-logo img {
-        width:60%;
-        object-fit:contain;
+        width: 60%;
+        object-fit: contain;
     }
-    .admin-sidebar-menu{
-        display:flex;
-        flex-direction:column;
+
+    .admin-sidebar-menu {
+        display: flex;
+        flex-direction: column;
         padding: 0rem 4rem;
-        gap:2rem;
+        gap: 2rem;
     }
-    .admin-sidebar-menu a{
-        font-size:18px;        
-        color:rgba(0,0,0,0.6);
-        font-weight:500;
-        text-decoration:none;
+
+    .admin-sidebar-menu a {
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.6);
+        font-weight: 500;
+        text-decoration: none;
     }
-    .admin-sidebar-menu a:hover{
-        text-decoration:none;
+
+    .admin-sidebar-menu a:hover {
+        text-decoration: none;
     }
-    .admin-sidebar-menu i{
+
+    .admin-sidebar-menu i {
         margin-right: 10px;
     }
-    .fa-gift{
-        font-size:22px;
+
+    .fa-gift {
+        font-size: 22px;
     }
 </style>
 
@@ -60,8 +67,8 @@
             <img src="<?php echo base_url('/assets/ajar-logo.png'); ?>" alt="brand logo">
         </div>
         <div class="admin-sidebar-menu">
-            <a href=<?php echo base_url('Admin/Slider')?>><i class="fa fa-image"></i> Slider</a>
-            <a href="#"><i class="fa fa-gift"></i> Products</a>
+            <a href="<?php echo base_url('Admin/Slider'); ?>"><i class="fa fa-image"></i> Slider</a>
+            <a href="<?php echo base_url('Admin/Home'); ?>"><i class="fa fa-gift"></i> Products</a>
             <a href="#"><i class="fa fa-envelope"></i> Enquiries</a>
         </div>
     </div>
