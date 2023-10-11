@@ -47,6 +47,15 @@ class Admin extends CI_Controller
             redirect(base_url('/admin'));
         }
     }
+    public function enquirey()
+    {
+        if ($_SESSION['user']) {
+            $this->load->view('Admin/Header');
+            $this->load->view('Admin/Enquiry');
+        } else {
+            redirect(base_url('/admin'));
+        }
+    }
 
 
 }
