@@ -48,6 +48,13 @@ class Admin extends CI_Controller
         }
     }
 
+    public function submit_product()
+    {
+        echo "<pre>";
+        print_r($_POST);
+        print_r($_FILES);
+        die();
+    }
 
 }
 ?>

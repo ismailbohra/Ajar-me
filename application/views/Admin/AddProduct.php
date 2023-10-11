@@ -44,6 +44,7 @@
         border-radius: 5px;
         min-height: 100px;
         max-width: 100%;
+        padding: 5px 10px;
     }
 
     .add-product-image {
@@ -151,7 +152,7 @@
 
 
     .images {
-        display: none;
+        display: flex;
         justify-content: center;
         flex-wrap: wrap;
         gap: 1rem;
@@ -216,7 +217,7 @@
     <div class="add-product-page-heading">
         <h1>Add New Product</h1>
     </div>
-    <form action="<?php echo base_url('/admin/submit-product'); ?>" method="POST">
+    <form action="<?php echo base_url('/admin/submit_product'); ?>" method="POST" enctype="multipart/form-data">
         <div class="add-product-form">
             <div class="add-product-description">
                 <h2>Description</h2>
@@ -234,24 +235,24 @@
             <div class="add-product-images">
                 <h2>Product Images</h2>
                 <div class="add-product-image">
-                    <div class="drop-zone">
+                    <!-- <div class="drop-zone">
                         <span class="drop-zone-text" id="drop-zone-text">Drop file here or click to upload</span>
-                        <input type="file" name="product-image" id="product-image" class="drop-zone-input"
+                        <input type="file" name="product-image[]" id="product-image" class="drop-zone-input"
                             onchange="fetchFileName(event);" required>
-                    </div>
+                    </div> -->
                     <div class="images">
 
                         <div class="product-images-div">
-                            <div class="product-images" id="product-images-0">
+                            <!-- <div class="product-images" id="product-images-0">
                                 <img id="first-product-image" src="">
                                 <p id="0" onclick="removeElement(this.id)">Remove</p>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="add-images">
                             <div class="add-image">
                                 <div class="drop-zone-small">
                                     <span class="drop-zone-text">Drop file here or click to upload</span>
-                                    <input type="file" name="product-image" class="drop-zone-input" required
+                                    <input type="file" name="product-image[]" class="drop-zone-input" required
                                         onchange="previewImage(this)">
                                 </div>
                             </div>
