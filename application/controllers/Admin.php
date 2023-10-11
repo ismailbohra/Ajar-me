@@ -38,5 +38,16 @@ class Admin extends CI_Controller
             redirect(base_url('/admin'));
         }
     }
+    public function slider()
+    {
+        if ($_SESSION['user']) {
+            $this->load->view('Admin/Header');
+            $this->load->view('Admin/Slider');
+        } else {
+            redirect(base_url('/admin'));
+        }
+    }
+
+
 }
 ?>
