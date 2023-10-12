@@ -232,34 +232,6 @@
                     </div>
                 </div>
             </div>
-            <div class="add-product-images">
-                <h2>Product Images</h2>
-                <div class="add-product-image">
-                    <!-- <div class="drop-zone">
-                        <span class="drop-zone-text" id="drop-zone-text">Drop file here or click to upload</span>
-                        <input type="file" name="product-image[]" id="product-image" class="drop-zone-input"
-                            onchange="fetchFileName(event);" required>
-                    </div> -->
-                    <div class="images">
-
-                        <div class="product-images-div">
-                            <!-- <div class="product-images" id="product-images-0">
-                                <img id="first-product-image" src="">
-                                <p id="0" onclick="removeElement(this.id)">Remove</p>
-                            </div> -->
-                        </div>
-                        <div class="add-images">
-                            <div class="add-image">
-                                <div class="drop-zone-small">
-                                    <span class="drop-zone-text">Drop file here or click to upload</span>
-                                    <input type="file" name="product-image[]" class="drop-zone-input" required
-                                        onchange="previewImage(this)">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="add-product-category">
                 <h2>Category</h2>
                 <div class="add-product-category-div">
@@ -274,6 +246,26 @@
                     </div>
                 </div>
             </div>
+            <div class="add-product-images">
+                <h2>Product Images</h2>
+                <div class="add-product-image">
+                    <div class="images">
+
+                        <div class="product-images-div">
+                        </div>
+                        <div class="add-images">
+                            <div class="add-image">
+                                <div class="drop-zone-small">
+                                    <span class="drop-zone-text">Drop file here or click to upload</span>
+                                    <input type="file" name="product-image[]" class="drop-zone-input" required
+                                        onchange="previewImage(this.files)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="submit-button">
                 <input type="submit" value="SUBMIT" name="submit">
             </div>
@@ -283,7 +275,7 @@
 <script>
     var i = 0;
     function previewImage(input) {
-        const file = input.files[0];
+        const file = input[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -291,19 +283,28 @@
                 newImage.className = "product-images";
                 newImage.id = `product-images-${i}`;
                 newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image" ><p id="${i}" onclick="removeElement(this.id);">Remove</p>`;
-                const newImage2 = document.createElement("div");
-                newImage2.className = "mySlides";
-                newImage2.innerHTML = `<img src="${e.target.result}" alt="uploaded image">`;
 
                 document.querySelector(".product-images-div").appendChild(newImage);
             };
             reader.readAsDataURL(file);
         }
+        document.querySelector(".drop-zone-input").style.visibility = "hidden";
+
+        addInput();
 
         i++;
     }
 
     function removeElement(index) {
         document.getElementById(`product-images-${index}`).remove();
+    }
+
+    function addInput() {
+        var newInput = document.createElement('input');
+        newInput.type = "file";
+        newInput.name = "product-image[]";
+        newInput.className = "drop-zone-input";
+        newInput.addEventListener("change", function () { previewImage(this.files); });
+        document.querySelector(".drop-zone-small").appendChild(newInput);
     }
 </script>

@@ -59,9 +59,37 @@ class Admin extends CI_Controller
 
     public function submit_product()
     {
-        echo "<pre>";
-        print_r($_POST);
-        print_r($_FILES);
+        if (!empty($_POST)) {
+            $product_name = $_POST['product-name'];
+            $product_desc = $_POST['product-desc'];
+            $product_category = $_POST['product-category'];
+            $product_id = $this->AdminM->insert_product($product_name, $product_desc, $product_category);
+            print_r($product_id);
+            if (!empty($_FILES['product-image'])) {
+                $i = 0;
+                foreach ($_FILES['product-image']['tmp_name'] as $file_tmp) {
+                    echo "file temp location => " . $file_tmp;
+                    echo "<br>";
+                    if (!empty($file_tmp)) {
+                        $file_name = "/uploads/Product_Images/" . $product_id . "-" . $i . "_" . $_FILES['product-image']['name'][$i];
+                        $location = pathinfo(pathinfo(__DIR__, PATHINFO_DIRNAME), PATHINFO_DIRNAME);
+                        $file_location = $location . "/" . $file_name;
+                        echo "file location => " . $file_location;
+                        echo "<br>";
+                        if (!is_dir('uploads/Product_Images')) {
+                            mkdir("uploads/Product_Images", 0777, true);
+                        }
+
+                        if (move_uploaded_file($file_tmp, $file_location)) {
+                            chmod($file_location, 0777);
+                            $this->AdminM->insert_product_image($product_id, $file_name);
+                        }
+                    }
+                    $i++;
+                }
+            }
+        }
+        echo "done";
         die();
     }
 
