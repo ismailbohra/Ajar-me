@@ -281,14 +281,6 @@
     </form>
 </div>
 <script>
-    function fetchFileName(event) {
-        document.querySelector(".drop-zone").style.display = "none";
-        document.querySelector(".images").style.display = "flex";
-
-        document.getElementById('first-product-image').src = URL.createObjectURL(event.target.files[0]);
-    }
-</script>
-<script>
     var i = 0;
     function previewImage(input) {
         const file = input.files[0];
@@ -307,6 +299,7 @@
             };
             reader.readAsDataURL(file);
         }
+
         i++;
     }
 
