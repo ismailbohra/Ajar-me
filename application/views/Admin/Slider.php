@@ -4,81 +4,7 @@
         padding: 5rem;
     }
 
-    .add-product-image {
-        border: 2px solid #D9D9D9;
-        padding: 1rem;
-        border-radius: 10px;
-        display: flex;
-    }
 
-    .drop-zone {
-        border: 2px dashed #D9D9D9;
-        padding: 1rem;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        position: relative;
-        overflow: hidden;
-        min-height: 100px;
-        width: 200px;
-    }
-
-    .drop-zone-text {
-        font-size: 18px;
-        text-align: center;
-    }
-
-    .drop-zone-input {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        cursor: pointer;
-    }
-
-    .images {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    .product-images {
-        width: 200px;
-        height: 150px;
-        border: 2px solid #D9D9D9;
-        padding: 1rem;
-        border-radius: 10px;
-    }
-
-    .add-product-image {
-        height: 100%;
-    }
-
-    .add-product-images {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    .product-images img {
-        width: 100%;
-        height: 80%;
-    }
-
-    .product-images p {
-        height: 20%;
-        width: 100%;
-        text-align: center;
-        padding-top: 1rem;
-    }
-
-    .product-images p:hover {
-        cursor: pointer;
-    }
 
     .slideshow-container {
         width: 100%;
@@ -147,67 +73,120 @@
     .fade {
         opacity: 1;
     }
+
+
+    .submit-button input {
+        padding: 2px 0px;
+        width: 90px;
+        border: 0.5px solid;
+        border-radius: 5px;
+        background-color: white;
+        color: #50AD55;
+        font-size: 15px;
+    }
+
+    .submit-button-delete input {
+        background-color: inherit;
+        color: red;
+        border: 0
+    }
+
+    .form_input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #images {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        margin-top: 5rem;
+        width: 100%;
+    }
+
+    #images td,
+    #images th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #images tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #images tr:hover {
+        background-color: #ddd;
+    }
+
+    #images th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: darkgrey;
+        color: black;
+    }
+
+    .table-image {
+        height: 50px;
+    }
+
+    .sno {
+        width: 80px;
+    }
+
+    .action {
+        width: 100px
+    }
 </style>
 <div class="center">
-    <h2>Slider Images</h2>
+
+    <h2>Slider Images Preview</h2>
     <div class="slideshow-container">
-
-        <div class="mySlides">
-            <img id="0" src="<?php echo base_url('/assets/Home.png'); ?>">
-        </div>
-
-        <div class="mySlides">
-            <img id="1" src="<?php echo base_url('/assets/Home-img.png'); ?>">
-        </div>
+        <?php foreach ($slider_image as $image): ?>
+            <div class="mySlides" id="<?php echo $image['slider_image_url']; ?>">
+                <img id="0" src="<?php echo base_url($image['slider_image_url']); ?>">
+            </div>
+        <?php endforeach; ?>
 
         <a class="prev" onclick="plusSlides(-1)">❮</a>
         <a class="next" onclick="plusSlides(1)">❯</a>
 
     </div>
-    <div class="images">
 
-        <div class="add-product-images">
-            <div class="product-images">
-                <img id="0" src="<?php echo base_url('/assets/Home.png'); ?>">
-                <p>Remove</p>
-            </div>
-            <div class="product-images">
-                <img id="1" src="<?php echo base_url('/assets/Home-img.png'); ?>">
-                <p>Remove</p>
-            </div>
+    <form action="<?php echo base_url('/admin/submit_slider_images'); ?>" method="POST" enctype="multipart/form-data">
+        <div class="form_input">
 
-        </div>
-        <div class="add-images">
-            <div class="add-product-image">
-                <div class="drop-zone">
-                    <span class="drop-zone-text">Drop file here or click to upload</span>
-                    <input type="file" name="product-image" class="drop-zone-input" required
-                        onchange="previewImage(this)">
-                </div>
+            <input type="file" name="product-image" id="image-input" required>
+
+            <div class="submit-button">
+                <input type="submit" value="Add Image" name="submit">
             </div>
         </div>
-    </div>
+    </form>
+    <table id="images">
+        <tr>
+            <th class="sno">S.No.</th>
+            <th>preview</th>
+            <th class="action">Action</th>
+        </tr>
+        <?php $i = 1;
+        foreach ($slider_image as $image): ?>
+            <tr id="<?php echo $image['slider_image_url']; ?>">
+                <td>
+                    <?php echo $i ?>
+                </td>
+                <td><img class="table-image" src="<?php echo base_url($image['slider_image_url']); ?>"></td>
+                <td>
+                    <div class="submit-button-delete">
+                        <input type="submit" value="Delete" name="submit"
+                            onclick="deleteImage('<?php echo $image['slider_image_url']; ?>')">
+                    </div>
+                </td>
+            </tr>
+            <?php $i++; endforeach; ?>
+    </table>
 </div>
-<script>
-    function previewImage(input) {
-        const file = input.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const newImage = document.createElement("div");
-                newImage.className = "product-images";
-                newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image"><p>Remove</p>`;
-                const newImage2 = document.createElement("div");
-                newImage2.className = "mySlides";
-                newImage2.innerHTML = `<img src="${e.target.result}" alt="uploaded image">`;
 
-                document.querySelector(".add-product-images").appendChild(newImage);
-                document.querySelector(".slideshow-container").appendChild(newImage2);
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-</script>
 <script>
     let slideIndex = 1;
     showSlides(slideIndex);
@@ -233,5 +212,28 @@
             slides[i].style.display = "none";
         }
         slides[slideIndex - 1].style.display = "block";
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function deleteImage(imageUrl) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('admin/delete_slider_image'); ?>",
+            data: { imageUrl: imageUrl },
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+
+                    document.getElementById(imageUrl).remove();
+                } else {
+                    console.log('Failed to delete image:', data.error);
+                }
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
     }
 </script>
