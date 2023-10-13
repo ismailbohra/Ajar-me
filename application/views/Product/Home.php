@@ -272,9 +272,10 @@
     }
 
     .product-list-text {
-        font-size: 18px;
+        margin-top:8px;
+        font-size: 16px;
         overflow: hidden;
-        height: 53px;
+        height: 50px;
         width: 100%;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
@@ -305,7 +306,6 @@
         }
     }
 </style>
-
 <div class="product-home">
     <div class="product-home-heading">
         <h1>PRODUCTS</h1>
@@ -337,213 +337,37 @@
         </div>
     </div>
     <div class="product-cards" id="product-cards">
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name is the name of product</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
+
+        <?php foreach($products as $p){ ?>
+            <div class="product-card">
+                <div class="product-card-img-div" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');">
+                    <img src="<?php echo base_url().$p['product_image_url']; ?>" alt="product image" class="product-card-img">
+                </div>
+                <div class="product-card-body" >
+                    <div class="product-card-heading" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');"><?php echo $p['product_name']; ?></div>
+                    <div class="product-card-buttons">
+                        <div class="send-button">
+                            <i class="fa fa-envelope"></i>&nbsp;Send Queries
+                        </div>
+                        <div class="download-button">
+                            <i class="fa fa-download"></i>&nbsp;Download Brochure
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product2.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product3.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product4.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product2.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product3.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product4.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product2.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product3.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img-div">
-                <img src="<?php echo base_url('/assets/product4.png'); ?>" alt="product image" class="product-card-img">
-            </div>
-            <div class="product-card-body">
-                <div class="product-card-heading">Product Name</div>
-                <div class="product-card-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php } ?>
+        
     </div>
     <div class="product-lists" id="product-lists">
-        <div class="product-list">
-            <div class="product-list-img-div">
-                <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="product image" class="product-list-img">
+        <?php foreach($products as $p){ ?>
+            <div class="product-list" >
+            <div class="product-list-img-div" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');">
+                <img src="<?php echo base_url().$p['product_image_url']; ?>" alt="product image" class="product-list-img">
             </div>
-            <div class="product-list-body">
-                <div class="product-list-heading">Product Name</div>
+            <div class="product-list-body" >
+                <div class="product-list-heading" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');"><?php echo $p['product_name']; ?></div>
                 <div class="product-list-text">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero
-                    eligendi nostrum omnis dolorum cum ex ut.
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero
-                    eligendi nostrum omnis dolorum cum ex ut.
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque perspiciatis asperiores sit libero
-                    eligendi nostrum omnis dolorum cum ex ut.
+                    <?php echo $p['product_description']; ?>
                 </div>
                 <div class="product-list-buttons">
                     <div class="send-button">
@@ -555,66 +379,7 @@
                 </div>
             </div>
         </div>
-        <div class="product-list">
-            <div class="product-list-img-div">
-                <img src="<?php echo base_url('/assets/product2.png'); ?>" alt="product image" class="product-list-img">
-            </div>
-            <div class="product-list-body">
-                <div class="product-list-heading">Product Name</div>
-                <div class="product-list-text">
-                    Lorem ipsum dolor sit amet....
-
-                </div>
-                <div class="product-list-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-list">
-            <div class="product-list-img-div">
-                <img src="<?php echo base_url('/assets/product3.png'); ?>" alt="product image" class="product-list-img">
-            </div>
-            <div class="product-list-body">
-                <div class="product-list-heading">Product Name</div>
-                <div class="product-list-text">
-                    Lorem ipsum dolor sit amet....
-
-                </div>
-                <div class="product-list-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-list">
-            <div class="product-list-img-div">
-                <img src="<?php echo base_url('/assets/product4.png'); ?>" alt="product image" class="product-list-img">
-            </div>
-            <div class="product-list-body">
-                <div class="product-list-heading">Product Name</div>
-                <div class="product-list-text">
-                    Lorem ipsum dolor sit amet....
-
-                </div>
-                <div class="product-list-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;Send Queries
-                    </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;Download Brochure
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php } ?>
     </div>
 </div>
 <script>
@@ -641,4 +406,9 @@
             dropdown.style.display = "block";
         }
     }
+
+    function redirectToUrl(url){
+        window.location.href = url;
+    }
+
 </script>

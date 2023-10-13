@@ -79,7 +79,22 @@
             max-height: 500px;
         }
     }
-
+    .product-images{
+        margin-top: 2rem;
+        display:flex;
+        flex-wrap:wrap;
+        gap:10px;
+        width:100%;
+    }
+    .product-images img{
+        padding:10px;
+        height:100px;
+        width:100px;
+        object-fit:contain;
+        background-color: #D9D9D9;
+        border-radius:5px;
+        cursor: pointer;
+    }
     .product-right {
         padding-left: 2rem;
 
@@ -121,6 +136,7 @@
     }
 
     .panel {
+        min-width:100%;
         padding: 10px 18px;
         display: none;
         background-color: white;
@@ -171,21 +187,22 @@
     <div class="product-container">
         <div class="product-left">
             <div class="product-left-img-div">
-                <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="product image" class="product-left-img">
+                <img src="<?php echo base_url().$product[0]['product_image_url']; ?>" alt="product image" class="product-left-img">
+            </div>
+            <div class="product-images">
+                <?php foreach($product as $p){ ?>
+                    <img src="<?php echo base_url().$p['product_image_url']; ?>" alt="product image" onclick="replaceImage(this);">
+                <?php } ?>
             </div>
         </div>
         <div class="product-right">
             <div class="product-right-heading">
-                <h1>Product Name</h1>
+                <h1><?php echo $product[0]['product_name']; ?></h1>
             </div>
             <div class="product-right-body">
                 <button class="accordion">DESCRIPTION</button>
                 <div class="panel">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                        ut
-                        aliquip ex ea commodo consequat.</p>
+                    <p><?php echo $product[0]['product_description']; ?></p>
                 </div>
 
                 <button class="accordion">SPECIFICATIONS</button>
@@ -242,5 +259,13 @@
                 panel.style.display = "block";
             }
         });
+    }
+
+    function replaceImage(image){
+        document.querySelector('.product-left-img').src = image.src;
+    }
+
+    function redirectToUrl(url){
+        window.location.href = url;
     }
 </script>
