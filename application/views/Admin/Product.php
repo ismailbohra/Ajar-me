@@ -370,7 +370,7 @@
                 <div class="product-card-body" >
                     <div class="product-card-heading" onclick="redirectToUrl('<?php echo base_url('/admin/view_product/').$p['id']; ?>');"><?php echo $p['product_name']; ?></div>
                     <div class="product-card-buttons">
-                        <div class="send-button">
+                        <div class="send-button" onclick="redirectToUrl('<?php echo base_url('/admin/edit_product/').$p['id']; ?>');">
                             <i class="fa fa-gear"></i>&nbsp;&nbsp;Edit Product
                         </div>
                         <div class="download-button" onclick="redirectToUrl('<?php echo base_url('/admin/delete_product/').$p['id']; ?>');">
@@ -394,7 +394,7 @@
                     <?php echo $p['product_description']; ?>
                 </div>
                 <div class="product-list-buttons">
-                    <div class="send-button">
+                    <div class="send-button" onclick="redirectToUrl('<?php echo base_url('/admin/edit_product/').$p['id']; ?>');">
                         <i class="fa fa-gear"></i>&nbsp;Edit Product
                     </div>
                     <div class="download-button" onclick="redirectToUrl('<?php echo base_url('/admin/delete_product/').$p['id']; ?>');">
