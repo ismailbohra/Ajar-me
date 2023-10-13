@@ -10,9 +10,9 @@ class Admin extends CI_Controller
         parent::__construct();
         $this->load->model('AdminM');
 
-        if(empty($_SESSION['user'])){
-            redirect('/admin');
-        }
+        // if(empty($_SESSION['user'])){
+        //     redirect('/admin');
+        // }
     }
 
     public function index()
@@ -85,6 +85,28 @@ class Admin extends CI_Controller
             redirect(base_url('/admin'));
         }
     }
+    public function messages()
+    {
+        if ($_SESSION['user']) {
+            $this->load->view('Admin/Header');
+            $this->load->view('Admin/Messages');
+        } else {
+            redirect(base_url('/admin'));
+        }
+    }
+    public function submit_message()
+    {
+        print_r($_POST);
+        if (!empty($_POST)) {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $contact = $_POST['contact'];
+            $message = $_POST['message'];
+            $result= $this->AdminM->insert_message($name, $email, $contact,$message);
+        }
+        
+        redirect(base_url('/admin/slider'));
+    }
 
     public function submit_product()
     {
@@ -145,6 +167,7 @@ class Admin extends CI_Controller
         
         redirect(base_url('/admin/slider'));
     }
+    
     public function delete_slider_image() {
         $imageUrl = $this->input->post('imageUrl');
     
@@ -165,4 +188,3 @@ class Admin extends CI_Controller
         redirect('/admin/home');
     }
 }
-?>

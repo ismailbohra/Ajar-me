@@ -70,6 +70,7 @@
             <a href=<?php echo base_url('admin/slider')?>><i class="fa fa-image"></i> Slider</a>
             <a href=<?php echo base_url('admin/home')?>><i class="fa fa-gift"></i> Products</a>
             <a href=<?php echo base_url('admin/enquiry')?>><i class="fa fa-envelope"></i> Enquiries</a>
+            <a href=<?php echo base_url('admin/messages')?>><i class="fa fa-comments"></i> Messages</a>
         </div>
     </div>
 </div>

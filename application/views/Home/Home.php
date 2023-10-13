@@ -635,8 +635,9 @@
     width: 200px;
 
     @media screen and (max-width:768px) {
-      height:100px;
-      width:100px;
+      height: 100px;
+      width: 100px;
+
       @media screen and (max-width:350px) {
         height: 60px;
         width: 60px;
@@ -648,15 +649,18 @@
 
   <div class="slideshow-container">
 
-    <div class="mySlides">
-      <img src="<?php echo base_url('/assets/Home.png'); ?>"
-        style="height:100%; width:100%;object-fit:cover;overflow:hidden;">
+    <!-- <div class="mySlides">
+      <img src="<?php echo base_url('/assets/Home.png'); ?>" style="height:100%; width:100%;object-fit:cover;overflow:hidden;">
     </div>
 
     <div class="mySlides">
-      <img src="<?php echo base_url('/assets/Home-img.png'); ?>"
-        style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
-    </div>
+      <img src="<?php echo base_url('/assets/Home-img.png'); ?>" style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
+    </div> -->
+    <?php foreach ($slider_image as $image) : ?>
+      <div class="mySlides">
+        <img src="<?php echo base_url($image['slider_image_url']); ?>" style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
+      </div>
+    <?php endforeach; ?>
 
     <a class="prev" onclick="plusSlides(-1)">❮</a>
     <a class="next" onclick="plusSlides(1)">❯</a>
@@ -673,11 +677,9 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor quae ipsum mollitia ducimus, iste
           fuga doloribus ullam cum facere.</p>
         <div class="featured-buttons">
-          <a style="margin-right:3rem;"><img src="<?php echo base_url('/assets/icons/arrow-left.svg') ?>"
-              alt="left arrow icon">&nbsp;&nbsp;Previous</a>
+          <a style="margin-right:3rem;"><img src="<?php echo base_url('/assets/icons/arrow-left.svg') ?>" alt="left arrow icon">&nbsp;&nbsp;Previous</a>
           <!-- <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Previous</a> -->
-          <a>Next&nbsp;&nbsp;<img src="<?php echo base_url('/assets/icons/arrow-right.svg') ?>"
-              alt="right arrow icon"></a>
+          <a>Next&nbsp;&nbsp;<img src="<?php echo base_url('/assets/icons/arrow-right.svg') ?>" alt="right arrow icon"></a>
           <!-- <a>Next&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
         </div>
       </div>
@@ -692,13 +694,11 @@
     </div>
     <div class="simplify-cards">
       <div class="simplify-card">
-        <img src="<?php echo base_url('/assets/simplify1.png'); ?>" alt="simplify product image"
-          class="simplify-card-img">
+        <img src="<?php echo base_url('/assets/simplify1.png'); ?>" alt="simplify product image" class="simplify-card-img">
         <p>Architectural Hardware</p>
       </div>
       <div class="simplify-card">
-        <img src="<?php echo base_url('/assets/simplify2.png'); ?>" alt="simplify product image"
-          class="simplify-card-img">
+        <img src="<?php echo base_url('/assets/simplify2.png'); ?>" alt="simplify product image" class="simplify-card-img">
         <p>Furniture Fitings</p>
       </div>
     </div>
@@ -746,31 +746,27 @@
     <div class="products-cards">
       <div class="products-card">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="products product image"
-            style="height:90px;width:90px;object-fit: cover;margin-left:30px;">
+          <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="products product image" style="height:90px;width:90px;object-fit: cover;margin-left:30px;">
         </div>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum aliquid saepe rem provident, rerum ullam.</p>
       </div>
       <div class="products-card products-card-upper">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product2.png'); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: cover;">
+          <img src="<?php echo base_url('/assets/product2.png'); ?>" alt="products product image" style="height:100px;width:100px;object-fit: cover;">
         </div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, esse quaerat veritatis voluptates quasi
           rerum.</p>
       </div>
       <div class="products-card">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product3.png'); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: contain;">
+          <img src="<?php echo base_url('/assets/product3.png'); ?>" alt="products product image" style="height:100px;width:100px;object-fit: contain;">
         </div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, esse quaerat veritatis voluptates quasi
           rerum.</p>
       </div>
       <div class="products-card products-card-upper">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product4.png'); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: contain;">
+          <img src="<?php echo base_url('/assets/product4.png'); ?>" alt="products product image" style="height:100px;width:100px;object-fit: contain;">
         </div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, esse quaerat veritatis voluptates quasi
           rerum.</p>
@@ -829,8 +825,12 @@
     function showSlides(n) {
       let i;
       let slides = document.getElementsByClassName("mySlides");
-      if (n > slides.length) { slideIndex = 1 }
-      if (n < 1) { slideIndex = slides.length }
+      if (n > slides.length) {
+        slideIndex = 1
+      }
+      if (n < 1) {
+        slideIndex = slides.length
+      }
       for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
       }
