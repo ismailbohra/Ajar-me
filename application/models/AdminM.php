@@ -49,6 +49,24 @@ class AdminM extends CI_Model
         $query = $this->db->query($sql);
         return ;
     }
+    function insert_slider_image($file_location)
+    {
+        $sql = "INSERT INTO `slider-images` (`slider_image_url`) VALUES ('$file_location')";
+        $query = $this->db->query($sql);
+        return $this->db->insert_id();
+    }
+    function get_slider_image()
+    {
+        $sql = "SELECT * from `slider-images`";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+    function delete_slider_image($filename)
+    {
+        $sql = "DELETE FROM `slider-images` WHERE `slider_image_url` = '$filename'";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
     function delete_product($product_id){
         $sql = "DELETE FROM `products` where products.id = $product_id ";
