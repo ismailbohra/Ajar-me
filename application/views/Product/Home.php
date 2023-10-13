@@ -272,7 +272,7 @@
     }
 
     .product-list-text {
-        margin-top:8px;
+        margin-top: 8px;
         font-size: 16px;
         overflow: hidden;
         height: 50px;
@@ -304,6 +304,20 @@
                 width: calc(100% - 20px);
             }
         }
+    }
+
+    .query-form {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: 1px solid lightgrey;
+        padding: 2rem;
+        width: 350px;
+        height: 400px;
+        overflow-y: scroll;
+        display: none;
     }
 </style>
 <div class="product-home">
@@ -338,13 +352,18 @@
     </div>
     <div class="product-cards" id="product-cards">
 
-        <?php foreach($products as $p){ ?>
+        <?php foreach ($products as $p) { ?>
             <div class="product-card">
-                <div class="product-card-img-div" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');">
-                    <img src="<?php echo base_url().$p['product_image_url']; ?>" alt="product image" class="product-card-img">
+                <div class="product-card-img-div"
+                    onclick="redirectToUrl('<?php echo base_url('/product/product/') . $p['id']; ?>');">
+                    <img src="<?php echo base_url() . $p['product_image_url']; ?>" alt="product image"
+                        class="product-card-img">
                 </div>
-                <div class="product-card-body" >
-                    <div class="product-card-heading" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');"><?php echo $p['product_name']; ?></div>
+                <div class="product-card-body">
+                    <div class="product-card-heading"
+                        onclick="redirectToUrl('<?php echo base_url('/product/product/') . $p['id']; ?>');">
+                        <?php echo $p['product_name']; ?>
+                    </div>
                     <div class="product-card-buttons">
                         <div class="send-button">
                             <i class="fa fa-envelope"></i>&nbsp;Send Queries
@@ -356,31 +375,83 @@
                 </div>
             </div>
         <?php } ?>
-        
+
     </div>
     <div class="product-lists" id="product-lists">
-        <?php foreach($products as $p){ ?>
-            <div class="product-list" >
-            <div class="product-list-img-div" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');">
-                <img src="<?php echo base_url().$p['product_image_url']; ?>" alt="product image" class="product-list-img">
-            </div>
-            <div class="product-list-body" >
-                <div class="product-list-heading" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');"><?php echo $p['product_name']; ?></div>
-                <div class="product-list-text">
-                    <?php echo $p['product_description']; ?>
+        <?php foreach ($products as $p) { ?>
+            <div class="product-list">
+                <div class="product-list-img-div"
+                    onclick="redirectToUrl('<?php echo base_url('/product/product/') . $p['id']; ?>');">
+                    <img src="<?php echo base_url() . $p['product_image_url']; ?>" alt="product image"
+                        class="product-list-img">
                 </div>
-                <div class="product-list-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;Send Queries
+                <div class="product-list-body">
+                    <div class="product-list-heading"
+                        onclick="redirectToUrl('<?php echo base_url('/product/product/') . $p['id']; ?>');">
+                        <?php echo $p['product_name']; ?>
                     </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;Download Brochure
+                    <div class="product-list-text">
+                        <?php echo $p['product_description']; ?>
+                    </div>
+                    <div class="product-list-buttons">
+                        <div class="send-button">
+                            <i class="fa fa-envelope"></i>&nbsp;Send Queries
+                        </div>
+                        <div class="download-button">
+                            <i class="fa fa-download"></i>&nbsp;Download Brochure
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         <?php } ?>
     </div>
+</div>
+<div class="query-form">
+    <form id="myForm">
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label">I am an</label>
+            <select class="form-select form-control" aria-label="Default select example">
+                <option selected>Select</option>
+                <option value="1">Architecture & Interior Designer</option>
+                <option value="2">Dealer</option>
+                <option value="3">Carpenter</option>
+                <option value="4">Contractor</option>
+                <option value="5">End User</option>
+                <option value="6">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input type="name" class="form-control" id="fullname" name="name" Required=true
+                placeholder="Enter your name (Required)">
+        </div>
+        <div class="form-group">
+            <label for="fullname" class="form-label">E-mail</label>
+            <input type="email" class="form-control" name="email" Required=true aria-describedby="emailHelp"
+                placeholder="Enter Your Email (Required)">
+        </div>
+        <div class="form-group">
+            <label for="fullname" class="form-label">Contact Number</label>
+            <input type="number" class="form-control" name="contact" Required=true
+                placeholder="Enter your Phone no (Required)">
+        </div>
+        <div class="form-group">
+            <label for="requirments" class="form-label">Requirments</label>
+            <textarea placeholder="Please tell us about your Requirments" class="form-control" name="requirments"
+                id="exampleFormControlTextarea1" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="company" class="form-label">Company</label>
+            <input type="text" class="form-control" name="contact" Required=true placeholder="Name of Your Company">
+        </div>
+        <div class="form-group">
+            <label for="address" class="form-label">Postal Address</label>
+            <input type="text" class="form-control" name="contact" Required=true placeholder="Postal Address">
+        </div>
+        <div class="submit">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </form>
 </div>
 <script>
     $('product-list-text').each(function () {
@@ -407,7 +478,7 @@
         }
     }
 
-    function redirectToUrl(url){
+    function redirectToUrl(url) {
         window.location.href = url;
     }
 

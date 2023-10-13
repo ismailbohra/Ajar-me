@@ -88,8 +88,9 @@ class Admin extends CI_Controller
     public function messages()
     {
         if ($_SESSION['user']) {
+            $data['messages'] = $this->AdminM->get_message();
             $this->load->view('Admin/Header');
-            $this->load->view('Admin/Messages');
+            $this->load->view('Admin/Messages',$data);
         } else {
             redirect(base_url('/admin'));
         }

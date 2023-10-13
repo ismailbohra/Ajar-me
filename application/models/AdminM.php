@@ -91,4 +91,10 @@ class AdminM extends CI_Model
 
         return $this->db->insert_id();
     }
+    function get_message()
+    {
+        $sql = "SELECT * from `message`";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
 }

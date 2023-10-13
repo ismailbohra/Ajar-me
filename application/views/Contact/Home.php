@@ -266,6 +266,47 @@
         border-radius: 10px;
         font-size: 15px;
     }
+
+
+    /* Add this to your existing CSS or create a new section for toast messages */
+    .toast-message {
+        position: fixed;
+        top: 10;
+        right: 0;
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 4px;
+        z-index: 9999;
+        display: none;
+        font-size: 15px;
+        animation: slideIn 0.5s, slideOut 0.5s 2s;
+
+        @media screen and (max-width:400px) {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            right: -100%;
+        }
+
+        to {
+            right: 0;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            right: 0;
+        }
+
+        to {
+            right: -100%;
+        }
+    }
 </style>
 <div class="center">
     <div class="wrap-map">
@@ -280,15 +321,20 @@
             </div>
         </div>
         <div class="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14723.810715326064!2d75.86225!3d22.69280545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fcfb09a33bc9%3A0x5433542158562a00!2sIndore%2C%20Madhya%20Pradesh%20452014!5e0!3m2!1sen!2sin!4v1696521109522!5m2!1sen!2sin" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14723.810715326064!2d75.86225!3d22.69280545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fcfb09a33bc9%3A0x5433542158562a00!2sIndore%2C%20Madhya%20Pradesh%20452014!5e0!3m2!1sen!2sin!4v1696521109522!5m2!1sen!2sin"
+                width="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
     <div class="wrap-form-address">
         <div class="wrap-addres">
             <div class="address">
                 <div class="details">
-                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-geo" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z" />
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-geo" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z" />
                         </svg></div>
                     <div class="text">
                         <p class="detail-heading">Head Office</p>
@@ -296,8 +342,10 @@
                     </div>
                 </div>
                 <div class="details">
-                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-envelope" viewBox="0 0 16 16">
+                            <path
+                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
                         </svg></div>
                     <div class="text">
                         <p class="detail-heading">E-mail</p>
@@ -308,8 +356,10 @@
                     </div>
                 </div>
                 <div class="details">
-                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-telephone" viewBox="0 0 16 16">
+                            <path
+                                d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
                         </svg></div>
                     <div class="text">
                         <p class="detail-heading">Call-us</p>
@@ -334,16 +384,20 @@
             </div>
             <form id="myForm" class="form">
                 <div class="form-group">
-                    <input type="name" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" Required=true placeholder="Enter your name (Required)">
+                    <input type="name" class="form-control" id="exampleInputEmail1" name="name"
+                        aria-describedby="emailHelp" Required=true placeholder="Enter your name (Required)">
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" Required=true placeholder="Enter your Email (Required)">
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                        aria-describedby="emailHelp" Required=true placeholder="Enter your Email (Required)">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="exampleInputEmail1" name="contact" aria-describedby="emailHelp" Required=true placeholder="Enter your Phone no (Required)">
+                    <input type="number" class="form-control" id="exampleInputEmail1" name="contact"
+                        aria-describedby="emailHelp" Required=true placeholder="Enter your Phone no (Required)">
                 </div>
                 <div class="form-group">
-                    <textarea placeholder="Type your message here and click submit" class="form-control" name="message" id="exampleFormControlTextarea1" rows="5"></textarea>
+                    <textarea placeholder="Type your message here and click submit" class="form-control" name="message"
+                        id="exampleFormControlTextarea1" rows="5"></textarea>
                 </div>
                 <div class="submit">
                     <button type="submit" class="btn btn-success">Submit</button>
@@ -352,31 +406,46 @@
         </div>
     </div>
 </div>
+
+<div id="toast-message" class="toast-message">
+    Message Sent successfully!<br />
+    We will contact you Shortly
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        // Listen for form submission
-        $('#myForm').submit(function(event) {
-            event.preventDefault(); // Prevent the default form submission
+    $(document).ready(function () {
+        $('#myForm').submit(function (event) {
+            event.preventDefault();
 
-            // Serialize the form data
             var formData = $(this).serialize();
 
-            // Make an Ajax POST request to your server endpoint
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('admin/submit_message'); ?>", // Replace with your server URL
+                url: "<?php echo base_url('admin/submit_message'); ?>",
                 data: formData,
-                success: function(response) {
-                    // Handle a successful response, e.g., show a success message or redirect
+                success: function (response) {
                     console.log('Form submitted successfully');
+                    showSuccessMessage();
+                    clearForm();
                 },
-                error: function(error) {
-                    // Handle errors, e.g., display an error message
+                error: function (error) {
                     console.error('Form submission failed');
                 }
             });
         });
+
+        function showSuccessMessage() {
+            var toastMessage = $('#toast-message');
+            toastMessage.show();
+            setTimeout(function () {
+                toastMessage.hide();
+            }, 2000);
+        }
+        function clearForm() {
+            $('#myForm')[0].reset();
+        }
     });
+
 </script>
