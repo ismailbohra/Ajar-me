@@ -8,11 +8,7 @@ class Admin extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('AdminM');
-
-        // if(empty($_SESSION['user'])){
-        //     redirect('/admin');
-        // }
+        $this->load->model('AdminM');                
     }
 
     public function index()
@@ -35,7 +31,11 @@ class Admin extends CI_Controller
 
     public function home()
     {
-        $data['products'] = $this->AdminM->get_products();
+        if(empty($_SESSION['user'])){
+            redirect('/admin');
+        }
+
+        $data['products'] = $this->AdminM->get_products(); 
 
         $i = 0;
         foreach ($data['products'] as $p) {
@@ -47,8 +47,11 @@ class Admin extends CI_Controller
         $this->load->view('Admin/Product', $data);
     }
 
-    public function view_product($product_id)
-    {
+    public function view_product($product_id){
+
+        if(empty($_SESSION['user'])){
+            redirect('/admin');
+        }
 
         $data['product'] = $this->AdminM->get_product_details($product_id);
 
@@ -61,6 +64,19 @@ class Admin extends CI_Controller
         if ($_SESSION['user']) {
             $this->load->view('Admin/Header');
             $this->load->view('Admin/AddProduct');
+        } else {
+            redirect(base_url('/admin'));
+        }
+    }
+
+    public function edit_product($product_id)
+    {
+        if ($_SESSION['user']) {
+
+            $data['product'] = $this->AdminM->get_product_details($product_id);
+
+            $this->load->view('Admin/Header');
+            $this->load->view('Admin/EditProduct', $data);
         } else {
             redirect(base_url('/admin'));
         }
@@ -98,8 +114,18 @@ class Admin extends CI_Controller
         }
     }
 
+    public function update_product(){
+        echo "<pre>";
+        print_r($_POST);
+        die();
+    }
+
     public function submit_product()
     {
+        if(empty($_SESSION['user'])){
+            redirect('/admin');
+        }
+
         if (!empty($_POST)) {
             $product_name = $_POST['product-name'];
             $product_desc = $_POST['product-desc'];
@@ -131,8 +157,12 @@ class Admin extends CI_Controller
 
         redirect('/admin/home');
     }
+
     public function submit_slider_images()
     {
+        if(empty($_SESSION['user'])){
+            redirect('/admin');
+        }
         if (!empty($_POST)) {
 
             if (!empty($_FILES['product-image'])) {
@@ -157,9 +187,12 @@ class Admin extends CI_Controller
 
         redirect(base_url('/admin/slider'));
     }
+    public function delete_slider_image() {
 
-    public function delete_slider_image()
-    {
+        if(empty($_SESSION['user'])){
+            redirect('/admin');
+        }
+
         $imageUrl = $this->input->post('imageUrl');
 
         // Implement the logic to delete the image in your model
@@ -174,8 +207,12 @@ class Admin extends CI_Controller
     }
 
 
-    public function delete_product($product_id)
-    {
+    public function delete_product($product_id){
+        
+        if(empty($_SESSION['user'])){
+            redirect('/admin');
+        }
+
         $this->AdminM->delete_product($product_id);
         redirect('/admin/home');
     }
