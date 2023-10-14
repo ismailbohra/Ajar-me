@@ -45,9 +45,10 @@
         font-size: 70px;
         margin-bottom: -10px;
 
-        
+
         @media screen and (max-width:900px) {
             font-size: 28px;
+
             @media screen and (max-width:600px) {
                 font-size: 28px;
             }
@@ -95,11 +96,12 @@
         align-items: center;
         overflow: hidden;
         width: 140px;
+
         @media screen and (max-width:700px) {
             width: 100px;
-            
+
             @media screen and (max-width:600px) {
-                
+
                 width: 100%;
                 border-radius: 5px 5px 5px 5px;
             }
@@ -165,7 +167,7 @@
     }
 
     .wrap-addres {
-        width:30%;
+        width: 30%;
 
         @media screen and (max-width:1200px) {
 
@@ -264,6 +266,47 @@
         border-radius: 10px;
         font-size: 15px;
     }
+
+
+    /* Add this to your existing CSS or create a new section for toast messages */
+    .toast-message {
+        position: fixed;
+        top: 10;
+        right: 0;
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 4px;
+        z-index: 9999;
+        display: none;
+        font-size: 15px;
+        animation: slideIn 0.5s, slideOut 0.5s 2s;
+
+        @media screen and (max-width:400px) {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            right: -100%;
+        }
+
+        to {
+            right: 0;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            right: 0;
+        }
+
+        to {
+            right: -100%;
+        }
+    }
 </style>
 <div class="center">
     <div class="wrap-map">
@@ -339,21 +382,21 @@
             <div class="form-heading">
                 <h1>Leava a Message</h1>
             </div>
-            <form class="form">
+            <form id="myForm" class="form">
                 <div class="form-group">
-                    <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        Required=true placeholder="Enter your name (Required)">
+                    <input type="name" class="form-control" id="exampleInputEmail1" name="name"
+                        aria-describedby="emailHelp" Required=true placeholder="Enter your name (Required)">
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        Required=true placeholder="Enter your Email (Required)">
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                        aria-describedby="emailHelp" Required=true placeholder="Enter your Email (Required)">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        Required=true placeholder="Enter your Phone no (Required)">
+                    <input type="number" class="form-control" id="exampleInputEmail1" name="contact"
+                        aria-describedby="emailHelp" Required=true placeholder="Enter your Phone no (Required)">
                 </div>
                 <div class="form-group">
-                    <textarea placeholder="Type your message here and click submit" class="form-control"
+                    <textarea placeholder="Type your message here and click submit" class="form-control" name="message"
                         id="exampleFormControlTextarea1" rows="5"></textarea>
                 </div>
                 <div class="submit">
@@ -363,3 +406,46 @@
         </div>
     </div>
 </div>
+
+<div id="toast-message" class="toast-message">
+    Message Sent successfully!<br />
+    We will contact you Shortly
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#myForm').submit(function (event) {
+            event.preventDefault();
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('contact/submit_message'); ?>",
+                data: formData,
+                success: function (response) {
+                    console.log('Form submitted successfully');
+                    showSuccessMessage();
+                    clearForm();
+                },
+                error: function (error) {
+                    console.error('Form submission failed');
+                }
+            });
+        });
+
+        function showSuccessMessage() {
+            var toastMessage = $('#toast-message');
+            toastMessage.show();
+            setTimeout(function () {
+                toastMessage.hide();
+            }, 2000);
+        }
+        function clearForm() {
+            $('#myForm')[0].reset();
+        }
+    });
+
+</script>

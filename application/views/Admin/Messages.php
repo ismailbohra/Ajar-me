@@ -41,60 +41,44 @@
 
 <div class="center">
 
-    <h1 class="heading">Enquirey</h1>
-
+    <h1 class="heading">Messages</h1>
     <table id="customers">
         <tr>
             <th>S.No.</th>
-            <th>Date</th>
-            <th>Type</th>
             <th>Name</th>
             <th>E-mail</th>
             <th>Contact No.</th>
-            <th>Requirements</th>
-            <th>product</th>
-            <th>Company</th>
-            <th>Postal Address</th>
+            <th>Messages</th>
+            <th>Date/Time</th>
         </tr>
+
         <?php $i = 1;
-        foreach ($enquires as $enquiry) { ?>
+        foreach ($messages as $message): ?>
             <tr>
                 <td>
                     <?php echo $i ?>
                 </td>
                 <td>
-                    <?php echo $enquiry['time-stamp'] ?>
+                    <?php echo $message['name'] ?>
                 </td>
                 <td>
-                    <?php echo $enquiry['user'] ?>
-                </td>
-                <td>
-                    <?php echo $enquiry['name'] ?>
-                </td>
-                <td>
-                    <a href="mailto:jane.doe@email.com">
-                        <?php echo $enquiry['email'] ?>
+                    <a href="mailto:john.smith@email.com">
+                        <?php echo $message['email'] ?>
                     </a>
                 </td>
                 <td>
-                    <?php echo $enquiry['contact'] ?>
+                    <?php echo $message['contact'] ?>
                 </td>
                 <td>
-                    <?php echo $enquiry['requirments'] ?>
+                    <?php echo $message['message'] ?>
                 </td>
                 <td>
-                    <a href='<?php echo base_url('admin/view_product/'.$enquiry['product_id']) ?>'>
-                        <?php echo $enquiry['product_id'] ?>
-                    </a>
-                </td>
-                <td>
-                    <?php echo $enquiry['company'] ?>
-                </td>
-                <td>
-                    <?php echo $enquiry['address'] ?>
+                    <?php echo $message['timestamp'] ?>
                 </td>
             </tr>
-            <?php $i++;
-        } ?>
+            <?php $i++; endforeach; ?>
+
+
+
     </table>
 </div>

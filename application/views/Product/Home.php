@@ -272,7 +272,7 @@
     }
 
     .product-list-text {
-        margin-top:8px;
+        margin-top: 8px;
         font-size: 16px;
         overflow: hidden;
         height: 50px;
@@ -303,6 +303,65 @@
                 left: 10px;
                 width: calc(100% - 20px);
             }
+        }
+    }
+
+    .query-form {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: 1px solid lightgrey;
+        padding: 2rem;
+        width: 350px;
+        height: 400px;
+        overflow-y: scroll;
+        display: none;
+    }
+
+    .submit {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+    }
+    /* Add this to your existing CSS or create a new section for toast messages */
+    .toast-message {
+        position: fixed;
+        top: 10;
+        right: 0;
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 4px;
+        z-index: 9999;
+        display: none;
+        font-size: 15px;
+        animation: slideIn 0.5s, slideOut 0.5s 2s;
+
+        @media screen and (max-width:400px) {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            right: -100%;
+        }
+
+        to {
+            right: 0;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            right: 0;
+        }
+
+        to {
+            right: -100%;
         }
     }
 </style>
@@ -338,15 +397,20 @@
     </div>
     <div class="product-cards" id="product-cards">
 
-        <?php foreach($products as $p){ ?>
+        <?php foreach ($products as $p) { ?>
             <div class="product-card">
-                <div class="product-card-img-div" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');">
-                    <img src="<?php echo base_url().$p['product_image_url']; ?>" alt="product image" class="product-card-img">
+                <div class="product-card-img-div"
+                    onclick="redirectToUrl('<?php echo base_url('/product/product/') . $p['id']; ?>');">
+                    <img src="<?php echo base_url() . $p['product_image_url']; ?>" alt="product image"
+                        class="product-card-img">
                 </div>
-                <div class="product-card-body" >
-                    <div class="product-card-heading" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');"><?php echo $p['product_name']; ?></div>
+                <div class="product-card-body">
+                    <div class="product-card-heading"
+                        onclick="redirectToUrl('<?php echo base_url('/product/product/') . $p['id']; ?>');">
+                        <?php echo $p['product_name']; ?>
+                    </div>
                     <div class="product-card-buttons">
-                        <div class="send-button">
+                        <div class="send-button" onclick="send_query('<?php echo $p['id']; ?>');">
                             <i class="fa fa-envelope"></i>&nbsp;Send Queries
                         </div>
                         <div class="download-button">
@@ -356,32 +420,90 @@
                 </div>
             </div>
         <?php } ?>
-        
+
     </div>
     <div class="product-lists" id="product-lists">
-        <?php foreach($products as $p){ ?>
-            <div class="product-list" >
-            <div class="product-list-img-div" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');">
-                <img src="<?php echo base_url().$p['product_image_url']; ?>" alt="product image" class="product-list-img">
-            </div>
-            <div class="product-list-body" >
-                <div class="product-list-heading" onclick="redirectToUrl('<?php echo base_url('/product/product/').$p['id']; ?>');"><?php echo $p['product_name']; ?></div>
-                <div class="product-list-text">
-                    <?php echo $p['product_description']; ?>
+        <?php foreach ($products as $p) { ?>
+            <div class="product-list">
+                <div class="product-list-img-div"
+                    onclick="redirectToUrl('<?php echo base_url('/product/product/') . $p['id']; ?>');">
+                    <img src="<?php echo base_url() . $p['product_image_url']; ?>" alt="product image"
+                        class="product-list-img">
                 </div>
-                <div class="product-list-buttons">
-                    <div class="send-button">
-                        <i class="fa fa-envelope"></i>&nbsp;Send Queries
+                <div class="product-list-body">
+                    <div class="product-list-heading"
+                        onclick="redirectToUrl('<?php echo base_url('/product/product/') . $p['id']; ?>');">
+                        <?php echo $p['product_name']; ?>
                     </div>
-                    <div class="download-button">
-                        <i class="fa fa-download"></i>&nbsp;Download Brochure
+                    <div class="product-list-text">
+                        <?php echo $p['product_description']; ?>
+                    </div>
+                    <div class="product-list-buttons">
+                        <div class="send-button" onclick="send_query('<?php echo $p['id']; ?>');">
+                            <i class="fa fa-envelope"></i>&nbsp;Send Queries
+                        </div>
+                        <div class="download-button">
+                            <i class="fa fa-download"></i>&nbsp;Download Brochure
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         <?php } ?>
     </div>
 </div>
+<div id="query" class="query-form">
+    <form class="myForm" id="myForm">
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label">I am an</label>
+            <select class="form-select form-control" name="user" aria-label="Default select example">
+                <option selected>Select</option>
+                <option value="Architecture & Interior Designer">Architecture & Interior Designer</option>
+                <option value="Dealer">Dealer</option>
+                <option value="Carpenter">Carpenter</option>
+                <option value="Contractor">Contractor</option>
+                <option value="End User">End User</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input type="name" class="form-control" id="fullname" name="name" Required=true
+                placeholder="Enter your name (Required)">
+        </div>
+        <div class="form-group">
+            <label for="Email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" name="Email" Required=true aria-describedby="emailHelp"
+                placeholder="Enter Your Email (Required)">
+        </div>
+        <div class="form-group">
+            <label for="contact" class="form-label">Contact Number</label>
+            <input type="number" class="form-control" name="contact" Required=true
+                placeholder="Enter your Phone no (Required)">
+        </div>
+        <div class="form-group">
+            <label for="requirments" class="form-label">Requirments</label>
+            <textarea placeholder="Please tell us about your Requirments" class="form-control" name="requirments"
+                id="exampleFormControlTextarea1" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="company" class="form-label">Company</label>
+            <input type="text" class="form-control" name="company" Required=true placeholder="Name of Your Company">
+        </div>
+        <div class="form-group">
+            <label for="address" class="form-label">Postal Address</label>
+            <input type="text" class="form-control" name="address" Required=true placeholder="Postal Address">
+        </div>
+        <div class="submit">
+            <button class="btn btn-danger" onclick="clearForm();">Cancel</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </form>
+</div>
+<div id="toast-message" class="toast-message">
+    Thank you for Enquiy!<br />
+    We will contact you Shortly
+</div>
+
 <script>
     $('product-list-text').each(function () {
         if ($(this)[0].scrollWidth > $(this).width()) {
@@ -397,7 +519,12 @@
         document.getElementById("product-cards").style.display = "none";
         document.getElementById("product-lists").style.display = "flex";
     }
-
+    function send_query(id) {
+        document.getElementById("query").style.display = "block";
+        const newInput = document.createElement("div");
+        newInput.innerHTML = `<input type="text" hidden name="product_id" value=${id} Required=true>`;
+        document.querySelector(".myForm").appendChild(newInput);
+    }
     function toggle_filter_dropdown() {
         var dropdown = document.getElementById("filter-dropdown");
         if (dropdown.style.display === "block") {
@@ -407,8 +534,41 @@
         }
     }
 
-    function redirectToUrl(url){
+    function redirectToUrl(url) {
         window.location.href = url;
     }
+    function clearForm() {
+        $('#myForm')[0].reset();
+        document.getElementById("query").style.display = "none";
+    }
+    $(document).ready(function () {
+        $('#myForm').submit(function (event) {
+            event.preventDefault();
 
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('product/send_enquiry'); ?>",
+                data: formData,
+                success: function (response) {
+                    console.log('query submitted successfully');
+                    console.log(response);
+                    showSuccessMessage();
+                    clearForm();
+                },
+                error: function (error) {
+                    console.error('query submission failed');
+                }
+            });
+        });
+
+        function showSuccessMessage() {
+            var toastMessage = $('#toast-message');
+            toastMessage.show();
+            setTimeout(function () {
+                toastMessage.hide();
+            }, 2000);
+        }
+    });
 </script>

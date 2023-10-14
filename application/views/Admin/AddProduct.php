@@ -238,10 +238,17 @@
                     <div class="input-field">
                         <label for="product-name">Product Category</label>
                         <select name="product-category" required>
-                            <option value="1">New Products</option>
-                            <option value="2">Products</option>
-                            <option value="3">Ebco</option>
-                            <option value="4">Livsmart</option>
+                            <option disabled value="" selected>Select category</option>
+                            <option value="1">Lever Handles</option>
+                            <option value="2">Knob Handles</option>
+                            <option value="3">Pull Handles</option>
+                            <option value="4">Hinges</option>
+                            <option value="5">Locking Devices</option>
+                            <option value="6">Europrofile Cylinder</option>
+                            <option value="7">Master Key</option>
+                            <option value="8">Panic Exit</option>
+                            <option value="9">Door Closer</option>
+                            <option value="10">Door Accessories</option>
                         </select>
                     </div>
                 </div>
