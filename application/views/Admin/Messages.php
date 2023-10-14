@@ -9,6 +9,7 @@
     #customers th {
         border: 1px solid #ddd;
         padding: 8px;
+        text-align: center;
     }
 
     #customers tr:nth-child(even) {
@@ -48,11 +49,12 @@
             <th>E-mail</th>
             <th>Contact No.</th>
             <th>Messages</th>
+            <th>Date/Time</th>
         </tr>
 
-        <tr>
-            <?php $i = 1;
-            foreach ($messages as $message): ?>
+        <?php $i = 1;
+        foreach ($messages as $message): ?>
+            <tr>
                 <td>
                     <?php echo $i ?>
                 </td>
@@ -70,10 +72,13 @@
                 <td>
                     <?php echo $message['message'] ?>
                 </td>
-                <?php $i++; endforeach; ?>
+                <td>
+                    <?php echo $message['timestamp'] ?>
+                </td>
+            </tr>
+            <?php $i++; endforeach; ?>
 
 
-        </tr>
 
     </table>
 </div>

@@ -78,22 +78,16 @@ class AdminM extends CI_Model
         $query = $this->db->query($sql2);
         return;
     }
-    function insert_message($name, $email, $contact, $message)
-    {
-        $data = array(
-            'name' => $name,
-            'email' => $email,
-            'contact' => $contact,
-            'message' => $message
-        );
-
-        $this->db->insert('message', $data);
-
-        return $this->db->insert_id();
-    }
+    
     function get_message()
     {
-        $sql = "SELECT * from `message`";
+        $sql = "SELECT * from `message` ORDER BY `timestamp` DESC";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+    function get_enquiry()
+    {
+        $sql = "SELECT * from `enquiry` ORDER BY `time-stamp` DESC";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

@@ -423,7 +423,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('admin/submit_message'); ?>",
+                url: "<?php echo base_url('contact/submit_message'); ?>",
                 data: formData,
                 success: function (response) {
                     console.log('Form submitted successfully');

@@ -35,24 +35,25 @@ class Admin extends CI_Controller
 
     public function home()
     {
-        $data['products'] = $this->AdminM->get_products(); 
+        $data['products'] = $this->AdminM->get_products();
 
-        $i=0;
-        foreach($data['products'] as $p){
+        $i = 0;
+        foreach ($data['products'] as $p) {
             $data['products'][$i]['product_image_url'] = $this->AdminM->get_product_image($p['id']);
             $i++;
         }
 
         $this->load->view('Admin/Header');
-        $this->load->view('Admin/Product', $data);        
+        $this->load->view('Admin/Product', $data);
     }
 
-    public function view_product($product_id){
+    public function view_product($product_id)
+    {
 
         $data['product'] = $this->AdminM->get_product_details($product_id);
 
         $this->load->view('Admin/Header');
-        $this->load->view('Admin/ViewProduct',$data);
+        $this->load->view('Admin/ViewProduct', $data);
     }
 
     public function add_product()
@@ -79,8 +80,9 @@ class Admin extends CI_Controller
     public function enquiry()
     {
         if ($_SESSION['user']) {
+            $data['enquires'] = $this->AdminM->get_enquiry();
             $this->load->view('Admin/Header');
-            $this->load->view('Admin/Enquiry');
+            $this->load->view('Admin/Enquiry',$data);
         } else {
             redirect(base_url('/admin'));
         }
@@ -90,23 +92,10 @@ class Admin extends CI_Controller
         if ($_SESSION['user']) {
             $data['messages'] = $this->AdminM->get_message();
             $this->load->view('Admin/Header');
-            $this->load->view('Admin/Messages',$data);
+            $this->load->view('Admin/Messages', $data);
         } else {
             redirect(base_url('/admin'));
         }
-    }
-    public function submit_message()
-    {
-        print_r($_POST);
-        if (!empty($_POST)) {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $contact = $_POST['contact'];
-            $message = $_POST['message'];
-            $result= $this->AdminM->insert_message($name, $email, $contact,$message);
-        }
-        
-        redirect(base_url('/admin/slider'));
     }
 
     public function submit_product()
@@ -122,7 +111,7 @@ class Admin extends CI_Controller
                 foreach ($_FILES['product-image']['tmp_name'] as $file_tmp) {
 
                     if (!empty($file_tmp)) {
-                        $file_name = "/uploads/Product_Images/" . $product_id . "-" . $i+1 . "_" . $_FILES['product-image']['name'][$i];
+                        $file_name = "/uploads/Product_Images/" . $product_id . "-" . $i + 1 . "_" . $_FILES['product-image']['name'][$i];
                         $location = pathinfo(pathinfo(__DIR__, PATHINFO_DIRNAME), PATHINFO_DIRNAME);
                         $file_location = $location . "/" . $file_name;
 
@@ -165,16 +154,17 @@ class Admin extends CI_Controller
                 }
             }
         }
-        
+
         redirect(base_url('/admin/slider'));
     }
-    
-    public function delete_slider_image() {
+
+    public function delete_slider_image()
+    {
         $imageUrl = $this->input->post('imageUrl');
-    
+
         // Implement the logic to delete the image in your model
         $result = $this->AdminM->delete_slider_image($imageUrl);
-    
+
         // Return a response (success or error) to the client
         if ($result) {
             echo json_encode(['success' => true]);
@@ -182,9 +172,10 @@ class Admin extends CI_Controller
             echo json_encode(['success' => false, 'error' => 'Failed to delete image']);
         }
     }
-    
 
-    public function delete_product($product_id){
+
+    public function delete_product($product_id)
+    {
         $this->AdminM->delete_product($product_id);
         redirect('/admin/home');
     }
