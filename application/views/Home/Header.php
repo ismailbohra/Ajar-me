@@ -372,6 +372,70 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 8;
   }
+
+  .search-div{
+    background-color: #D9D9D9;
+    z-index: 7;
+    position: fixed;
+    top:90;
+    height:60px;
+    width:100vw;
+    padding:10px 20px;
+    display:none;
+    justify-content: space-between;
+    align-items: center;  
+    @media screen and (max-width:768px) {
+      padding-right: 0;
+      top:70;
+    }
+  }
+  .search-bar{
+    height: 100%;
+    width: 100%;
+    display:flex;
+    align-items: center;  
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  .search{
+    width: 100%;
+  }
+  .search-close-icon{
+    margin-top: -5px;
+    font-size:40px;
+    padding: 0px 15px;
+    cursor: pointer;
+  }
+  .search input{
+    height: 100%;
+    width: calc(100% - 50px);
+    border:none;
+    border-radius: 5px 0px 0px 5px;
+    padding: 0px 15px;
+    font-size:18px;
+  }
+  .search span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#D9D9D9;
+    background-color: rgba(18, 79, 144, 1);
+    height: 100%;
+    width: 50px;
+    top:0;
+    border-radius: 0px 5px 5px 0px;
+    cursor: pointer;
+  }
+
+  /* <div class="search-div">
+    <div class="search-bar">
+      <div class="search">
+        <input type="text" placeholder="search here...">
+        <i class="fa fa-magnifying-glass"></i>
+      </div>
+      <div class="search-close-icon"><i class="fa fa-xmark"></i></div>
+    </div>
+  </div> */
 </style>
 <main id="main">
   <nav>
@@ -438,7 +502,7 @@
             <li class="dropdown-item">&emsp;<a href="#">Office Address</a>&emsp;</li>
           </ul>
       </li>
-      <li><span class="glyphicon glyphicon-search"></span></li>
+      <li><span class="glyphicon glyphicon-search" onclick="showSearchBar();"></span></li>
     </ul>
     <ul id="navbar-small">
       <li>
@@ -447,7 +511,7 @@
         </div>
       </li>
       <li>
-        <div class="icons" style="margin-top:0px;"><span class="glyphicon glyphicon-search"></span><span
+        <div class="icons" style="margin-top:0px;"><span class="glyphicon glyphicon-search" onclick="showSearchBar();"></span><span
             class="glyphicon glyphicon-menu-hamburger" onclick="openNav()"></span></div>
       </li>
     </ul>
@@ -520,6 +584,15 @@
     </div>
 
   </nav>
+  <div class="search-div" id="search-div">
+    <div class="search-bar">
+      <div class="search">
+        <input type="text" placeholder="search here...">
+        <span class="glyphicon glyphicon-search"></span>
+      </div>
+    </div>
+    <div class="search-close-icon" onclick="hideSearchBar();">&times;</div>
+  </div>
 </main>
 <div id="overlay"></div>
 <script>
@@ -555,5 +628,13 @@
 
   function off() {
     document.getElementById("overlay").style.display = "none";
+  }
+
+  function showSearchBar() {
+    document.getElementById("search-div").style.display = "flex";
+  }
+
+  function hideSearchBar() {
+    document.getElementById("search-div").style.display = "none";
   }
 </script>
