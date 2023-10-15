@@ -7,18 +7,23 @@ class About extends CI_Controller
 
 	function __construct()
 	{
-		parent::__construct();		
+		parent::__construct();
+		$this->load->model('AdminM');
 	}
 
 	public function Certifications()
-	{		
-		$this->load->view('Home/Header');
+	{
+
+		$data2['product_category'] = $this->AdminM->get_category();
+		$this->load->view('Home/Header', $data2);
 		$this->load->view('About/Certificate');
 		$this->load->view('Home/Footer');
 	}
 	public function Company()
-	{		
-		$this->load->view('Home/Header');
+	{
+
+		$data2['product_category'] = $this->AdminM->get_category();
+		$this->load->view('Home/Header', $data2);
 		$this->load->view('About/Company');
 		$this->load->view('Home/Footer');
 	}

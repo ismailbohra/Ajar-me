@@ -15,7 +15,8 @@ class Home extends CI_Controller
 	public function index()
 	{
 		$data['slider_image'] = $this->AdminM->get_slider_image();
-		$this->load->view('Home/Header');
+		$data2['product_category'] = $this->AdminM->get_category();
+		$this->load->view('Home/Header',$data2);
 		$this->load->view('Home/Home',$data);
 		$this->load->view('Home/Footer');
 	}

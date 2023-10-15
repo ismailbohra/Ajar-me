@@ -225,8 +225,8 @@
             dataType: "json",
             success: function (data) {
                 if (data.success) {
-
-                    document.getElementById(imageUrl).remove();
+                    const element = document.getElementById(imageUrl);
+                    element.remove();
                 } else {
                     console.log('Failed to delete image:', data.error);
                 }

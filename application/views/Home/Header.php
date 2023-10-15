@@ -458,7 +458,7 @@
           href="<?php echo base_url('/product'); ?>" class="navbar-headings">PRODUCTS <span
             class="glyphicon glyphicon-chevron-down"></span></a>
         <ul class="products dropdown">
-          <li class="dropdown-item" id="products-submenu" style="justify-content:space-between;">&emsp;AJAR <span
+          <!-- <li class="dropdown-item" id="products-submenu" style="justify-content:space-between;">&emsp;AJAR <span
               class="glyphicon glyphicon-chevron-right"></span>
             <ul class="products-submenu dropdown">
               <li class="dropdown-item">&emsp;<a href="#">Lever Handles</a>&emsp;</li>
@@ -478,31 +478,39 @@
           <li class="dropdown-item">&emsp;<a href="#">BWS (Breuer + Schmitz)</a>&emsp;</li>
           <li class="dropdown-item">&emsp;<a href="#">FSB</a>&emsp;</li>
           <li class="dropdown-item">&emsp;<a href="#">HELM</a>&emsp;</li>
-          <li class="dropdown-item">&emsp;<a href="#">NORSEAL</a>&emsp;</li>
+          <li class="dropdown-item">&emsp;<a href="#">NORSEAL</a>&emsp;</li> -->
+          <?php foreach ($product_category as $pc) { ?>
+            <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/product/category/' . $pc['id']); ?>">
+                <?php echo $pc['name'] ?>
+              </a>&emsp;</li>
+          <?php } ?>
         </ul>
       </li>
-      <li id="download" onmouseover="on();" onmouseout="off();" class="navbar-headings">DOWNLOADS <span
+      <!-- <li id="download" onmouseover="on();" onmouseout="off();" class="navbar-headings">DOWNLOADS <span
           class="glyphicon glyphicon-chevron-down"></span>
         <ul class="download dropdown">
           <li class="dropdown-item">&emsp;<a href="#">Catalogues</a>&emsp;</li>
         </ul>
-      </li>
-      <li id="showroom" onmouseover="on();" onmouseout="off();" class="navbar-headings">SHOWROOM <span
+      </li> -->
+      <!-- <li id="showroom" onmouseover="on();" onmouseout="off();" class="navbar-headings">SHOWROOM <span
           class="glyphicon glyphicon-chevron-down"></span>
         <ul class="showroom dropdown">
           <li class="dropdown-item">&emsp;<a href="#">Showroom Tour Video</a>&emsp;</li>
           <li class="dropdown-item">&emsp;<a href="#">Showroom Pictures</a>&emsp;</li>
         </ul>
-      </li>
-      <li id="contact" onmouseover="on();" onmouseout="off();" class="navbar-headings">CONTACT US <span
+      </li> -->
+      <!-- <li id="contact" onmouseover="on();" onmouseout="off();" class="navbar-headings">CONTACT US <span
           class="glyphicon glyphicon-chevron-down">
           <ul class="contact dropdown">
             <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/Contact'); ?>">Office Location Map</a>&emsp;
             </li>
             <li class="dropdown-item">&emsp;<a href="#">Office Address</a>&emsp;</li>
           </ul>
-      </li>
-      <li><span class="glyphicon glyphicon-search" onclick="showSearchBar();"></span></li>
+      </li> -->
+      <li><a href="<?php echo base_url('download'); ?>" class="navbar-headings">DOWNLOAD</a></li>
+      <li><a href="<?php echo base_url('showroom'); ?>" class="navbar-headings">SHOWROOM</a></li>
+      <li><a href="<?php echo base_url('contact'); ?>" class="navbar-headings">CONTACT US</a></li>
+      <li><span class="glyphicon glyphicon-search"></span></li>
     </ul>
     <ul id="navbar-small">
       <li>
@@ -534,7 +542,13 @@
         </div>
       </button>
       <div class="dropdown-container">
-        <button class="dropdown-btn">AJAR
+        <a href="<?php echo base_url('product'); ?>">All</a>
+        <?php foreach ($product_category as $pc) { ?>
+          <a href="<?php echo base_url('/product/category/' . $pc['id']); ?>">
+            <?php echo $pc['name'] ?>
+          </a>
+        <?php } ?>
+        <!-- <button class="dropdown-btn">AJAR
           <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i
               class="fa fa-minus dropdown-icon"></i>
           </div>
@@ -556,9 +570,9 @@
         <a href="#">BWS (Breuer + Schmitz)</a>
         <a href="#">FSB</a>
         <a href="#">HELM</a>
-        <a href="#">NORSEAL</a>
+        <a href="#">NORSEAL</a> -->
       </div>
-      <button class="dropdown-btn">DOWNLOADS
+      <!-- <button class="dropdown-btn">DOWNLOADS
         <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i class="fa fa-minus dropdown-icon"></i>
         </div>
       </button>
@@ -580,7 +594,11 @@
       <div class="dropdown-container">
         <a href="<?php echo base_url('/Contact'); ?>">Office Location Map</a>
         <a href="#">Office Address</a>
-      </div>
+      </div> -->
+
+      <a href="<?php echo base_url('Download'); ?>">DOWNLOAD</a>
+      <a href="<?php echo base_url('Showroom'); ?>">SHOWROOM</a>
+      <a href="<?php echo base_url('Contact'); ?>">CONTACT US</a>
     </div>
 
   </nav>
