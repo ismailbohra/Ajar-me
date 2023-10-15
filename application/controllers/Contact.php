@@ -8,11 +8,14 @@ class Contact extends CI_Controller
 	{
 		parent::__construct();
         $this->load->model('HomeM');
+        $this->load->model('AdminM');
 	}
 
 	public function index()
 	{
-		$this->load->view('Home/Header');
+        
+		$data2['product_category'] = $this->AdminM->get_category();
+		$this->load->view('Home/Header',$data2);
 		$this->load->view('Contact/Home');
 		$this->load->view('Home/Footer');
 	}

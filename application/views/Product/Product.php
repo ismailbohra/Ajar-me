@@ -79,27 +79,32 @@
             max-height: 500px;
         }
     }
-    .product-images{
+
+    .product-images {
         margin-top: 2rem;
-        display:flex;
-        flex-wrap:wrap;
-        gap:10px;
-        width:100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 100%;
     }
-    .product-images img{
-        padding:10px;
-        height:100px;
-        width:100px;
-        object-fit:contain;
+
+    .product-images img {
+        padding: 10px;
+        height: 100px;
+        width: 100px;
+        object-fit: contain;
         background-color: #D9D9D9;
-        border-radius:5px;
+        border-radius: 5px;
         cursor: pointer;
     }
+
     .product-right {
         padding-left: 2rem;
+        width: 70%;
 
         @media screen and (max-width:768px) {
             padding: 0;
+            width: 100%;
         }
     }
 
@@ -136,7 +141,7 @@
     }
 
     .panel {
-        min-width:100%;
+        min-width: 100%;
         padding: 10px 18px;
         display: none;
         background-color: white;
@@ -181,28 +186,99 @@
     .download-button {
         background-color: #DD0E1C;
     }
+
+    .query-form {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: 1px solid lightgrey;
+        padding: 2rem;
+        width: 350px;
+        height: 400px;
+        overflow-y: scroll;
+        display: none;
+    }
+
+    .submit {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Add this to your existing CSS or create a new section for toast messages */
+    .toast-message {
+        position: fixed;
+        top: 10;
+        right: 0;
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 4px;
+        z-index: 9999;
+        display: none;
+        font-size: 15px;
+        animation: slideIn 0.5s, slideOut 0.5s 2s;
+
+        @media screen and (max-width:400px) {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            right: -100%;
+        }
+
+        to {
+            right: 0;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            right: 0;
+        }
+
+        to {
+            right: -100%;
+        }
+    }
 </style>
 
 <div class="product-page">
     <div class="product-container">
         <div class="product-left">
             <div class="product-left-img-div">
-                <img src="<?php echo base_url().$product[0]['product_image_url']; ?>" alt="product image" class="product-left-img">
+                <img src="<?php echo base_url() . $product[0]['product_image_url']; ?>" alt="product image"
+                    class="product-left-img">
             </div>
             <div class="product-images">
-                <?php foreach($product as $p){ ?>
-                    <img src="<?php echo base_url().$p['product_image_url']; ?>" alt="product image" onclick="replaceImage(this);">
+                <?php foreach ($product as $p) { ?>
+                    <img src="<?php echo base_url() . $p['product_image_url']; ?>" alt="product image"
+                        onclick="replaceImage(this);">
                 <?php } ?>
             </div>
         </div>
         <div class="product-right">
             <div class="product-right-heading">
-                <h1><?php echo $product[0]['product_name']; ?></h1>
+                <h1>
+                    <?php echo $product[0]['product_name']; ?>
+                </h1>
+            </div>
+            <div class="product-right-heading">
+                <h4>
+                    <?php echo '(' . $product[0]['product_code'] . ')'; ?>
+                </h4>
             </div>
             <div class="product-right-body">
                 <button class="accordion">DESCRIPTION</button>
                 <div class="panel">
-                    <p><?php echo $product[0]['product_description']; ?></p>
+                    <p>
+                        <?php echo $product[0]['product_description']; ?>
+                    </p>
                 </div>
 
                 <button class="accordion">SPECIFICATIONS</button>
@@ -214,7 +290,7 @@
                         aliquip ex ea commodo consequat.</p>
                 </div>
 
-                <button class="accordion">FITTING INSTRUCTIONS</button>
+                <!-- <button class="accordion">FITTING INSTRUCTIONS</button>
                 <div class="panel">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                         labore
@@ -230,10 +306,10 @@
                         et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
                         ut
                         aliquip ex ea commodo consequat.</p>
-                </div>
+                </div> -->
             </div>
             <div class="product-right-buttons">
-                <div class="send-button">
+                <div class="send-button" onclick="send_query('<?php echo $product[0]['id']; ?>');">
                     <i class="fa fa-envelope"></i>&nbsp;Send Queries
                 </div>
                 <div class="download-button">
@@ -242,6 +318,58 @@
             </div>
         </div>
     </div>
+</div>
+<div id="query" class="query-form">
+    <form class="myForm" id="myForm">
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label">I am an</label>
+            <select class="form-select form-control" name="user" aria-label="Default select example">
+                <option selected>Select</option>
+                <option value="Architecture & Interior Designer">Architecture & Interior Designer</option>
+                <option value="Dealer">Dealer</option>
+                <option value="Carpenter">Carpenter</option>
+                <option value="Contractor">Contractor</option>
+                <option value="End User">End User</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input type="name" class="form-control" id="fullname" name="name" Required=true
+                placeholder="Enter your name (Required)">
+        </div>
+        <div class="form-group">
+            <label for="Email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" name="Email" Required=true aria-describedby="emailHelp"
+                placeholder="Enter Your Email (Required)">
+        </div>
+        <div class="form-group">
+            <label for="contact" class="form-label">Contact Number</label>
+            <input type="number" class="form-control" name="contact" Required=true
+                placeholder="Enter your Phone no (Required)">
+        </div>
+        <div class="form-group">
+            <label for="requirments" class="form-label">Requirments</label>
+            <textarea placeholder="Please tell us about your Requirments" class="form-control" name="requirments"
+                id="exampleFormControlTextarea1" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="company" class="form-label">Company</label>
+            <input type="text" class="form-control" name="company" Required=true placeholder="Name of Your Company">
+        </div>
+        <div class="form-group">
+            <label for="address" class="form-label">Postal Address</label>
+            <input type="text" class="form-control" name="address" Required=true placeholder="Postal Address">
+        </div>
+        <div class="submit">
+            <button class="btn btn-danger" onclick="clearForm();">Cancel</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </form>
+</div>
+<div id="toast-message" class="toast-message">
+    Thank you for Enquiy!<br />
+    We will contact you Shortly
 </div>
 <script>
     var acc = document.getElementsByClassName("accordion");
@@ -261,11 +389,51 @@
         });
     }
 
-    function replaceImage(image){
+    function replaceImage(image) {
         document.querySelector('.product-left-img').src = image.src;
     }
 
-    function redirectToUrl(url){
+    function redirectToUrl(url) {
         window.location.href = url;
     }
+    function send_query(id) {
+        document.getElementById("query").style.display = "block";
+        const newInput = document.createElement("div");
+        newInput.innerHTML = `<input type="text" hidden name="product_id" value=${id} Required=true>`;
+        document.querySelector(".myForm").appendChild(newInput);
+    }
+    function clearForm() {
+        $('#myForm')[0].reset();
+        document.getElementById("query").style.display = "none";
+    }
+    $(document).ready(function () {
+        $('#myForm').submit(function (event) {
+            event.preventDefault();
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo base_url('product/send_enquiry'); ?>",
+                data: formData,
+                success: function (response) {
+                    console.log('query submitted successfully');
+                    console.log(response);
+                    showSuccessMessage();
+                    clearForm();
+                },
+                error: function (error) {
+                    console.error('query submission failed');
+                }
+            });
+        });
+
+        function showSuccessMessage() {
+            var toastMessage = $('#toast-message');
+            toastMessage.show();
+            setTimeout(function () {
+                toastMessage.hide();
+            }, 2000);
+        }
+    });
 </script>

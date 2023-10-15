@@ -23,6 +23,12 @@ class AdminM extends CI_Model
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+    function get_products_by_category($category)
+    {
+        $sql = " SELECT * from `products` WHERE products.product_category=$category";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
 
     function get_product_image($product_id)
     {
@@ -38,9 +44,9 @@ class AdminM extends CI_Model
         return $query->result_array();
     }
 
-    function insert_product($product_name, $product_desc, $product_category)
+    function insert_product($product_name, $product_desc, $product_category,$product_code)
     {
-        $sql = "INSERT INTO `products` (`product_name`,`product_description`,`product_category`) VALUES ('$product_name', '$product_desc', $product_category)";
+        $sql = "INSERT INTO `products` (`product_name`,`product_description`,`product_category`,`product_code`) VALUES ('$product_name', '$product_desc', $product_category,'$product_code')";
         $query = $this->db->query($sql);
         return $this->db->insert_id();
     }
@@ -88,6 +94,12 @@ class AdminM extends CI_Model
     function get_enquiry()
     {
         $sql = "SELECT * from `enquiry` ORDER BY `time-stamp` DESC";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+    function get_category()
+    {
+        $sql = "SELECT * from `category` ORDER BY `time-stamp` DESC";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
