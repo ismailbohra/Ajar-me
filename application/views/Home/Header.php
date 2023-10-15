@@ -479,7 +479,12 @@
       </button>
       <div class="dropdown-container">
         <a href="<?php echo base_url('product'); ?>">All</a>
-        <button class="dropdown-btn">AJAR
+        <?php foreach ($product_category as $pc) { ?>
+          <a href="<?php echo base_url('/product/category/' . $pc['id']); ?>">
+            <?php echo $pc['name'] ?>
+          </a>
+        <?php } ?>
+        <!-- <button class="dropdown-btn">AJAR
           <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i
               class="fa fa-minus dropdown-icon"></i>
           </div>
@@ -501,7 +506,7 @@
         <a href="#">BWS (Breuer + Schmitz)</a>
         <a href="#">FSB</a>
         <a href="#">HELM</a>
-        <a href="#">NORSEAL</a>
+        <a href="#">NORSEAL</a> -->
       </div>
       <!-- <button class="dropdown-btn">DOWNLOADS
         <div class="dropdown-btn-icon"><i class="fa fa-plus dropdown-icon"></i><i class="fa fa-minus dropdown-icon"></i>
