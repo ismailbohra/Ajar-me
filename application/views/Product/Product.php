@@ -252,33 +252,31 @@
     <div class="product-container">
         <div class="product-left">
             <div class="product-left-img-div">
-                <img src="<?php echo base_url() . $product[0]['product_image_url']; ?>" alt="product image"
-                    class="product-left-img">
+                <img src="<?php if(!empty($product['product_image_url'][0])){echo base_url().$product['product_image_url'][0];}else{echo base_url()."/assets/no-image.png";} ?>" alt="product image" class="product-left-img">
             </div>
             <div class="product-images">
-                <?php foreach ($product as $p) { ?>
-                    <img src="<?php echo base_url() . $p['product_image_url']; ?>" alt="product image"
-                        onclick="replaceImage(this);">
+            <?php if(!empty($product['product_image_url'])){ foreach($product['product_image_url'] as $p){ ?>
+                    <img src="<?php if(!empty($p)){echo base_url().$p;}else{echo base_url()."/assets/no-image.png";} ?>" alt="product image" onclick="replaceImage(this);">
+                <?php }}else{ ?>
+                    <img src="<?php echo base_url()."/assets/no-image.png"; ?>" alt="product image" onclick="replaceImage(this);">
                 <?php } ?>
             </div>
         </div>
         <div class="product-right">
             <div class="product-right-heading">
                 <h1>
-                    <?php echo $product[0]['product_name']; ?>
+                    <?php echo $product['product_name']; ?>
                 </h1>
             </div>
             <div class="product-right-heading">
                 <h4>
-                    <?php echo '(' . $product[0]['product_code'] . ')'; ?>
+                    <?php echo '(' . $product['product_code'] . ')'; ?>
                 </h4>
             </div>
             <div class="product-right-body">
                 <button class="accordion">DESCRIPTION</button>
                 <div class="panel">
-                    <p>
-                        <?php echo $product[0]['product_description']; ?>
-                    </p>
+                    <p><?php echo $product['product_description']; ?></p>
                 </div>
 
                 <button class="accordion">SPECIFICATIONS</button>
@@ -309,7 +307,7 @@
                 </div> -->
             </div>
             <div class="product-right-buttons">
-                <div class="send-button" onclick="send_query('<?php echo $product[0]['id']; ?>');">
+                <div class="send-button" onclick="send_query('<?php echo $product['id']; ?>');">
                     <i class="fa fa-envelope"></i>&nbsp;Send Queries
                 </div>
                 <div class="download-button">

@@ -218,17 +218,18 @@
         <h1>Edit Product</h1>
     </div>
     <form action="<?php echo base_url('/admin/update_product'); ?>" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="product-id" value="<?php echo $product['id']; ?>">
         <div class="add-product-form">
             <div class="add-product-description">
                 <h2>Description</h2>
                 <div class="add-product-desc">
                     <div class="input-field">
                         <label for="product-name">Product Name</label>
-                        <input type="text" name="product-name" value="<?php echo $product[0]['product_name']; ?>" required>
+                        <input type="text" name="product-name" value="<?php echo $product['product_name']; ?>" required>
                     </div>
                     <div class="input-field">
                         <label for="product-desc">Product Description</label>
-                        <textarea name="product-desc"  required><?php echo $product[0]['product_description']; ?></textarea>
+                        <textarea name="product-desc"  required><?php echo $product['product_description']; ?></textarea>
                     </div>
                 </div>
             </div>
@@ -238,10 +239,10 @@
                     <div class="input-field">
                         <label for="product-name">Product Category</label>
                         <select name="product-category" required>
-                            <option value="1" <?php if($product[0]['product_category']==1) echo "selected"; ?>>New Products</option>
-                            <option value="2" <?php if($product[0]['product_category']==2) echo "selected"; ?>>Products</option>
-                            <option value="3" <?php if($product[0]['product_category']==3) echo "selected"; ?>>Ebco</option>
-                            <option value="4" <?php if($product[0]['product_category']==4) echo "selected"; ?>>Livsmart</option>
+                            <option value="1" <?php if($product['product_category']==1) echo "selected"; ?>>New Products</option>
+                            <option value="2" <?php if($product['product_category']==2) echo "selected"; ?>>Products</option>
+                            <option value="3" <?php if($product['product_category']==3) echo "selected"; ?>>Ebco</option>
+                            <option value="4" <?php if($product['product_category']==4) echo "selected"; ?>>Livsmart</option>
                         </select>
                     </div>
                 </div>
@@ -252,11 +253,11 @@
                     <div class="images">
 
                         <div class="product-images-div">
-                            <?php $i=0; foreach($product as $p){ ?>
+                            <?php $i=0; foreach($product['product_image_url'] as $p){ ?>
                                 <div class="product_images" id="product-images-<?php echo $i; ?>" style="max-width: 200px; max-height: 150px; border: 2px solid #D9D9D9; padding: 1rem; border-radius: 10px;">
-                                    <img src="<?php echo base_url().$p['product_image_url']; ?>" alt="uploaded image" style="width: 100%;height: 80%;">
+                                    <img src="<?php echo base_url().$p; ?>" alt="uploaded image" style="width: 100%;height: 80%;">
                                     <p id="<?php echo $i; ?>" style="height: 20%; width: 100%; text-align: center;  padding-top: 1rem;cursor:pointer;" onclick="removeElement(this.id);">Remove</p>
-                                    <input type="hidden" name="product-image-previous[]" id="prev-image-<?php echo $i; ?>" value="<?php echo $p['product_image_url']; ?>">
+                                    <input type="hidden" name="previous[]" id="prev-image-<?php echo $i; ?>" value="<?php echo $p; ?>">
                                 </div>
                             <?php $i++; } ?>
                         </div>
@@ -264,7 +265,7 @@
                             <div class="add-image">
                                 <div class="drop-zone-small">
                                     <span class="drop-zone-text">Drop file here or click to upload</span>
-                                    <input type="file" id="<?php echo "input-image-0" ?>" name="product-image[]" class="drop-zone-input" required
+                                    <input type="file" name="product-image[]" class="drop-zone-input" id="drop-zone-input-<?php echo count($product['product_image_url']); ?>"
                                         onchange="previewImage(this.files)">
                                 </div>
                             </div>
@@ -280,7 +281,7 @@
     </form>
 </div>
 <script>
-    var i = '<?php echo count($product); ?>';
+    var i = Number('<?php echo count($product['product_image_url']); ?>');
     function previewImage(input) {
         const file = input[0];
         if (file) {
@@ -288,23 +289,27 @@
             reader.onload = function (e) {
                 const newImage = document.createElement("div");
                 newImage.className = "product-images";
-                newImage.id = `product-images-${i}`;
-                newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image" ><p id="${i}" onclick="removeElement(this.id);" >Remove</p>`;
+                newImage.id = `product-images-${i-1}`;
+                newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image" ><p id="${i-1}" onclick="removeElement(this.id);" >Remove</p>`;
 
                 document.querySelector(".product-images-div").appendChild(newImage);
             };
             reader.readAsDataURL(file);
         }
-        document.querySelector(".drop-zone-input").style.visibility = "hidden";
+        
+        document.querySelector(`#drop-zone-input-${i}`).style.visibility = "hidden";
+
+        i++;
 
         addInput();
 
-        i++;
     }
 
     function removeElement(index) {
         document.getElementById(`product-images-${index}`).remove();
-        document.getElementById(`input-image-${index}`).remove();
+        if(index>=Number('<?php echo count($product['product_image_url']); ?>')){
+            document.getElementById(`drop-zone-input-${index}`).remove();
+        }
     }
 
     function addInput() {
@@ -312,7 +317,7 @@
         newInput.type = "file";
         newInput.name = "product-image[]";
         newInput.className = "drop-zone-input";
-        newInput.id = `input-image-${i}`;
+        newInput.id = `drop-zone-input-${i}`;
         newInput.addEventListener("change", function () { previewImage(this.files); });
         document.querySelector(".drop-zone-small").appendChild(newInput);
     }

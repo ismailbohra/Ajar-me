@@ -272,7 +272,7 @@
                             <div class="add-image">
                                 <div class="drop-zone-small">
                                     <span class="drop-zone-text">Drop file here or click to upload</span>
-                                    <input type="file" name="product-image[]" class="drop-zone-input" required
+                                    <input type="file" name="product-image[]" class="drop-zone-input" id="drop-zone-input-1" required
                                         onchange="previewImage(this.files)">
                                 </div>
                             </div>
@@ -288,30 +288,33 @@
     </form>
 </div>
 <script>
-    var i = 0;
+    var i = 1;
     function previewImage(input) {
+        
         const file = input[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
                 const newImage = document.createElement("div");
                 newImage.className = "product-images";
-                newImage.id = `product-images-${i}`;
-                newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image" ><p id="${i}" onclick="removeElement(this.id);">Remove</p>`;
+                newImage.id = `product-images-${i-1}`;
+                newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image" ><p id="${i-1}" onclick="removeElement(this.id);">Remove</p>`;
 
                 document.querySelector(".product-images-div").appendChild(newImage);
             };
             reader.readAsDataURL(file);
         }
-        document.querySelector(".drop-zone-input").style.visibility = "hidden";
-
-        addInput();
-
+        document.querySelector(`#drop-zone-input-${i}`).style.visibility = "hidden";
+        
         i++;
+
+        addInput();        
+
     }
 
     function removeElement(index) {
         document.getElementById(`product-images-${index}`).remove();
+        document.getElementById(`drop-zone-input-${index}`).remove();
     }
 
     function addInput() {
@@ -319,6 +322,7 @@
         newInput.type = "file";
         newInput.name = "product-image[]";
         newInput.className = "drop-zone-input";
+        newInput.id = `drop-zone-input-${i}`;
         newInput.addEventListener("change", function () { previewImage(this.files); });
         document.querySelector(".drop-zone-small").appendChild(newInput);
     }
