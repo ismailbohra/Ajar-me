@@ -52,8 +52,8 @@ class Product extends CI_Controller
             $i++;
         }
 
-        $data2['product_category'] = $this->AdminM->get_category();
-        $this->load->view('Home/Header', $data2);
+        $data['product_category'] = $this->AdminM->get_category();
+        $this->load->view('Home/Header', $data);
         $this->load->view('Product/Home', $data);
         $this->load->view('Home/Footer');
     }
@@ -72,8 +72,8 @@ class Product extends CI_Controller
             $i++;
         }
 
-        $data2['product_category'] = $this->AdminM->get_category();
-        $this->load->view('Home/Header', $data2);
+        $data['product_category'] = $this->AdminM->get_category();
+        $this->load->view('Home/Header', $data);
         $this->load->view('Product/Home', $data);
         $this->load->view('Home/Footer');
     }
