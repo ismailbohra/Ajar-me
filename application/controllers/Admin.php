@@ -34,14 +34,43 @@ class Admin extends CI_Controller
         if(empty($_SESSION['user'])){
             redirect('/admin');
         }
+        $data['products'] = array();
+        $filter = "";
+        $sort = "";
+        if(!empty($_GET)){
 
-        $data['products'] = $this->AdminM->get_products(); 
+            if(!empty($_GET['sort'])){
+                $data['sort'] = $_GET['sort'];
+                $temp = explode('-',$_GET['sort']);
+                if($temp[0]=="name"){
+                    $sort = "product_name ".$temp[1].", ";                    
+                }else{
+                    $sort = "timestamp ".$temp[1].", ";
+                }
+            }
+
+            if(!empty($_GET['filter'])){
+                $data['filter_string'] = $_GET['filter'];
+                $data['filter'] = explode(',', $_GET['filter']);
+                $filter = "where product_category in (".$_GET['filter'].")";
+            }
+
+            $data['products'] = $this->AdminM->get_filtered_sorted_products($filter, $sort);
+        }else{
+            $data['products'] = $this->AdminM->get_products(); 
+        }
+
 
         $i = 0;
         foreach ($data['products'] as $p) {
-            $data['products'][$i]['product_image_url'] = $this->AdminM->get_product_image($p['id']);
+            $product_image = $this->AdminM->get_product_image($p['id']);
+            if(!empty($product_image)){
+                $data['products'][$i]['product_image_url'] = $product_image[0]['product_image_url']; 
+            }else{
+                $data['products'][$i]['product_image_url'] = "";
+            }
             $i++;
-        }
+        }        
 
         $this->load->view('Admin/Header');
         $this->load->view('Admin/Product', $data);
@@ -53,7 +82,13 @@ class Admin extends CI_Controller
             redirect('/admin');
         }
 
-        $data['product'] = $this->AdminM->get_product_details($product_id);
+        $data['product'] = $this->AdminM->get_product_details($product_id)[0];
+        $product_images = $this->AdminM->get_product_images($product_id);
+        $i=0;
+        foreach($product_images as $p){
+            $data['product']['product_image_url'][$i] = $p['product_image_url'];
+            $i++;
+        }
 
         $this->load->view('Admin/Header');
         $this->load->view('Admin/ViewProduct', $data);
@@ -73,8 +108,15 @@ class Admin extends CI_Controller
     {
         if ($_SESSION['user']) {
 
-            $data['product'] = $this->AdminM->get_product_details($product_id);
-
+            $data['product'] = $this->AdminM->get_product_details($product_id)[0];
+            $product_images = $this->AdminM->get_product_images($product_id);
+            $data['product']['product_image_url'] = array();
+            $i=0;
+            foreach($product_images as $p){
+                $data['product']['product_image_url'][$i] = $p['product_image_url'];
+                $i++;
+            }
+            
             $this->load->view('Admin/Header');
             $this->load->view('Admin/EditProduct', $data);
         } else {
@@ -115,9 +157,67 @@ class Admin extends CI_Controller
     }
 
     public function update_product(){
-        echo "<pre>";
-        print_r($_POST);
-        die();
+        
+        if(empty($_SESSION['user'])){
+            redirect('/admin');
+        }
+
+        if (!empty($_POST)) {
+            $product_id = $_POST['product-id'];
+            $product_name = $_POST['product-name'];
+            $product_desc = $_POST['product-desc'];
+            $product_category = $_POST['product-category'];
+
+            $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category);
+
+            $product = array();
+            if(isset($_POST['previous'])){
+                $product_images = $_POST['previous'];
+                $product = $this->AdminM->get_product_images($product_id);
+
+                if(count($product_images)!=count($product)){
+                    $product_image_string = "";
+                    $i=0;
+                    foreach($product_images as $p){
+                        $product_image_string .= "'".$p."'";
+                        if($i<count($product_images)-1){
+                            $product_image_string .= ',';
+                        }
+                        $i++;
+                    }
+
+                    $this->AdminM->update_product_images($product_id, $product_image_string);
+                }
+
+            }else{
+                $this->AdminM->delete_product_images($product_id);
+            }
+            
+
+            if (!empty($_FILES['product-image'])) {
+                $i = 0;
+                foreach ($_FILES['product-image']['tmp_name'] as $file_tmp) {
+
+                    if (!empty($file_tmp)) {
+                        $file_name = "/uploads/Product_Images/" . $product_id . "-" . $i + 1 + count($product) . "_" . $_FILES['product-image']['name'][$i];
+                        $location = pathinfo(pathinfo(__DIR__, PATHINFO_DIRNAME), PATHINFO_DIRNAME);
+                        $file_location = $location . "/" . $file_name;
+
+                        if (!is_dir('uploads/Product_Images')) {
+                            mkdir("uploads/Product_Images", 0777, true);
+                        }
+
+                        if (move_uploaded_file($file_tmp, $file_location)) {
+                            chmod($file_location, 0777);
+                            $this->AdminM->insert_product_image($product_id, $file_name);
+                        }
+                    }
+                    $i++;
+                }
+            }
+        }
+
+        redirect('/admin/home');
     }
 
     public function submit_product()

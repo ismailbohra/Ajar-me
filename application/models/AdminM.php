@@ -24,16 +24,30 @@ class AdminM extends CI_Model
         return $query->result_array();
     }
 
+    function get_filtered_sorted_products($filter, $sort)
+    {
+        $sql = " SELECT * from `products` $filter Order By $sort products.id desc";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
     function get_product_image($product_id)
     {
-        $sql = " SELECT product_image_url from `product_images` where product_images.product_id = $product_id Order By product_images.id desc LIMIT 1";
+        $sql = " SELECT product_image_url from `product_images` where product_images.product_id = $product_id Order By product_images.id LIMIT 1";
         $query = $this->db->query($sql);
-        return $query->result_array()[0]['product_image_url'];
+        return $query->result_array();
     }
 
     function get_product_details($product_id)
     {
-        $sql = " SELECT products.*, product_images.product_image_url from `products`, `product_images` where products.id = $product_id and products.id = product_images.product_id Order By products.id desc, product_images.id desc ";
+        $sql = " SELECT products.* from `products` where products.id = $product_id Order By products.id desc";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    function get_product_images($product_id)
+    {
+        $sql = "SELECT product_image_url from `product_images` where product_images.product_id = $product_id Order By product_images.id";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -69,6 +83,13 @@ class AdminM extends CI_Model
         $query = $this->db->query($sql);
         return $query;
     }
+    
+    function delete_product_images($product_id)
+    {
+        $sql = "DELETE FROM `product_images` WHERE `product_id` = '$product_id'";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
     function delete_product($product_id)
     {
@@ -76,6 +97,19 @@ class AdminM extends CI_Model
         $sql2 = "DELETE FROM `product_images` where product_images.product_id = $product_id ";
         $query = $this->db->query($sql);
         $query = $this->db->query($sql2);
+        return;
+    }
+
+    function update_product_details($product_id, $product_name, $product_desc, $product_category){
+        $sql = "UPDATE `products` SET `product_name` = '$product_name', `product_description`='$product_desc', `product_category`=$product_category WHERE `id` = $product_id ";
+        $query = $this->db->query($sql);
+        return;
+    }
+
+    function update_product_images($product_id, $product_image_string){
+        $sql = "DELETE FROM `product_images` WHERE `product_id` = $product_id AND `product_image_url` NOT IN ($product_image_string) ";
+    
+        $query = $this->db->query($sql);
         return;
     }
     
@@ -87,7 +121,7 @@ class AdminM extends CI_Model
     }
     function get_enquiry()
     {
-        $sql = "SELECT * from `enquiry` ORDER BY `time-stamp` DESC";
+        $sql = "SELECT * from `enquiry` ORDER BY `timestamp` DESC";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
