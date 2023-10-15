@@ -393,8 +393,8 @@
                     <option value="">Sort By</option>
                     <option value="name-asc" <?php if(isset($sort) && $sort=="name-asc") echo "selected"; ?>>Name (A-Z)</option>
                     <option value="name-desc" <?php if(isset($sort) && $sort=="name-desc") echo "selected"; ?>>Name (Z-A)</option>
-                    <option value="date-asc" <?php if(isset($sort) && $sort=="date-asc") echo "selected"; ?>>Date (New > Old)</option>
-                    <option value="date-desc" <?php if(isset($sort) && $sort=="date-asc") echo "selected"; ?>>Date (Old > New)</option>
+                    <option value="date-desc" <?php if(isset($sort) && $sort=="date-desc") echo "selected"; ?>>Date (New > Old)</option>
+                    <option value="date-asc" <?php if(isset($sort) && $sort=="date-asc") echo "selected"; ?>>Date (Old > New)</option>
                 </select>
             </div>
             <i class="glyphicon glyphicon-th" onclick="gridView();"></i>
