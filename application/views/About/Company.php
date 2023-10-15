@@ -446,7 +446,7 @@
             </div>
         </div>
     </div>
-    <div class="company-founder">
+    <!-- <div class="company-founder">
         <div class="founder-heading">
             <h1>Meet Our Founders</h1>
         </div>
@@ -476,5 +476,5 @@
                 <img src="<?php echo base_url('/assets/founder2.png'); ?>" alt="founder image" class="founder-img">
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

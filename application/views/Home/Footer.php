@@ -122,12 +122,14 @@
             font-size: 12px;
         }
     }
-    .footer li a{
-        color:rgb(51, 51, 51);
+
+    .footer li a {
+        color: rgb(51, 51, 51);
     }
-    .footer li a:hover{
-        color:rgb(51, 51, 51);
-        text-decoration:none;
+
+    .footer li a:hover {
+        color: rgb(51, 51, 51);
+        text-decoration: none;
     }
 
     .footer li:first-child {
@@ -195,8 +197,9 @@
         <div class="fourth">
             <ul>
                 <li>REACH OUT</li>
-                <li>LOCATION</li>
-                <li>CONTACT US</li>
+                <li><a href="<?php echo base_url('contact') ?>">LOCATION</a></li>
+                <li><a href="<?php echo base_url('contact') ?>">CONTACT US</a></li>
+                <li><a href="<?php echo base_url('admin') ?>">ADMIN</a></li>
                 <li>
                     <div class="icons">
                         <img src="<?php echo base_url('/assets/icons/facebook.svg') ?>" alt="facebook">
