@@ -1,3 +1,18 @@
+<?php
+$this->load->model('HomeM');
+$products = $this->HomeM->get_products();
+$i = 0;
+foreach ($products as $p) {
+  $product_image = $this->HomeM->get_product_image($p['id']);
+  if (!empty($product_image)) {
+    $products[$i]['product_image_url'] = $product_image[0]['product_image_url'];
+  } else {
+    $products[$i]['product_image_url'] = "assets/no-image.png";
+  }
+  $i++;
+}
+?>
+
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -373,69 +388,125 @@
     z-index: 8;
   }
 
-  .search-div{
-    background-color: #D9D9D9;
+  .search-div {
+    background-color: #C4C4C4;
     z-index: 7;
     position: fixed;
-    top:90;
-    height:60px;
-    width:100vw;
-    padding:10px 20px;
-    display:none;
-    justify-content: space-between;
-    align-items: center;  
+    top: 90;
+    height: 60px;
+    width: 100vw;
+    padding: 10px 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+
     @media screen and (max-width:768px) {
+      justify-content: space-between;
       padding-right: 0;
-      top:70;
+      top: 70;
     }
   }
-  .search-bar{
+
+  .search-bar {
     height: 100%;
-    width: 100%;
-    display:flex;
-    align-items: center;  
+    width: 60%;
+    display: flex;
+    align-items: center;
     background-color: #fff;
     border-radius: 5px;
+
+    @media screen and (max-width:1200px) {
+      width: 95%;
+
+      @media screen and (max-width:768px) {
+        width: 100%;
+      }
+    }
+
   }
-  .search{
+
+  .search {
     width: 100%;
   }
-  .search-close-icon{
+
+  .search-close-icon {
     margin-top: -5px;
-    font-size:40px;
+    font-size: 40px;
     padding: 0px 15px;
     cursor: pointer;
   }
-  .search input{
+
+  .search .autocomplete input {
     height: 100%;
-    width: calc(100% - 50px);
-    border:none;
+    width: 100%;
+    border: none;
     border-radius: 5px 0px 0px 5px;
     padding: 0px 15px;
-    font-size:18px;
+    font-size: 18px;
   }
-  .search span{
+
+  .search span {
     display: flex;
     justify-content: center;
     align-items: center;
-    color:#D9D9D9;
+    color: #D9D9D9;
     background-color: rgba(18, 79, 144, 1);
     height: 100%;
     width: 50px;
-    top:0;
+    top: 0;
     border-radius: 0px 5px 5px 0px;
     cursor: pointer;
   }
 
-  /* <div class="search-div">
-    <div class="search-bar">
-      <div class="search">
-        <input type="text" placeholder="search here...">
-        <i class="fa fa-magnifying-glass"></i>
-      </div>
-      <div class="search-close-icon"><i class="fa fa-xmark"></i></div>
-    </div>
-  </div> */
+  /*the container must be positioned relative:*/
+  .autocomplete {
+    position: relative;
+    display: inline-block;
+  }
+
+  .autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  .autocomplete-items div {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+    font-size: 18px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    width: 100%;
+    max-height: 60px;
+  }
+
+  .autocomplete-items div img {
+    max-height: 50px;
+    max-width: 50px;
+    object-fit: contain;
+    margin-right: 5px;
+  }
+
+  /*when hovering an item:*/
+  .autocomplete-items div:hover {
+    background-color: #e9e9e9;
+  }
+
+  /*when navigating through the items using the arrow keys:*/
+  .autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+  }
 </style>
 <main id="main">
   <nav>
@@ -510,7 +581,7 @@
       <li><a href="<?php echo base_url('download'); ?>" class="navbar-headings">DOWNLOAD</a></li>
       <li><a href="<?php echo base_url('showroom'); ?>" class="navbar-headings">SHOWROOM</a></li>
       <li><a href="<?php echo base_url('contact'); ?>" class="navbar-headings">CONTACT US</a></li>
-      <li><span class="glyphicon glyphicon-search"></span></li>
+      <li><span class="glyphicon glyphicon-search" onclick="showSearchBar();"></span></li>
     </ul>
     <ul id="navbar-small">
       <li>
@@ -519,8 +590,9 @@
         </div>
       </li>
       <li>
-        <div class="icons" style="margin-top:0px;"><span class="glyphicon glyphicon-search" onclick="showSearchBar();"></span><span
-            class="glyphicon glyphicon-menu-hamburger" onclick="openNav()"></span></div>
+        <div class="icons" style="margin-top:0px;"><span class="glyphicon glyphicon-search"
+            onclick="showSearchBar();"></span><span class="glyphicon glyphicon-menu-hamburger"
+            onclick="openNav()"></span></div>
       </li>
     </ul>
 
@@ -604,10 +676,14 @@
   </nav>
   <div class="search-div" id="search-div">
     <div class="search-bar">
-      <div class="search">
-        <input type="text" placeholder="search here...">
-        <span class="glyphicon glyphicon-search"></span>
-      </div>
+      <form class="search" id="search-form" action="<?php echo base_url('/product/search'); ?>" method="POST">
+        <div class="autocomplete" style="width:100%">
+          <input id="myInput" type="text" name="searched-product" placeholder="search here..." autocomplete="off" <?php if (isset($_SESSION['searched-product'])) {
+            echo "value = '" . $_SESSION['searched-product'] . "'";
+          } ?>>
+        </div>
+        <span class="glyphicon glyphicon-search" onclick="submitSearchForm();"></span>
+      </form>
     </div>
     <div class="search-close-icon" onclick="hideSearchBar();">&times;</div>
   </div>
@@ -655,4 +731,130 @@
   function hideSearchBar() {
     document.getElementById("search-div").style.display = "none";
   }
+
+  function submitSearchForm() {
+    document.getElementById("search-form").submit();
+  }
+
+</script>
+<script>
+  let products = [];
+  let product_images = [];
+  <?php
+  foreach ($products as $p) {
+    ?>
+    products.push('<?php echo $p['product_name']; ?>');
+    products.push('<?php echo $p['product_code']; ?>');
+    product_images.push('<?php echo base_url() . $p['product_image_url']; ?>');
+    product_images.push('<?php echo base_url() . $p['product_image_url']; ?>');
+  <?php } ?>
+  // console.log(products);
+  // console.log(product_images);
+  function autocomplete(inp, arr) {
+    /*the autocomplete function takes two arguments,
+      the text field element and an array of possible autocompleted values:*/
+    var currentFocus;
+    /*execute a function when someone writes in the text field:*/
+    inp.addEventListener("input", function (e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false; }
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.className = "searched-product-div";
+          b.innerHTML = "<img src='" + product_images[i] + "'>";
+          b.innerHTML += "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function (e) {
+            /*insert the value for the autocomplete text field:*/
+            inp.value = this.getElementsByTagName("input")[0].value;
+            /*close the list of autocompleted values,
+            (or any other open lists of autocompleted values:*/
+            closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+    });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", function (e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      }
+      // else if (e.keyCode == 13) {
+      //   /*If the ENTER key is pressed, prevent the form from being submitted,*/
+      //   e.preventDefault();
+      //   if (currentFocus > -1) {
+      //     /*and simulate a click on the "active" item:*/
+      //     if (x) x[currentFocus].click();
+      //   }
+      // }
+    });
+    function addActive(x) {
+      /*a function to classify an item as "active":*/
+      if (!x) return false;
+      /*start by removing the "active" class on all items:*/
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
+      /*add class "autocomplete-active":*/
+      x[currentFocus].classList.add("autocomplete-active");
+    }
+    function removeActive(x) {
+      /*a function to remove the "active" class from all autocomplete items:*/
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+    function closeAllLists(elmnt) {
+      /*close all autocomplete lists in the document,
+        except the one passed as an argument:*/
+      var x = document.getElementsByClassName("autocomplete-items");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+          x[i].parentNode.removeChild(x[i]);
+        }
+      }
+    }
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+    });
+  }
+
+  autocomplete(document.getElementById("myInput"), products);
+
+  $('searched-product-div').each(function () {
+    if ($(this)[0].scrollWidth > $(this).width()) {
+      $(this).prepend('<div class="hellip"">&hellip;</div>');
+    }
+  });
 </script>

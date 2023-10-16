@@ -13,11 +13,17 @@ class Admin extends CI_Controller
 
     public function index()
     {
+        if (!empty($_SESSION['user'])) {
+            redirect('/admin/home');
+        }
         $this->load->view('Admin/Login');
     }
 
     public function login()
     {
+        if (!empty($_SESSION['user'])) {
+            redirect('/admin/home');
+        }
         $username = $_POST['username'];
         $password = $_POST['password'];
         $check = $this->AdminM->check_user($username, md5($password));
@@ -37,40 +43,40 @@ class Admin extends CI_Controller
         $data['products'] = array();
         $filter = "";
         $sort = "";
-        if(!empty($_GET)){
+        if (!empty($_GET)) {
 
-            if(!empty($_GET['sort'])){
+            if (!empty($_GET['sort'])) {
                 $data['sort'] = $_GET['sort'];
-                $temp = explode('-',$_GET['sort']);
-                if($temp[0]=="name"){
-                    $sort = "product_name ".$temp[1].", ";                    
-                }else{
-                    $sort = "timestamp ".$temp[1].", ";
+                $temp = explode('-', $_GET['sort']);
+                if ($temp[0] == "name") {
+                    $sort = "product_name " . $temp[1] . ", ";
+                } else {
+                    $sort = "timestamp " . $temp[1] . ", ";
                 }
             }
 
-            if(!empty($_GET['filter'])){
+            if (!empty($_GET['filter'])) {
                 $data['filter_string'] = $_GET['filter'];
                 $data['filter'] = explode(',', $_GET['filter']);
-                $filter = "where product_category in (".$_GET['filter'].")";
+                $filter = "where product_category in (" . $_GET['filter'] . ")";
             }
 
             $data['products'] = $this->AdminM->get_filtered_sorted_products($filter, $sort);
-        }else{
-            $data['products'] = $this->AdminM->get_products(); 
+        } else {
+            $data['products'] = $this->AdminM->get_products();
         }
 
 
         $i = 0;
         foreach ($data['products'] as $p) {
             $product_image = $this->AdminM->get_product_image($p['id']);
-            if(!empty($product_image)){
-                $data['products'][$i]['product_image_url'] = $product_image[0]['product_image_url']; 
-            }else{
+            if (!empty($product_image)) {
+                $data['products'][$i]['product_image_url'] = $product_image[0]['product_image_url'];
+            } else {
                 $data['products'][$i]['product_image_url'] = "";
             }
             $i++;
-        }        
+        }
 
         $this->load->view('Admin/Header');
         $this->load->view('Admin/Product', $data);
@@ -85,8 +91,8 @@ class Admin extends CI_Controller
 
         $data['product'] = $this->AdminM->get_product_details($product_id)[0];
         $product_images = $this->AdminM->get_product_images($product_id);
-        $i=0;
-        foreach($product_images as $p){
+        $i = 0;
+        foreach ($product_images as $p) {
             $data['product']['product_image_url'][$i] = $p['product_image_url'];
             $i++;
         }
@@ -101,7 +107,7 @@ class Admin extends CI_Controller
 
             $data['product_category'] = $this->AdminM->get_category();
             $this->load->view('Admin/Header');
-            $this->load->view('Admin/AddProduct',$data);
+            $this->load->view('Admin/AddProduct', $data);
         } else {
             redirect(base_url('/admin'));
         }
@@ -114,12 +120,12 @@ class Admin extends CI_Controller
             $data['product'] = $this->AdminM->get_product_details($product_id)[0];
             $product_images = $this->AdminM->get_product_images($product_id);
             $data['product']['product_image_url'] = array();
-            $i=0;
-            foreach($product_images as $p){
+            $i = 0;
+            foreach ($product_images as $p) {
                 $data['product']['product_image_url'][$i] = $p['product_image_url'];
                 $i++;
             }
-            
+
             $this->load->view('Admin/Header');
             $this->load->view('Admin/EditProduct', $data);
         } else {
@@ -159,9 +165,10 @@ class Admin extends CI_Controller
         }
     }
 
-    public function update_product(){
-        
-        if(empty($_SESSION['user'])){
+    public function update_product()
+    {
+
+        if (empty($_SESSION['user'])) {
             redirect('/admin');
         }
 
@@ -174,16 +181,16 @@ class Admin extends CI_Controller
             $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category);
 
             $product = array();
-            if(isset($_POST['previous'])){
+            if (isset($_POST['previous'])) {
                 $product_images = $_POST['previous'];
                 $product = $this->AdminM->get_product_images($product_id);
 
-                if(count($product_images)!=count($product)){
+                if (count($product_images) != count($product)) {
                     $product_image_string = "";
-                    $i=0;
-                    foreach($product_images as $p){
-                        $product_image_string .= "'".$p."'";
-                        if($i<count($product_images)-1){
+                    $i = 0;
+                    foreach ($product_images as $p) {
+                        $product_image_string .= "'" . $p . "'";
+                        if ($i < count($product_images) - 1) {
                             $product_image_string .= ',';
                         }
                         $i++;
@@ -192,10 +199,10 @@ class Admin extends CI_Controller
                     $this->AdminM->update_product_images($product_id, $product_image_string);
                 }
 
-            }else{
+            } else {
                 $this->AdminM->delete_product_images($product_id);
             }
-            
+
 
             if (!empty($_FILES['product-image'])) {
                 $i = 0;

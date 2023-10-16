@@ -30,7 +30,7 @@ class HomeM extends CI_Model
 
     return $this->db->insert_id();
   }
-  function insert_query($name, $email, $contact, $requirments, $company, $address, $product_id,$user)
+  function insert_query($name, $email, $contact, $requirments, $company, $address, $product_id, $user)
   {
     $data = array(
       'name' => $name,
@@ -46,5 +46,19 @@ class HomeM extends CI_Model
     $this->db->insert('enquiry', $data);
 
     return $this->db->insert_id();
+  }
+
+  function get_products()
+  {
+    $sql = "SELECT distinct * from `products` order by product_name ";
+    $query = $this->db->query($sql);
+    return $query->result_array();
+  }
+
+  function get_product_image($product_id)
+  {
+    $sql = " SELECT product_image_url from `product_images` where product_images.product_id = $product_id Order By product_images.id LIMIT 1";
+    $query = $this->db->query($sql);
+    return $query->result_array();
   }
 }

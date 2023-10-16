@@ -29,6 +29,19 @@ class AdminM extends CI_Model
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+    function get_searched_products($value)
+    {
+        $sql = " SELECT * from `products` WHERE product_name LIKE '%$value%' OR product_code LIKE '%$value%' ";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    function get_searched_filtered_sorted_products($filter, $sort, $value)
+    {
+        $sql = " SELECT * from `products` WHERE (product_name LIKE '%$value%' OR product_code LIKE '%$value%') $filter Order By $sort products.id";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
 
     function get_filtered_sorted_products($filter, $sort)
     {
@@ -58,7 +71,7 @@ class AdminM extends CI_Model
         return $query->result_array();
     }
 
-    function insert_product($product_name, $product_desc, $product_category,$product_code)
+    function insert_product($product_name, $product_desc, $product_category, $product_code)
     {
         $sql = "INSERT INTO `products` (`product_name`,`product_description`,`product_category`,`product_code`) VALUES ('$product_name', '$product_desc', $product_category,'$product_code')";
         $query = $this->db->query($sql);
@@ -89,7 +102,7 @@ class AdminM extends CI_Model
         $query = $this->db->query($sql);
         return $query;
     }
-    
+
     function delete_product_images($product_id)
     {
         $sql = "DELETE FROM `product_images` WHERE `product_id` = '$product_id'";
@@ -106,19 +119,21 @@ class AdminM extends CI_Model
         return;
     }
 
-    function update_product_details($product_id, $product_name, $product_desc, $product_category){
+    function update_product_details($product_id, $product_name, $product_desc, $product_category)
+    {
         $sql = "UPDATE `products` SET `product_name` = '$product_name', `product_description`='$product_desc', `product_category`=$product_category WHERE `id` = $product_id ";
         $query = $this->db->query($sql);
         return;
     }
 
-    function update_product_images($product_id, $product_image_string){
+    function update_product_images($product_id, $product_image_string)
+    {
         $sql = "DELETE FROM `product_images` WHERE `product_id` = $product_id AND `product_image_url` NOT IN ($product_image_string) ";
-    
+
         $query = $this->db->query($sql);
         return;
     }
-    
+
     function get_message()
     {
         $sql = "SELECT * from `message` ORDER BY `timestamp` DESC";
@@ -133,7 +148,7 @@ class AdminM extends CI_Model
     }
     function get_category()
     {
-        $sql = "SELECT * from `category` ORDER BY `time-stamp` DESC";
+        $sql = "SELECT * from `category` ORDER BY `id`";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
