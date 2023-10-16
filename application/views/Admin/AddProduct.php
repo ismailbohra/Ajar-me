@@ -326,11 +326,11 @@
                         <table class="horizontal-table">
                             <!-- Initial header row with input -->
                             <tr>
-                                <td><input type="text" placeholder="Header1"  name="header[]"/></td>
+                                <td><input type="text" placeholder="Header1" name="header[]" /></td>
                             </tr>
                             <!-- Initial data row with input -->
                             <tr>
-                                <td><input type="text" placeholder="Row1" name="row[]"/></td>
+                                <td><input type="text" placeholder="Row1" name="row[]" /></td>
                             </tr>
                         </table>
                     </div>

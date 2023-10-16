@@ -384,4 +384,32 @@
         newInput.addEventListener("change", function () { previewImage(this.files); });
         document.querySelector(".drop-zone-small").appendChild(newInput);
     }
+    function addColumnH() {
+        var table = document.querySelector(".horizontal-table");
+        var rowCount = table.rows.length;
+
+        var headerCell = table.rows[0].insertCell(-1);
+        headerCell.innerHTML = '<input type="text" name="header[]" placeholder="Header' + (rowCount + 1) + '" />';
+
+        for (var i = 1; i < rowCount; i++) {
+            var row = table.rows[i];
+            var cell = row.insertCell(-1);
+            cell.innerHTML = '<input type="text" name="row[]" placeholder="Row' + i + '" />';
+        }
+    }
+
+
+
+
+    function addRowH() {
+        var table = document.querySelector(".horizontal-table");
+        var headerRow = table.rows[0];
+        var rowCount = headerRow.cells.length;
+
+        var newRow = table.insertRow(-1);
+        for (var i = 0; i < rowCount; i++) {
+            var cell = newRow.insertCell(-1);
+            cell.innerHTML = '<input type="text" name="row[]" placeholder="Row' + (newRow.rowIndex) + '" />';
+        }
+    }
 </script>
