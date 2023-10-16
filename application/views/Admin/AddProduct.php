@@ -33,6 +33,13 @@
         margin-bottom: 1rem;
     }
 
+    .input-table {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
     .add-product-desc input {
         border: 2px solid #D9D9D9;
         border-radius: 5px;
@@ -143,14 +150,6 @@
         font-size: 18px;
     }
 
-
-
-
-
-
-
-
-
     .images {
         display: flex;
         justify-content: center;
@@ -211,6 +210,68 @@
     .product-images p:hover {
         cursor: pointer;
     }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
 </style>
 
 <div class="add-product-page">
@@ -232,7 +293,9 @@
                     </div>
                     <div class="input-field">
                         <label for="product-desc">Product Description</label>
-                        <textarea name="product-desc" required></textarea>
+                        <textarea name="product-desc"
+                            placeholder="For description in points add semicolon ' ; ' to end the line"
+                            required></textarea>
                     </div>
                 </div>
             </div>
@@ -248,19 +311,32 @@
                                     <?php echo $pc['name'] ?>
                                 </option>
                             <?php } ?>
-                            <!-- <option value="2">Knob Handles</option>
-                            <option value="3">Pull Handles</option>
-                            <option value="4">Hinges</option>
-                            <option value="5">Locking Devices</option>
-                            <option value="6">Europrofile Cylinder</option>
-                            <option value="7">Master Key</option>
-                            <option value="8">Panic Exit</option>
-                            <option value="9">Door Closer</option>
-                            <option value="10">Door Accessories</option> -->
                         </select>
                     </div>
                 </div>
             </div>
+            <div class="add-product-horizontal-table">
+                <h2>Specification Table</h2>
+                <div class="add-product-desc">
+                    <div class="input-table">
+                        <input type="button" value="Add Column" name="addcolumn" onclick="addColumnH();">
+                        <input type="button" value="Add Row" name="addrow" onclick="addRowH();">
+                    </div>
+                    <div>
+                        <table class="horizontal-table">
+                            <!-- Initial header row with input -->
+                            <tr>
+                                <td><input type="text" placeholder="Header1"  name="header[]"/></td>
+                            </tr>
+                            <!-- Initial data row with input -->
+                            <tr>
+                                <td><input type="text" placeholder="Row1" name="row[]"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <div class="add-product-images">
                 <h2>Product Images</h2>
                 <div class="add-product-image">
@@ -272,8 +348,8 @@
                             <div class="add-image">
                                 <div class="drop-zone-small">
                                     <span class="drop-zone-text">Drop file here or click to upload</span>
-                                    <input type="file" name="product-image[]" class="drop-zone-input" id="drop-zone-input-1" required
-                                        onchange="previewImage(this.files)">
+                                    <input type="file" name="product-image[]" class="drop-zone-input"
+                                        id="drop-zone-input-1" required onchange="previewImage(this.files)">
                                 </div>
                             </div>
                         </div>
@@ -289,26 +365,27 @@
 </div>
 <script>
     var i = 1;
+
     function previewImage(input) {
-        
+
         const file = input[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
                 const newImage = document.createElement("div");
                 newImage.className = "product-images";
-                newImage.id = `product-images-${i-1}`;
-                newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image" ><p id="${i-1}" onclick="removeElement(this.id);">Remove</p>`;
+                newImage.id = `product-images-${i - 1}`;
+                newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image" ><p id="${i - 1}" onclick="removeElement(this.id);">Remove</p>`;
 
                 document.querySelector(".product-images-div").appendChild(newImage);
             };
             reader.readAsDataURL(file);
         }
         document.querySelector(`#drop-zone-input-${i}`).style.visibility = "hidden";
-        
+
         i++;
 
-        addInput();        
+        addInput();
 
     }
 
@@ -323,7 +400,38 @@
         newInput.name = "product-image[]";
         newInput.className = "drop-zone-input";
         newInput.id = `drop-zone-input-${i}`;
-        newInput.addEventListener("change", function () { previewImage(this.files); });
+        newInput.addEventListener("change", function () {
+            previewImage(this.files);
+        });
         document.querySelector(".drop-zone-small").appendChild(newInput);
+    }
+
+    function addColumnH() {
+        var table = document.querySelector(".horizontal-table");
+        var rowCount = table.rows.length;
+
+        var headerCell = table.rows[0].insertCell(-1);
+        headerCell.innerHTML = '<input type="text" name="header[]" placeholder="Header' + (rowCount + 1) + '" />';
+
+        for (var i = 1; i < rowCount; i++) {
+            var row = table.rows[i];
+            var cell = row.insertCell(-1);
+            cell.innerHTML = '<input type="text" name="row[]" placeholder="Row' + i + '" />';
+        }
+    }
+
+
+
+
+    function addRowH() {
+        var table = document.querySelector(".horizontal-table");
+        var headerRow = table.rows[0];
+        var rowCount = headerRow.cells.length;
+
+        var newRow = table.insertRow(-1);
+        for (var i = 0; i < rowCount; i++) {
+            var cell = newRow.insertCell(-1);
+            cell.innerHTML = '<input type="text" name="row[]" placeholder="Row' + (newRow.rowIndex) + '" />';
+        }
     }
 </script>
