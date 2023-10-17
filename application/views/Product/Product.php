@@ -246,19 +246,78 @@
             right: -100%;
         }
     }
+
+    .panel-table {
+        /* padding: 10px 18px; */
+        display: none;
+        background-color: white;
+        overflow: hidden;
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td,
+    #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    #customers tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #customers tr:hover {
+        background-color: #ddd;
+    }
+
+    #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        /* background-color: darkgrey; */
+        color: black;
+        text-transform: uppercase;
+        font-size: 13px;
+    }
+    ul {
+        padding-left: 40px;
+        @media  screen and (max-width:768px) {
+            padding-left: 15px;
+            
+        }
+    }
+    li::marker {
+        font-size: 20px;
+    }
 </style>
 
 <div class="product-page">
     <div class="product-container">
         <div class="product-left">
             <div class="product-left-img-div">
-                <img src="<?php if(!empty($product['product_image_url'][0])){echo base_url().$product['product_image_url'][0];}else{echo base_url()."/assets/no-image.png";} ?>" alt="product image" class="product-left-img">
+                <img src="<?php if (!empty($product['product_image_url'][0])) {
+                                echo base_url() . $product['product_image_url'][0];
+                            } else {
+                                echo base_url() . "/assets/no-image.png";
+                            } ?>" alt="product image" class="product-left-img">
             </div>
             <div class="product-images">
-            <?php if(!empty($product['product_image_url'])){ foreach($product['product_image_url'] as $p){ ?>
-                    <img src="<?php if(!empty($p)){echo base_url().$p;}else{echo base_url()."/assets/no-image.png";} ?>" alt="product image" onclick="replaceImage(this);">
-                <?php }}else{ ?>
-                    <img src="<?php echo base_url()."/assets/no-image.png"; ?>" alt="product image" onclick="replaceImage(this);">
+                <?php if (!empty($product['product_image_url'])) {
+                    foreach ($product['product_image_url'] as $p) { ?>
+                        <img src="<?php if (!empty($p)) {
+                                        echo base_url() . $p;
+                                    } else {
+                                        echo base_url() . "/assets/no-image.png";
+                                    } ?>" alt="product image" onclick="replaceImage(this);">
+                    <?php }
+                } else { ?>
+                    <img src="<?php echo base_url() . "/assets/no-image.png"; ?>" alt="product image" onclick="replaceImage(this);">
                 <?php } ?>
             </div>
         </div>
@@ -276,18 +335,53 @@
             <div class="product-right-body">
                 <button class="accordion">DESCRIPTION</button>
                 <div class="panel">
-                    <p><?php echo $product['product_description']; ?></p>
+                    <?php foreach ($product['product_description'] as $pd) { ?>
+                        <?php if ($pd[0] == '#') { ?>
+                            <ul>
+                                <li>
+                                    <?php $pd = str_replace(';', ',', $pd);
+                                    $pd = str_replace('|', '"', $pd);
+                                    echo $pd; ?>
+                                </li>
+                            </ul>
+                        <?php } else { ?>
+                            <p>
+                                <?php $pd = str_replace(';', ',', $pd);
+                                $pd = str_replace('|', '"', $pd);
+                                echo $pd; ?>
+                            </p>
+                        <?php } ?>
+                    <?php } ?>
                 </div>
+                <?php if (count($header) > 1) { ?>
+                    <button class="accordion">SPECIFICATIONS</button>
+                    <div class="panel-table">
+                        <table id="customers">
+                            <tr>
+                                <?php
+                                foreach ($header as $h) { ?>
+                                    <th>
+                                        <?php echo $h ?>
+                                    </th>
+                                <?php } ?>
+                            </tr>
+                            <?php
+                            $i = 0;
+                            foreach ($row as $r) {
+                                if ($i % count($header) == 0) {
+                                    echo '<tr>';
+                                }
+                                echo '<td>' . $r . '</td>';
+                                if ($i % count($header) == (count($header) - 1)) {
+                                    echo '</tr>';
+                                }
+                                $i++;
+                            }
+                            ?>
 
-                <button class="accordion">SPECIFICATIONS</button>
-                <div class="panel">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                        ut
-                        aliquip ex ea commodo consequat.</p>
-                </div>
-
+                        </table>
+                    </div>
+                <?php } ?>
                 <!-- <button class="accordion">FITTING INSTRUCTIONS</button>
                 <div class="panel">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
@@ -333,23 +427,19 @@
         </div>
         <div class="form-group">
             <label for="fullname" class="form-label">Full Name</label>
-            <input type="name" class="form-control" id="fullname" name="name" Required=true
-                placeholder="Enter your name (Required)">
+            <input type="name" class="form-control" id="fullname" name="name" Required=true placeholder="Enter your name (Required)">
         </div>
         <div class="form-group">
             <label for="Email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" name="Email" Required=true aria-describedby="emailHelp"
-                placeholder="Enter Your Email (Required)">
+            <input type="email" class="form-control" name="Email" Required=true aria-describedby="emailHelp" placeholder="Enter Your Email (Required)">
         </div>
         <div class="form-group">
             <label for="contact" class="form-label">Contact Number</label>
-            <input type="number" class="form-control" name="contact" Required=true
-                placeholder="Enter your Phone no (Required)">
+            <input type="number" class="form-control" name="contact" Required=true placeholder="Enter your Phone no (Required)">
         </div>
         <div class="form-group">
             <label for="requirments" class="form-label">Requirments</label>
-            <textarea placeholder="Please tell us about your Requirments" class="form-control" name="requirments"
-                id="exampleFormControlTextarea1" rows="5"></textarea>
+            <textarea placeholder="Please tell us about your Requirments" class="form-control" name="requirments" id="exampleFormControlTextarea1" rows="5"></textarea>
         </div>
         <div class="form-group">
             <label for="company" class="form-label">Company</label>
@@ -376,7 +466,7 @@
     var i;
 
     for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function () {
+        acc[i].addEventListener("click", function() {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
             if (panel.style.display === "block") {
@@ -394,18 +484,20 @@
     function redirectToUrl(url) {
         window.location.href = url;
     }
+
     function send_query(id) {
         document.getElementById("query").style.display = "block";
         const newInput = document.createElement("div");
         newInput.innerHTML = `<input type="text" hidden name="product_id" value=${id} Required=true>`;
         document.querySelector(".myForm").appendChild(newInput);
     }
+
     function clearForm() {
         $('#myForm')[0].reset();
         document.getElementById("query").style.display = "none";
     }
-    $(document).ready(function () {
-        $('#myForm').submit(function (event) {
+    $(document).ready(function() {
+        $('#myForm').submit(function(event) {
             event.preventDefault();
 
             var formData = $(this).serialize();
@@ -414,13 +506,13 @@
                 type: 'POST',
                 url: "<?php echo base_url('product/send_enquiry'); ?>",
                 data: formData,
-                success: function (response) {
+                success: function(response) {
                     console.log('query submitted successfully');
                     console.log(response);
                     showSuccessMessage();
                     clearForm();
                 },
-                error: function (error) {
+                error: function(error) {
                     console.error('query submission failed');
                 }
             });
@@ -429,7 +521,7 @@
         function showSuccessMessage() {
             var toastMessage = $('#toast-message');
             toastMessage.show();
-            setTimeout(function () {
+            setTimeout(function() {
                 toastMessage.hide();
             }, 2000);
         }

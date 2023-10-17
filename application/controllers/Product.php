@@ -143,7 +143,10 @@ class Product extends CI_Controller
             $data['product']['product_image_url'][$i] = $p['product_image_url'];
             $i++;
         }
-
+        
+        $data['header'] = json_decode($data['product']['table_header'], true);
+        $data['row'] = json_decode($data['product']['table_row'], true);
+        $data['product']['product_description']=json_decode($data['product']['product_description'],true);
         $data2['product_category'] = $this->AdminM->get_category();
         $this->load->view('Home/Header', $data2);
         $this->load->view('Product/Product', $data);
