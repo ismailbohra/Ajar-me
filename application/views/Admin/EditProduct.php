@@ -211,6 +211,17 @@
     .product-images p:hover {
         cursor: pointer;
     }
+
+    .input-table {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    td {
+        padding: 5px;
+    }
 </style>
 
 <div class="add-product-page">
@@ -218,7 +229,7 @@
         <h1>Edit Product</h1>
     </div>
     <form action="<?php echo base_url('/admin/update_product'); ?>" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="product-id" value="<?php echo $product['id']; ?>">
+        <input type="hidden" name="product-id" value="<?php echo $product['id']; ?>">
         <div class="add-product-form">
             <div class="add-product-description">
                 <h2>Description</h2>
@@ -229,7 +240,7 @@
                     </div>
                     <div class="input-field">
                         <label for="product-desc">Product Description</label>
-                        <textarea name="product-desc"  required><?php echo $product['product_description']; ?></textarea>
+                        <textarea name="product-desc" required><?php echo $product['product_description']; ?></textarea>
                     </div>
                 </div>
             </div>
@@ -239,11 +250,55 @@
                     <div class="input-field">
                         <label for="product-name">Product Category</label>
                         <select name="product-category" required>
-                            <option value="1" <?php if($product['product_category']==1) echo "selected"; ?>>New Products</option>
-                            <option value="2" <?php if($product['product_category']==2) echo "selected"; ?>>Products</option>
-                            <option value="3" <?php if($product['product_category']==3) echo "selected"; ?>>Ebco</option>
-                            <option value="4" <?php if($product['product_category']==4) echo "selected"; ?>>Livsmart</option>
+
+                            <?php foreach ($product_category as $pc) { ?>
+                                <option value="1" <?php if ($product['product_category'] == $pc['id'])
+                                    echo "selected"; ?>><?php echo $pc['name'] ?>
+                                </option>
+                            <?php } ?>
                         </select>
+                    </div>
+                </div>
+            </div>
+            <div class="add-product-horizontal-table">
+                <h2>Specification Table</h2>
+                <div class="add-product-desc">
+                    <div class="input-table">
+                        <input type="button" value="Add Column" name="addcolumn" onclick="addColumnH();">
+                        <input type="button" value="Add Row" name="addrow" onclick="addRowH();">
+                    </div>
+                    <div>
+                        <table class="horizontal-table">
+                            <!-- Initial header row with input -->
+                            <tr>
+                                <?php
+                                foreach ($header as $h) {
+                                    ?>
+                                    <td>
+                                        <input type="text" placeholder="Header1" name="header[]" <?php if (!empty($h)) {
+                                            echo 'value="' . $h . '"';
+                                        } ?> />
+                                    </td>
+                                    <?php
+                                }
+                                ?>
+                            </tr>
+
+                            <!-- Initial data row with input -->
+                            <?php
+                            $i = 0;
+                            foreach ($row as $r) {
+                                if ($i % count($header) == 0) {
+                                    echo '<tr>';
+                                }
+                                echo '<td><input type="text" placeholder="Row1" name="row[]" value="' . $r . '"/></td>';
+                                if ($i % count($header) == (count($header) - 1)) {
+                                    echo '</tr>';
+                                }
+                                $i++;
+                            }
+                            ?>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -253,19 +308,27 @@
                     <div class="images">
 
                         <div class="product-images-div">
-                            <?php $i=0; foreach($product['product_image_url'] as $p){ ?>
-                                <div class="product_images" id="product-images-<?php echo $i; ?>" style="max-width: 200px; max-height: 150px; border: 2px solid #D9D9D9; padding: 1rem; border-radius: 10px;">
-                                    <img src="<?php echo base_url().$p; ?>" alt="uploaded image" style="width: 100%;height: 80%;">
-                                    <p id="<?php echo $i; ?>" style="height: 20%; width: 100%; text-align: center;  padding-top: 1rem;cursor:pointer;" onclick="removeElement(this.id);">Remove</p>
-                                    <input type="hidden" name="previous[]" id="prev-image-<?php echo $i; ?>" value="<?php echo $p; ?>">
+                            <?php $i = 0;
+                            foreach ($product['product_image_url'] as $p) { ?>
+                                <div class="product_images" id="product-images-<?php echo $i; ?>"
+                                    style="max-width: 200px; max-height: 150px; border: 2px solid #D9D9D9; padding: 1rem; border-radius: 10px;">
+                                    <img src="<?php echo base_url() . $p; ?>" alt="uploaded image"
+                                        style="width: 100%;height: 80%;">
+                                    <p id="<?php echo $i; ?>"
+                                        style="height: 20%; width: 100%; text-align: center;  padding-top: 1rem;cursor:pointer;"
+                                        onclick="removeElement(this.id);">Remove</p>
+                                    <input type="hidden" name="previous[]" id="prev-image-<?php echo $i; ?>"
+                                        value="<?php echo $p; ?>">
                                 </div>
-                            <?php $i++; } ?>
+                                <?php $i++;
+                            } ?>
                         </div>
                         <div class="add-images">
                             <div class="add-image">
                                 <div class="drop-zone-small">
                                     <span class="drop-zone-text">Drop file here or click to upload</span>
-                                    <input type="file" name="product-image[]" class="drop-zone-input" id="drop-zone-input-<?php echo count($product['product_image_url']); ?>"
+                                    <input type="file" name="product-image[]" class="drop-zone-input"
+                                        id="drop-zone-input-<?php echo count($product['product_image_url']); ?>"
                                         onchange="previewImage(this.files)">
                                 </div>
                             </div>
@@ -289,14 +352,14 @@
             reader.onload = function (e) {
                 const newImage = document.createElement("div");
                 newImage.className = "product-images";
-                newImage.id = `product-images-${i-1}`;
-                newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image" ><p id="${i-1}" onclick="removeElement(this.id);" >Remove</p>`;
+                newImage.id = `product-images-${i - 1}`;
+                newImage.innerHTML = `<img src="${e.target.result}" alt="uploaded image" ><p id="${i - 1}" onclick="removeElement(this.id);" >Remove</p>`;
 
                 document.querySelector(".product-images-div").appendChild(newImage);
             };
             reader.readAsDataURL(file);
         }
-        
+
         document.querySelector(`#drop-zone-input-${i}`).style.visibility = "hidden";
 
         i++;
@@ -307,7 +370,7 @@
 
     function removeElement(index) {
         document.getElementById(`product-images-${index}`).remove();
-        if(index>=Number('<?php echo count($product['product_image_url']); ?>')){
+        if (index >= Number('<?php echo count($product['product_image_url']); ?>')) {
             document.getElementById(`drop-zone-input-${index}`).remove();
         }
     }
@@ -320,5 +383,33 @@
         newInput.id = `drop-zone-input-${i}`;
         newInput.addEventListener("change", function () { previewImage(this.files); });
         document.querySelector(".drop-zone-small").appendChild(newInput);
+    }
+    function addColumnH() {
+        var table = document.querySelector(".horizontal-table");
+        var rowCount = table.rows.length;
+
+        var headerCell = table.rows[0].insertCell(-1);
+        headerCell.innerHTML = '<input type="text" name="header[]" placeholder="Header' + (rowCount + 1) + '" />';
+
+        for (var i = 1; i < rowCount; i++) {
+            var row = table.rows[i];
+            var cell = row.insertCell(-1);
+            cell.innerHTML = '<input type="text" name="row[]" placeholder="Row' + i + '" />';
+        }
+    }
+
+
+
+
+    function addRowH() {
+        var table = document.querySelector(".horizontal-table");
+        var headerRow = table.rows[0];
+        var rowCount = headerRow.cells.length;
+
+        var newRow = table.insertRow(-1);
+        for (var i = 0; i < rowCount; i++) {
+            var cell = newRow.insertCell(-1);
+            cell.innerHTML = '<input type="text" name="row[]" placeholder="Row' + (newRow.rowIndex) + '" />';
+        }
     }
 </script>

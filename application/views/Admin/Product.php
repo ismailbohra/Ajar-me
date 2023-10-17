@@ -399,7 +399,8 @@
                         echo "selected"; ?>>Name
                         (Z-A)</option>
                     <option value="date-asc" <?php if (isset($sort) && $sort == "date-asc")
-                        echo "selected"; ?>>Date (New >
+                        echo "selected"; ?>>Date (New
+                        >
                         Old)</option>
                     <option value="date-desc" <?php if (isset($sort) && $sort == "date-asc")
                         echo "selected"; ?>>Date (Old
@@ -423,13 +424,13 @@
                         echo base_url() . $p['product_image_url'];
                     } else {
                         echo base_url() . "/assets/no-image.png";
-                    } ?>"
-                        alt="product image" class="product-card-img">
+                    } ?>" alt="product image" class="product-card-img">
                 </div>
                 <div class="product-card-body">
                     <div class="product-card-heading"
                         onclick="redirectToUrl('<?php echo base_url('/admin/view_product/') . $p['id']; ?>');">
-                        <?php echo $p['product_name']; ?></div>
+                        <?php echo $p['product_name']; ?>
+                    </div>
                     <div class="product-card-buttons">
                         <div class="send-button"
                             onclick="redirectToUrl('<?php echo base_url('/admin/edit_product/') . $p['id']; ?>');">
@@ -438,6 +439,14 @@
                         <div class="download-button"
                             onclick="redirectToUrl('<?php echo base_url('/admin/delete_product/') . $p['id']; ?>');">
                             <i class="fa fa-trash"></i>&nbsp;&nbsp;Delete Product
+                        </div>
+                        <div class="featured-button"
+                            onclick="redirectToUrl('<?php echo base_url('/admin/featured_product/') . $p['id']; ?>');">
+                            <i <?php if ($p['featured'] == 1) {
+                                echo 'class="fa fa-heart"';
+                            } else {
+                                echo 'class="fa fa-heart-o"';
+                            } ?>></i>&nbsp;&nbsp;Mark as Featured
                         </div>
                     </div>
                 </div>
@@ -454,13 +463,13 @@
                         echo base_url() . $p['product_image_url'];
                     } else {
                         echo base_url() . "/assets/no-image.png";
-                    } ?>"
-                        alt="product image" class="product-list-img">
+                    } ?>" alt="product image" class="product-list-img">
                 </div>
                 <div class="product-list-body">
                     <div class="product-list-heading"
                         onclick="redirectToUrl('<?php echo base_url('/admin/view_product/') . $p['id']; ?>');">
-                        <?php echo $p['product_name']; ?></div>
+                        <?php echo $p['product_name']; ?>
+                    </div>
                     <div class="product-list-text">
                         <?php echo $p['product_description']; ?>
                     </div>
@@ -520,7 +529,7 @@
                         window.location.href = '<?php echo base_url('/admin/home?sort=') ?>' + value + "&" + temp;
                     }
                 }
-            }else{
+            } else {
                 window.location.href = '<?php echo base_url('/admin/home?sort=') ?>' + value;
             }
         } else {
@@ -552,10 +561,10 @@
                         window.location.href = '<?php echo base_url('/admin/home?filter=') ?>' + filter + "&" + temp;
                     }
                 }
-            }else{
+            } else {
                 window.location.href = '<?php echo base_url('/admin/home?filter=') ?>' + filter;
             }
-            
+
         } else {
             window.location.href = '<?php echo base_url('/admin/home?filter=') ?>' + filter;
         }

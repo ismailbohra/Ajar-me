@@ -96,6 +96,9 @@ class Admin extends CI_Controller
             $data['product']['product_image_url'][$i] = $p['product_image_url'];
             $i++;
         }
+        $data['header'] = json_decode($data['product']['table_header'], true);
+        $data['row'] = json_decode($data['product']['table_row'], true);
+
 
         $this->load->view('Admin/Header');
         $this->load->view('Admin/ViewProduct', $data);
@@ -119,13 +122,15 @@ class Admin extends CI_Controller
 
             $data['product'] = $this->AdminM->get_product_details($product_id)[0];
             $product_images = $this->AdminM->get_product_images($product_id);
+            $data['product_category'] = $this->AdminM->get_category();
             $data['product']['product_image_url'] = array();
             $i = 0;
             foreach ($product_images as $p) {
                 $data['product']['product_image_url'][$i] = $p['product_image_url'];
                 $i++;
             }
-
+            $data['header'] = json_decode($data['product']['table_header'], true);
+            $data['row'] = json_decode($data['product']['table_row'], true);
             $this->load->view('Admin/Header');
             $this->load->view('Admin/EditProduct', $data);
         } else {
@@ -171,14 +176,22 @@ class Admin extends CI_Controller
         if (empty($_SESSION['user'])) {
             redirect('/admin');
         }
+        $header = "";
+        $row = "";
 
         if (!empty($_POST)) {
+            if (!empty($_POST['header'])) {
+                $header = json_encode($_POST['header']);
+            }
+            if (!empty($_POST['row'])) {
+                $row = json_encode($_POST['row']);
+            }
             $product_id = $_POST['product-id'];
             $product_name = $_POST['product-name'];
             $product_desc = $_POST['product-desc'];
             $product_category = $_POST['product-category'];
 
-            $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category);
+            $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category,$header,$row);
 
             $product = array();
             if (isset($_POST['previous'])) {
@@ -235,13 +248,21 @@ class Admin extends CI_Controller
         if (empty($_SESSION['user'])) {
             redirect('/admin');
         }
+        $header = "";
+        $row = "";
 
         if (!empty($_POST)) {
+            if (!empty($_POST['header'])) {
+                $header = json_encode($_POST['header']);
+            }
+            if (!empty($_POST['row'])) {
+                $row = json_encode($_POST['row']);
+            }
             $product_name = $_POST['product-name'];
             $product_code = $_POST['product-code'];
             $product_desc = $_POST['product-desc'];
             $product_category = $_POST['product-category'];
-            $product_id = $this->AdminM->insert_product($product_name, $product_desc, $product_category, $product_code);
+            $product_id = $this->AdminM->insert_product($product_name, $product_desc, $product_category, $product_code, $header, $row);
 
             if (!empty($_FILES['product-image'])) {
                 $i = 0;
@@ -327,6 +348,16 @@ class Admin extends CI_Controller
         }
 
         $this->AdminM->delete_product($product_id);
+        redirect('/admin/home');
+    }
+    public function featured_product($product_id)
+    {
+
+        if (empty($_SESSION['user'])) {
+            redirect('/admin');
+        }
+
+        $this->AdminM->featured_product($product_id);
         redirect('/admin/home');
     }
 }

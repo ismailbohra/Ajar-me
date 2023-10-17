@@ -71,9 +71,9 @@ class AdminM extends CI_Model
         return $query->result_array();
     }
 
-    function insert_product($product_name, $product_desc, $product_category, $product_code)
+    function insert_product($product_name, $product_desc, $product_category, $product_code, $header, $row)
     {
-        $sql = "INSERT INTO `products` (`product_name`,`product_description`,`product_category`,`product_code`) VALUES ('$product_name', '$product_desc', $product_category,'$product_code')";
+        $sql = "INSERT INTO `products` (`product_name`,`product_description`,`product_category`,`product_code`,`table_header`,`table_row`) VALUES ('$product_name', '$product_desc', $product_category,'$product_code','$header','$row')";
         $query = $this->db->query($sql);
         return $this->db->insert_id();
     }
@@ -109,6 +109,12 @@ class AdminM extends CI_Model
         $query = $this->db->query($sql);
         return $query;
     }
+    function featured_product($product_id)
+    {
+        $sql = "UPDATE `products` SET `featured` = CASE WHEN `featured` = 1 THEN 0 ELSE 1 END WHERE `id` = '$product_id'";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
     function delete_product($product_id)
     {
@@ -119,9 +125,9 @@ class AdminM extends CI_Model
         return;
     }
 
-    function update_product_details($product_id, $product_name, $product_desc, $product_category)
+    function update_product_details($product_id, $product_name, $product_desc, $product_category, $header, $row)
     {
-        $sql = "UPDATE `products` SET `product_name` = '$product_name', `product_description`='$product_desc', `product_category`=$product_category WHERE `id` = $product_id ";
+        $sql = "UPDATE `products` SET `product_name` = '$product_name', `product_description`='$product_desc', `table_header`='$header', `table_row`='$row', `product_category`=$product_category WHERE `id` = $product_id ";
         $query = $this->db->query($sql);
         return;
     }

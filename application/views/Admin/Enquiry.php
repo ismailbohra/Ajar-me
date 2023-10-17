@@ -63,7 +63,7 @@
                     <?php echo $i ?>
                 </td>
                 <td>
-                    <?php echo $enquiry['time-stamp'] ?>
+                    <?php echo $enquiry['timestamp'] ?>
                 </td>
                 <td>
                     <?php echo $enquiry['user'] ?>
