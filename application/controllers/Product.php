@@ -58,14 +58,18 @@ class Product extends CI_Controller
         $this->load->view('Home/Footer');
     }
 
+    public function update_search(){
+        $searched_value = "";
+        if (isset($_POST['searched-product'])) {
+            $_SESSION['searched-product'] =  $_POST['searched-product'];
+        }
+
+        redirect('/product/search');
+    }
+
     public function search()
     {
         $searched_value = "";
-        if (isset($_POST['searched-product'])) {
-            $searched_value = $_POST['searched-product'];
-            $_SESSION['searched-product'] = $searched_value;
-        }
-
         if (isset($_SESSION['searched-product'])) {
             $searched_value = $_SESSION['searched-product'];
         }
@@ -115,7 +119,32 @@ class Product extends CI_Controller
 
     public function category($id)
     {
-        $data['products'] = $this->AdminM->get_products_by_category($id);
+        
+        $data['products'] = array();
+        $filter = "";
+        $sort = "";
+        if (!empty($_GET)) {
+
+            if (!empty($_GET['sort'])) {
+                $data['sort'] = $_GET['sort'];
+                $temp = explode('-', $_GET['sort']);
+                if ($temp[0] == "name") {
+                    $sort = "product_name " . $temp[1] . ", ";
+                } else {
+                    $sort = "timestamp " . $temp[1] . ", ";
+                }
+            }
+
+            if (!empty($_GET['filter'])) {
+                $data['filter_string'] = $_GET['filter'];
+                $data['filter'] = explode(',', $_GET['filter']);
+                $filter = "AND product_category in (" . $_GET['filter'] . ")";
+            }
+
+            $data['products'] = $this->AdminM->get_filtered_sorted_products_by_category($filter, $sort, $id);
+        } else {
+            $data['products'] = $this->AdminM->get_products_by_category($id);
+        }
 
         $i = 0;
         foreach ($data['products'] as $p) {

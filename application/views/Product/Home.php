@@ -1,5 +1,6 @@
 <style>
     .product-home {
+        min-height:calc(100vh - 300px);
         width: 100%;
         background-color: #EAEAEA;
         padding-top: 90px;
@@ -306,7 +307,7 @@
         }
     }
 
-    .query-form {
+    .query-form {        
         position: fixed;
         top: 50%;
         left: 50%;
@@ -314,10 +315,22 @@
         background-color: white;
         border: 1px solid lightgrey;
         padding: 2rem;
-        width: 350px;
-        height: 400px;
+        width: 400px;
+        max-width: 400px;
+        min-height: 400px;
+        max-height:95vh;
         overflow-y: scroll;
         display: none;
+        z-index: 12;
+        border-radius:5px;
+        @media screen and (max-width:500px) {
+            
+            max-width:350px;
+            @media screen and (max-width: 374px) {
+                
+                max-width:250px;
+            }
+        }
     }
 
     .submit {
@@ -326,6 +339,15 @@
         justify-content: space-between;
     }
 
+    #product-overlay{
+        display: none;
+        top:0;
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+    }
     /* Add this to your existing CSS or create a new section for toast messages */
     .toast-message {
         position: fixed;
@@ -528,7 +550,7 @@
         <div class="form-group">
             <label for="requirments" class="form-label">Requirments</label>
             <textarea placeholder="Please tell us about your Requirments" class="form-control" name="requirments"
-                id="exampleFormControlTextarea1" rows="5"></textarea>
+                id="exampleFormControlTextarea1" rows="2" style="max-width:100%; min-width:100%"></textarea>
         </div>
         <div class="form-group">
             <label for="company" class="form-label">Company</label>
@@ -544,6 +566,7 @@
         </div>
     </form>
 </div>
+<div id="product-overlay"></div>
 <div id="toast-message" class="toast-message">
     Thank you for Enquiy!<br />
     We will contact you Shortly
@@ -564,12 +587,6 @@
         document.getElementById("product-cards").style.display = "none";
         document.getElementById("product-lists").style.display = "flex";
     }
-    function send_query(id) {
-        document.getElementById("query").style.display = "block";
-        const newInput = document.createElement("div");
-        newInput.innerHTML = `<input type="text" hidden name="product_id" value=${id} Required=true>`;
-        document.querySelector(".myForm").appendChild(newInput);
-    }
     function toggle_filter_dropdown() {
         var dropdown = document.getElementById("filter-dropdown");
         if (dropdown.style.display === "block") {
@@ -578,13 +595,21 @@
             dropdown.style.display = "block";
         }
     }
-
+    
     function redirectToUrl(url) {
         window.location.href = url;
+    }
+    function send_query(id) {
+        document.getElementById("query").style.display = "block";
+        document.getElementById("product-overlay").style.display = "block";
+        const newInput = document.createElement("div");
+        newInput.innerHTML = `<input type="text" hidden name="product_id" value=${id} Required=true>`;
+        document.querySelector(".myForm").appendChild(newInput);
     }
     function clearForm() {
         $('#myForm')[0].reset();
         document.getElementById("query").style.display = "none";
+        document.getElementById("product-overlay").style.display = "none";
     }
     $(document).ready(function () {
         $('#myForm').submit(function (event) {

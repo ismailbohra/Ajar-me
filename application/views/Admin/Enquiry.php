@@ -63,7 +63,7 @@
                     <?php echo $i ?>
                 </td>
                 <td>
-                    <?php echo $enquiry['timestamp'] ?>
+                    <?php echo $enquiry['timestamp']; ?>
                 </td>
                 <td>
                     <?php echo $enquiry['user'] ?>
@@ -80,7 +80,7 @@
                     <?php echo $enquiry['contact'] ?>
                 </td>
                 <td>
-                    <?php echo $enquiry['requirments'] ?>
+                    <?php echo $enquiry['requirements'] ?>
                 </td>
                 <td>
                     <a href='<?php echo base_url('admin/view_product/'.$enquiry['product_id']) ?>'>

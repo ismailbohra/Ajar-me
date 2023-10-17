@@ -37,7 +37,7 @@ class HomeM extends CI_Model
       'user' => $user,
       'email' => $email,
       'contact' => $contact,
-      'requirments' => $requirments,
+      'requirements' => $requirments,
       'company' => $company,
       'address' => $address,
       'product_id' => $product_id

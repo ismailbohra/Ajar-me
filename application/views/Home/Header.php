@@ -1,3 +1,17 @@
+<?php
+$this->load->model('HomeM');
+$products = $this->HomeM->get_products();
+$i = 0;
+foreach ($products as $p) {
+  $product_image = $this->HomeM->get_product_image($p['id']);
+  if (!empty($product_image)) {
+    $products[$i]['product_image_url'] = $product_image[0]['product_image_url'];
+  } else {
+    $products[$i]['product_image_url'] = "assets/no-image.png";
+  }
+  $i++;
+}
+?>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -536,7 +550,7 @@
           <li class="dropdown-item">&emsp;<a href="#">HELM</a>&emsp;</li>
           <li class="dropdown-item">&emsp;<a href="#">NORSEAL</a>&emsp;</li> -->
           <?php foreach ($product_category as $pc) { ?>
-            <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/product/category/' . $pc['id']); ?>">
+            <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/product/category/' . $pc['id'].'/'); ?>">
                 <?php echo $pc['name'] ?>
               </a>&emsp;</li>
           <?php } ?>
@@ -661,7 +675,7 @@
   </nav>
   <div class="search-div" id="search-div">
     <div class="search-bar">
-      <form class="search" id="search-form" action="<?php echo base_url('/product/search'); ?>" method="POST">
+      <form class="search" id="search-form" action="<?php echo base_url('/product/update_search'); ?>" method="POST">
         <div class="autocomplete" style="width:100%">
           <input id="myInput" type="text" name="searched-product" placeholder="search here..." autocomplete="off" <?php if (isset($_SESSION['searched-product'])) {
             echo "value = '" . $_SESSION['searched-product'] . "'";
