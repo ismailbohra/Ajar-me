@@ -267,13 +267,15 @@
                                 <li>
                                     <?php $pd = str_replace(';', ',', $pd);
                                     $pd = str_replace('|', '"', $pd);
-                                    echo $pd; ?>
+                                    $pd = str_replace('^', "'", $pd);
+                                    echo substr($pd, 1); ?>
                                 </li>
                             </ul>
                         <?php } else { ?>
                             <p>
                                 <?php $pd = str_replace(';', ',', $pd);
                                 $pd = str_replace('|', '"', $pd);
+                                $pd = str_replace('^', "'", $pd);
                                 echo $pd; ?>
                             </p>
                         <?php } ?>

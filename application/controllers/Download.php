@@ -9,6 +9,7 @@ class Download extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('AdminM');
+		$this->load->model('HomeM');
 	}
 
 	public function index()

@@ -150,7 +150,7 @@
   .featured-img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
     position: absolute;
     top: -20;
@@ -671,7 +671,7 @@
     <h1>Featured Projects</h1>
     <div class="featured-div">
       <div class="featured-img-div">
-        <img src="<?php echo base_url('/assets/Home-img.png'); ?>" alt="featured product" class="featured-img">
+        <img src="<?php echo base_url($featured_product[0]['product_image_url']); ?>" alt="featured product" class="featured-img">
       </div>
       <div class="featured-description">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolor quae ipsum mollitia ducimus, iste

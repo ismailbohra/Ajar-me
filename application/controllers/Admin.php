@@ -65,8 +65,32 @@ class Admin extends CI_Controller
         } else {
             $data['products'] = $this->AdminM->get_products();
         }
-
-
+        // echo '<pre>';
+        // echo print_r($data);
+        // die();
+        for ($j=0; $j < count($data['products']); $j++) { 
+            $desc = "";
+            $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
+            foreach ($data['products'][$j]['product_description'] as $pd) {
+                if ($pd[0] == "#") {
+                    $desc = $desc . " " . substr($pd, 1);
+                } else {
+                    $desc = $desc . " " . $pd;
+                }
+                $desc = str_replace(';', ',', $desc);
+                $desc = str_replace('|', '"', $desc);
+                $desc = str_replace('^', "'", $desc);
+                $desc = str_replace('1001', '+', $desc);
+                $desc = str_replace('1002', '-', $desc);
+                $desc = str_replace('1003', '*', $desc);
+                $desc = str_replace('1004', '/', $desc);
+            }
+            $data['products'][$j]['product_description'] = $desc;
+        }
+        
+        // echo '<pre>';
+        // echo print_r($data);
+        // die();
         $i = 0;
         foreach ($data['products'] as $p) {
             $product_image = $this->AdminM->get_product_image($p['id']);
@@ -98,7 +122,7 @@ class Admin extends CI_Controller
         }
         $data['header'] = json_decode($data['product']['table_header'], true);
         $data['row'] = json_decode($data['product']['table_row'], true);
-        $data['product']['product_description']= json_decode($data['product']['product_description'],true);
+        $data['product']['product_description'] = json_decode($data['product']['product_description'], true);
         // echo '<pre>';
         // echo $data;
         // die();
@@ -133,7 +157,19 @@ class Admin extends CI_Controller
             }
             $data['header'] = json_decode($data['product']['table_header'], true);
             $data['row'] = json_decode($data['product']['table_row'], true);
-            $data['product']['product_description']=json_decode($data['product']['product_description'],true);
+            $data['product']['product_description'] = json_decode($data['product']['product_description'], true);
+            $i = 0;
+            foreach ($data['product']['product_description'] as $pd) {
+                $pds = str_replace(';', ',', $pd);
+                $pds = str_replace('|', '"', $pds);
+                $pds = str_replace('^', "'", $pds);
+                $pds = str_replace('1001', '+', $pd);
+                $pds = str_replace('1002', '-', $pd);
+                $pds = str_replace('1003', '*', $pd);
+                $pds = str_replace('1004', '/', $pd);
+                $data['product']['product_description'][$i] = $pds;
+                $i++;
+            }
             $this->load->view('Admin/Header');
             $this->load->view('Admin/EditProduct', $data);
         } else {
@@ -191,16 +227,21 @@ class Admin extends CI_Controller
             }
             $product_id = $_POST['product-id'];
             $product_name = $_POST['product-name'];
-            $i=0;
+            $i = 0;
             foreach ($_POST['product-desc'] as $pd) {
-                $_POST['product-desc'][$i]=str_replace(',', ';', $pd);
-                $_POST['product-desc'][$i]=str_replace('"', '|', $pd);
+                $_POST['product-desc'][$i] = str_replace(',', ';', $pd);
+                $_POST['product-desc'][$i] = str_replace("'", '^', $pd);
+                $_POST['product-desc'][$i] = str_replace('"', '|', $pd);
+                $_POST['product-desc'][$i] = str_replace('+', '1001', $pd);
+                $_POST['product-desc'][$i] = str_replace('-', '1002', $pd);
+                $_POST['product-desc'][$i] = str_replace('*', '1003', $pd);
+                $_POST['product-desc'][$i] = str_replace('/', '1004', $pd);
                 $i++;
             }
             $product_desc = json_encode($_POST['product-desc']);
             $product_category = $_POST['product-category'];
 
-            $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category,$header,$row);
+            $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category, $header, $row);
 
             $product = array();
             if (isset($_POST['previous'])) {
@@ -269,13 +310,19 @@ class Admin extends CI_Controller
             }
             $product_name = $_POST['product-name'];
             $product_code = $_POST['product-code'];
-            $i=0;
+            $i = 0;
             foreach ($_POST['product-desc'] as $pd) {
-                $_POST['product-desc'][$i]=str_replace(',', ';', $pd);
-                $_POST['product-desc'][$i]=str_replace('"', '|', $pd);
+                $_POST['product-desc'][$i] = str_replace(',', ';', $pd);
+                $_POST['product-desc'][$i] = str_replace('"', '|', $pd);
+                $_POST['product-desc'][$i] = str_replace("'", '^', $pd);
+                $_POST['product-desc'][$i] = str_replace('+', '1001', $pd);
+                $_POST['product-desc'][$i] = str_replace('-', '1002', $pd);
+                $_POST['product-desc'][$i] = str_replace('*', '1003', $pd);
+                $_POST['product-desc'][$i] = str_replace('/', '1004', $pd);
                 $i++;
-            }           
-            $product_desc = json_encode(str_replace(',', ';', $_POST['product-desc']));
+            }
+            $desc = str_replace("'", '^', $_POST['product-desc']);
+            $product_desc = json_encode(str_replace(',', ';', $desc));
             $product_category = $_POST['product-category'];
             $product_id = $this->AdminM->insert_product($product_name, $product_desc, $product_category, $product_code, $header, $row);
 
