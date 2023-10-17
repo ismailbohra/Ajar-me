@@ -191,7 +191,7 @@
 
     .product-images-div {
         display: flex;
-        flex-wrap: wrap;
+        /* flex-wrap: wrap; */
         justify-content: center;
         gap: 1rem;
     }
@@ -222,6 +222,25 @@
     td {
         padding: 5px;
     }
+
+    /* .addbutton {
+        background-color: greenyellow;
+    }
+
+    .removebutton {
+        background-color: red;
+    } */
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .product-desc-array {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 </style>
 
 <div class="add-product-page">
@@ -238,9 +257,15 @@
                         <label for="product-name">Product Name</label>
                         <input type="text" name="product-name" value="<?php echo $product['product_name']; ?>" required>
                     </div>
-                    <div class="input-field">
+                    <div class="input-field product-desc-array" id="input-description">
                         <label for="product-desc">Product Description</label>
-                        <textarea name="product-desc" required><?php echo $product['product_description']; ?></textarea>
+                        <?php foreach ($product['product_description'] as $pd) { ?>
+                            <input name="product-desc[]" required value="<?php echo $pd ?>">
+                        <?php } ?>
+                    </div>
+                    <div class="buttons">
+                        <input type="button" class="addbutton" value="Add Points" onclick="addDescritpion();">
+                        <input type="button" value="Remove" id="remvoebtn" class="removebutton" onclick="removeDescription();">
                     </div>
                 </div>
             </div>
@@ -253,7 +278,7 @@
 
                             <?php foreach ($product_category as $pc) { ?>
                                 <option value="1" <?php if ($product['product_category'] == $pc['id'])
-                                    echo "selected"; ?>><?php echo $pc['name'] ?>
+                                                        echo "selected"; ?>><?php echo $pc['name'] ?>
                                 </option>
                             <?php } ?>
                         </select>
@@ -266,6 +291,7 @@
                     <div class="input-table">
                         <input type="button" value="Add Column" name="addcolumn" onclick="addColumnH();">
                         <input type="button" value="Add Row" name="addrow" onclick="addRowH();">
+                        <input type="button" value="Reset" name="resettable" onclick="resetTable();">
                     </div>
                     <div>
                         <table class="horizontal-table">
@@ -273,13 +299,13 @@
                             <tr>
                                 <?php
                                 foreach ($header as $h) {
-                                    ?>
+                                ?>
                                     <td>
                                         <input type="text" placeholder="Header1" name="header[]" <?php if (!empty($h)) {
-                                            echo 'value="' . $h . '"';
-                                        } ?> />
+                                                                                                        echo 'value="' . $h . '"';
+                                                                                                    } ?> />
                                     </td>
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </tr>
@@ -310,26 +336,19 @@
                         <div class="product-images-div">
                             <?php $i = 0;
                             foreach ($product['product_image_url'] as $p) { ?>
-                                <div class="product_images" id="product-images-<?php echo $i; ?>"
-                                    style="max-width: 200px; max-height: 150px; border: 2px solid #D9D9D9; padding: 1rem; border-radius: 10px;">
-                                    <img src="<?php echo base_url() . $p; ?>" alt="uploaded image"
-                                        style="width: 100%;height: 80%;">
-                                    <p id="<?php echo $i; ?>"
-                                        style="height: 20%; width: 100%; text-align: center;  padding-top: 1rem;cursor:pointer;"
-                                        onclick="removeElement(this.id);">Remove</p>
-                                    <input type="hidden" name="previous[]" id="prev-image-<?php echo $i; ?>"
-                                        value="<?php echo $p; ?>">
+                                <div class="product_images" id="product-images-<?php echo $i; ?>" style="max-width: 200px; max-height: 150px; border: 2px solid #D9D9D9; padding: 1rem; border-radius: 10px;">
+                                    <img src="<?php echo base_url() . $p; ?>" alt="uploaded image" style="width: 100%;height: 80%;">
+                                    <p id="<?php echo $i; ?>" style="height: 20%; width: 100%; text-align: center;  padding-top: 1rem;cursor:pointer;" onclick="removeElement(this.id);">Remove</p>
+                                    <input type="hidden" name="previous[]" id="prev-image-<?php echo $i; ?>" value="<?php echo $p; ?>">
                                 </div>
-                                <?php $i++;
+                            <?php $i++;
                             } ?>
                         </div>
                         <div class="add-images">
                             <div class="add-image">
                                 <div class="drop-zone-small">
                                     <span class="drop-zone-text">Drop file here or click to upload</span>
-                                    <input type="file" name="product-image[]" class="drop-zone-input"
-                                        id="drop-zone-input-<?php echo count($product['product_image_url']); ?>"
-                                        onchange="previewImage(this.files)">
+                                    <input type="file" name="product-image[]" class="drop-zone-input" id="drop-zone-input-<?php echo count($product['product_image_url']); ?>" onchange="previewImage(this.files)">
                                 </div>
                             </div>
                         </div>
@@ -345,11 +364,12 @@
 </div>
 <script>
     var i = Number('<?php echo count($product['product_image_url']); ?>');
+
     function previewImage(input) {
         const file = input[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 const newImage = document.createElement("div");
                 newImage.className = "product-images";
                 newImage.id = `product-images-${i - 1}`;
@@ -381,9 +401,12 @@
         newInput.name = "product-image[]";
         newInput.className = "drop-zone-input";
         newInput.id = `drop-zone-input-${i}`;
-        newInput.addEventListener("change", function () { previewImage(this.files); });
+        newInput.addEventListener("change", function() {
+            previewImage(this.files);
+        });
         document.querySelector(".drop-zone-small").appendChild(newInput);
     }
+
     function addColumnH() {
         var table = document.querySelector(".horizontal-table");
         var rowCount = table.rows.length;
@@ -411,5 +434,32 @@
             var cell = newRow.insertCell(-1);
             cell.innerHTML = '<input type="text" name="row[]" placeholder="Row' + (newRow.rowIndex) + '" />';
         }
+    }
+
+    function addDescritpion() {
+        var newInput = document.createElement('input')
+        newInput.type = "text"
+        newInput.name = "product-desc[]"
+        newInput.required = true
+        document.querySelector(".product-desc-array").appendChild(newInput);
+        var btn = document.getElementById("remvoebtn");
+        btn.style.display = "block";
+    }
+
+    function removeDescription() {
+        let inputdescription = document.getElementById('input-description');
+        inputdescription.removeChild(inputdescription.lastElementChild);
+        var descripiton_length = document.getElementsByName('product-desc[]').length;
+
+        if (descripiton_length < 2) {
+            var btn = document.getElementById("remvoebtn");
+            btn.style.display = "none";
+        }
+    }
+    var descripiton_length = document.getElementsByName('product-desc[]').length;
+
+    if (descripiton_length < 2) {
+        var btn = document.getElementById("remvoebtn");
+        btn.style.display = "none";
     }
 </script>

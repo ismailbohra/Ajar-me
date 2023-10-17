@@ -98,8 +98,10 @@ class Admin extends CI_Controller
         }
         $data['header'] = json_decode($data['product']['table_header'], true);
         $data['row'] = json_decode($data['product']['table_row'], true);
-
-
+        $data['product']['product_description']= json_decode($data['product']['product_description'],true);
+        // echo '<pre>';
+        // echo $data;
+        // die();
         $this->load->view('Admin/Header');
         $this->load->view('Admin/ViewProduct', $data);
     }
@@ -131,6 +133,7 @@ class Admin extends CI_Controller
             }
             $data['header'] = json_decode($data['product']['table_header'], true);
             $data['row'] = json_decode($data['product']['table_row'], true);
+            $data['product']['product_description']=json_decode($data['product']['product_description'],true);
             $this->load->view('Admin/Header');
             $this->load->view('Admin/EditProduct', $data);
         } else {
@@ -188,7 +191,13 @@ class Admin extends CI_Controller
             }
             $product_id = $_POST['product-id'];
             $product_name = $_POST['product-name'];
-            $product_desc = $_POST['product-desc'];
+            $i=0;
+            foreach ($_POST['product-desc'] as $pd) {
+                $_POST['product-desc'][$i]=str_replace(',', ';', $pd);
+                $_POST['product-desc'][$i]=str_replace('"', '|', $pd);
+                $i++;
+            }
+            $product_desc = json_encode($_POST['product-desc']);
             $product_category = $_POST['product-category'];
 
             $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category,$header,$row);
@@ -260,7 +269,13 @@ class Admin extends CI_Controller
             }
             $product_name = $_POST['product-name'];
             $product_code = $_POST['product-code'];
-            $product_desc = $_POST['product-desc'];
+            $i=0;
+            foreach ($_POST['product-desc'] as $pd) {
+                $_POST['product-desc'][$i]=str_replace(',', ';', $pd);
+                $_POST['product-desc'][$i]=str_replace('"', '|', $pd);
+                $i++;
+            }           
+            $product_desc = json_encode(str_replace(',', ';', $_POST['product-desc']));
             $product_category = $_POST['product-category'];
             $product_id = $this->AdminM->insert_product($product_name, $product_desc, $product_category, $product_code, $header, $row);
 

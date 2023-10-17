@@ -272,6 +272,16 @@
     .slider.round:before {
         border-radius: 50%;
     }
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .product-desc-array {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 </style>
 
 <div class="add-product-page">
@@ -291,11 +301,13 @@
                         <label for="product-code">Product Code</label>
                         <input type="text" name="product-code" required>
                     </div>
-                    <div class="input-field">
+                    <div class="input-field product-desc-array" id="input-description">
                         <label for="product-desc">Product Description</label>
-                        <textarea name="product-desc"
-                            placeholder="For description in points add semicolon ' ; ' to end the line"
-                            required></textarea>
+                        <input name="product-desc[]" required>
+                    </div>
+                    <div class="buttons">
+                        <input type="button" class="addbutton" value="Add Points" onclick="addDescritpion();">
+                        <input type="button" value="Remove" id="remvoebtn" class="removebutton" onclick="removeDescription();">
                     </div>
                 </div>
             </div>
@@ -348,8 +360,7 @@
                             <div class="add-image">
                                 <div class="drop-zone-small">
                                     <span class="drop-zone-text">Drop file here or click to upload</span>
-                                    <input type="file" name="product-image[]" class="drop-zone-input"
-                                        id="drop-zone-input-1" required onchange="previewImage(this.files)">
+                                    <input type="file" name="product-image[]" class="drop-zone-input" id="drop-zone-input-1" required onchange="previewImage(this.files)">
                                 </div>
                             </div>
                         </div>
@@ -371,7 +382,7 @@
         const file = input[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 const newImage = document.createElement("div");
                 newImage.className = "product-images";
                 newImage.id = `product-images-${i - 1}`;
@@ -400,7 +411,7 @@
         newInput.name = "product-image[]";
         newInput.className = "drop-zone-input";
         newInput.id = `drop-zone-input-${i}`;
-        newInput.addEventListener("change", function () {
+        newInput.addEventListener("change", function() {
             previewImage(this.files);
         });
         document.querySelector(".drop-zone-small").appendChild(newInput);
@@ -433,5 +444,32 @@
             var cell = newRow.insertCell(-1);
             cell.innerHTML = '<input type="text" name="row[]" placeholder="Row' + (newRow.rowIndex) + '" />';
         }
+    }
+
+    function addDescritpion() {
+        var newInput = document.createElement('input')
+        newInput.type = "text"
+        newInput.name = "product-desc[]"
+        newInput.required = true
+        document.querySelector(".product-desc-array").appendChild(newInput);
+        var btn = document.getElementById("remvoebtn");
+        btn.style.display = "block";
+    }
+
+    function removeDescription() {
+        let inputdescription = document.getElementById('input-description');
+        inputdescription.removeChild(inputdescription.lastElementChild);
+        var descripiton_length = document.getElementsByName('product-desc[]').length;
+
+        if (descripiton_length < 2) {
+            var btn = document.getElementById("remvoebtn");
+            btn.style.display = "none";
+        }
+    }
+    var descripiton_length = document.getElementsByName('product-desc[]').length;
+
+    if (descripiton_length < 2) {
+        var btn = document.getElementById("remvoebtn");
+        btn.style.display = "none";
     }
 </script>
