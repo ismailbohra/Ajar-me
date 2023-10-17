@@ -27,6 +27,25 @@ class Home extends CI_Controller
 			}
 			$i++;
 		}
+		for ($j=0; $j < count($data['featured_product']); $j++) { 
+            $desc = "";
+            $data['featured_product'][$j]['product_description'] = json_decode($data['featured_product'][$j]['product_description'], true);
+            foreach ($data['featured_product'][$j]['product_description'] as $pd) {
+                if ($pd[0] == "#") {
+                    $desc = $desc . " " . substr($pd, 1);
+                } else {
+                    $desc = $desc . " " . $pd;
+                }
+                $desc = str_replace(';', ',', $desc);
+                $desc = str_replace('|', '"', $desc);
+                $desc = str_replace('^', "'", $desc);
+                $desc = str_replace('1001', '+', $desc);
+                $desc = str_replace('1002', '-', $desc);
+                $desc = str_replace('1003', '*', $desc);
+                $desc = str_replace('1004', '/', $desc);
+            }
+            $data['featured_product'][$j]['product_description'] = $desc;
+        }
 		// echo '<pre>';
 		// echo print_r($data['featured_product']);
 		// die();
