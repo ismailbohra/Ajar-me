@@ -71,6 +71,7 @@
     .product-left-img {
         width: 100%;
         object-fit: contain;
+        aspect-ratio: 1/1;
 
         @media screen and (max-width:768px) {
             max-height: 500px;
@@ -267,13 +268,15 @@
                                 <li>
                                     <?php $pd = str_replace(';', ',', $pd);
                                     $pd = str_replace('|', '"', $pd);
-                                    echo $pd; ?>
+                                    $pd = str_replace('^', "'", $pd);
+                                    echo substr($pd, 1); ?>
                                 </li>
                             </ul>
                         <?php } else { ?>
                             <p>
                                 <?php $pd = str_replace(';', ',', $pd);
                                 $pd = str_replace('|', '"', $pd);
+                                $pd = str_replace('^', "'", $pd);
                                 echo $pd; ?>
                             </p>
                         <?php } ?>

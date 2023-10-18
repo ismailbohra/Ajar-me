@@ -23,6 +23,12 @@ class AdminM extends CI_Model
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+    function get_featured_product()
+    {
+        $sql = " SELECT * from `products` WHERE products.featured=1 Order By products.id desc";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
     function get_products_by_category($category)
     {
         $sql = " SELECT * from `products` WHERE products.product_category=$category";

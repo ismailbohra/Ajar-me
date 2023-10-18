@@ -40,7 +40,25 @@ class Product extends CI_Controller
             $data['products'] = $this->AdminM->get_products();
         }
 
-
+        for ($j=0; $j < count($data['products']); $j++) { 
+            $desc = "";
+            $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
+            foreach ($data['products'][$j]['product_description'] as $pd) {
+                if ($pd[0] == "#") {
+                    $desc = $desc . " " . substr($pd, 1);
+                } else {
+                    $desc = $desc . " " . $pd;
+                }
+                $desc = str_replace(';', ',', $desc);
+                $desc = str_replace('|', '"', $desc);
+                $desc = str_replace('^', "'", $desc);
+                $desc = str_replace('1001', '+', $desc);
+                $desc = str_replace('1002', '-', $desc);
+                $desc = str_replace('1003', '*', $desc);
+                $desc = str_replace('1004', '/', $desc);
+            }
+            $data['products'][$j]['product_description'] = $desc;
+        }
         $i = 0;
         foreach ($data['products'] as $p) {
             $product_image = $this->AdminM->get_product_image($p['id']);
@@ -58,10 +76,11 @@ class Product extends CI_Controller
         $this->load->view('Home/Footer');
     }
 
-    public function update_search(){
+    public function update_search()
+    {
         $searched_value = "";
         if (isset($_POST['searched-product'])) {
-            $_SESSION['searched-product'] =  $_POST['searched-product'];
+            $_SESSION['searched-product'] = $_POST['searched-product'];
         }
 
         redirect('/product/search');
@@ -99,7 +118,25 @@ class Product extends CI_Controller
         } else {
             $data['products'] = $this->AdminM->get_searched_products($searched_value);
         }
-
+        for ($j=0; $j < count($data['products']); $j++) { 
+            $desc = "";
+            $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
+            foreach ($data['products'][$j]['product_description'] as $pd) {
+                if ($pd[0] == "#") {
+                    $desc = $desc . " " . substr($pd, 1);
+                } else {
+                    $desc = $desc . " " . $pd;
+                }
+                $desc = str_replace(';', ',', $desc);
+                $desc = str_replace('|', '"', $desc);
+                $desc = str_replace('^', "'", $desc);
+                $desc = str_replace('1001', '+', $desc);
+                $desc = str_replace('1002', '-', $desc);
+                $desc = str_replace('1003', '*', $desc);
+                $desc = str_replace('1004', '/', $desc);
+            }
+            $data['products'][$j]['product_description'] = $desc;
+        }
         $i = 0;
         foreach ($data['products'] as $p) {
             $product_image = $this->AdminM->get_product_image($p['id']);
@@ -119,7 +156,7 @@ class Product extends CI_Controller
 
     public function category($id)
     {
-        
+
         $data['products'] = array();
         $filter = "";
         $sort = "";
@@ -145,7 +182,25 @@ class Product extends CI_Controller
         } else {
             $data['products'] = $this->AdminM->get_products_by_category($id);
         }
-
+        for ($j=0; $j < count($data['products']); $j++) { 
+            $desc = "";
+            $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
+            foreach ($data['products'][$j]['product_description'] as $pd) {
+                if ($pd[0] == "#") {
+                    $desc = $desc . " " . substr($pd, 1);
+                } else {
+                    $desc = $desc . " " . $pd;
+                }
+                $desc = str_replace(';', ',', $desc);
+                $desc = str_replace('|', '"', $desc);
+                $desc = str_replace('^', "'", $desc);
+                $desc = str_replace('1001', '+', $desc);
+                $desc = str_replace('1002', '-', $desc);
+                $desc = str_replace('1003', '*', $desc);
+                $desc = str_replace('1004', '/', $desc);
+            }
+            $data['products'][$j]['product_description'] = $desc;
+        }
         $i = 0;
         foreach ($data['products'] as $p) {
             $product_image = $this->AdminM->get_product_image($p['id']);
@@ -172,10 +227,10 @@ class Product extends CI_Controller
             $data['product']['product_image_url'][$i] = $p['product_image_url'];
             $i++;
         }
-        
+
         $data['header'] = json_decode($data['product']['table_header'], true);
         $data['row'] = json_decode($data['product']['table_row'], true);
-        $data['product']['product_description']=json_decode($data['product']['product_description'],true);
+        $data['product']['product_description'] = json_decode($data['product']['product_description'], true);
         $data2['product_category'] = $this->AdminM->get_category();
         $this->load->view('Home/Header', $data2);
         $this->load->view('Product/Product', $data);

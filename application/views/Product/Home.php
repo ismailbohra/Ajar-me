@@ -178,7 +178,7 @@
         background-color: #D9D9D9;
         border-radius: 10px;
         gap: 5px;
-        padding: 0.5rem 1rem;
+        padding: 1rem;
     }
 
     .send-button,
@@ -296,7 +296,7 @@
         gap: 2rem;
 
         @media screen and (max-width:500px) {
-            gap: 5px;
+            gap: 10px;
 
             @media screen and (max-width:400px) {
                 position: absolute;

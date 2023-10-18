@@ -46,18 +46,23 @@
 
     .certificate img {
         height: 300px;
+        margin-top: 1rem;
+        border: 0.5px solid black;
+        border-radius: 8px;
     }
+
 
     .certificate p {
         text-align: center;
         font-weight: bold;
         font-size: 20px;
-        color:black;
-        text-decoration:none;
+        color: black;
+        text-decoration: none;
     }
-    .certificate:hover{
-        text-decoration:none;
-        color:black;
+
+    .certificate:hover {
+        text-decoration: none;
+        color: black;
     }
 </style>
 <div class="center" id="center">
@@ -66,41 +71,25 @@
         <p>Our manufacturing plant at Vasai houses our Design and Development department, Tool Room, Press Shop, Hardening, Phosphating and Assembly departments and has been certified in ISO 9001: 2015 – Quality Management System, ISO 14001: 2015 – Environmental Management System, ISO 45001: 2018 – Occupational Health & Safety Management System. Our Window Fittings Plant in Palghar has been expanded to increase production capacity.</p>
     </div>
     <div class="certificates">
-        <a href="<?php echo base_url('/assets/certificate.png') ?>" target="_blank" class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
+        <a href="<?php echo base_url('/assets/certificate/License.pdf') ?>" target="_blank" class="certificate">
+            <img src="<?php echo base_url('/assets/certificate/License.png') ?>" alt="certificate">
             <p>Certificate - 01</p>
         </a>
-        <a href="<?php echo base_url('/assets/certificate.png') ?>" class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 02</p>
-        </a href="<?php echo base_url('/assets/certificate.png') ?>">
-        <a href="<?php echo base_url('/assets/certificate.png') ?>" class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 03</p>
-        </a href="<?php echo base_url('/assets/certificate.png') ?>">
-        <a href="<?php echo base_url('/assets/certificate.png') ?>" class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 04</p>
-        </a href="<?php echo base_url('/assets/certificate.png') ?>">
-        <a href="<?php echo base_url('/assets/certificate.png') ?>" class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 05</p>
-        </a href="<?php echo base_url('/assets/certificate.png') ?>">
-        <a href="<?php echo base_url('/assets/certificate.png') ?>" class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 06</p>
-        </a href="<?php echo base_url('/assets/certificate.png') ?>">
-        <a href="<?php echo base_url('/assets/certificate.png') ?>" class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 07</p>
-        </a href="<?php echo base_url('/assets/certificate.png') ?>">
-        <a href="<?php echo base_url('/assets/certificate.png') ?>" class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 08</p>
-        </a href="<?php echo base_url('/assets/certificate.png') ?>">
-        <a href="<?php echo base_url('/assets/certificate.png') ?>" class="certificate">
-            <img src="<?php echo base_url('/assets/certificate.png') ?>" alt="certificate">
-            <p>Certificate - 09</p>
-        </a href="<?php echo base_url('/assets/certificate.png') ?>">
+        <a href="<?php echo base_url('/assets/certificate/BIFMA.pdf') ?>" target="_blank" class="certificate">
+            <img src="<?php echo base_url('/assets/certificate/BIFMA.png') ?>" alt="certificate">
+            <p>Certificate - 01</p>
+        </a>
+        <a href="<?php echo base_url('/assets/certificate/HINGES.pdf') ?>" target="_blank" class="certificate">
+            <img src="<?php echo base_url('/assets/certificate/HINGES.png') ?>" alt="certificate">
+            <p>Certificate - 01</p>
+        </a>
+        <a href="<?php echo base_url('/assets/certificate/LOCKS.pdf') ?>" target="_blank" class="certificate">
+            <img src="<?php echo base_url('/assets/certificate/LOCKS.png') ?>" alt="certificate">
+            <p>Certificate - 01</p>
+        </a>
+        <a href="<?php echo base_url('/assets/certificate/Diploma.pdf') ?>" target="_blank" class="certificate">
+            <img src="<?php echo base_url('/assets/certificate/Diploma.png') ?>" alt="certificate">
+            <p>Certificate - 01</p>
+        </a>
     </div>
 </div>
