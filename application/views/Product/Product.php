@@ -285,13 +285,16 @@
         text-transform: uppercase;
         font-size: 13px;
     }
+
     ul {
         padding-left: 40px;
-        @media  screen and (max-width:768px) {
+
+        @media screen and (max-width:768px) {
             padding-left: 15px;
-            
+
         }
     }
+
     li::marker {
         font-size: 20px;
     }
@@ -302,22 +305,23 @@
         <div class="product-left">
             <div class="product-left-img-div">
                 <img src="<?php if (!empty($product['product_image_url'][0])) {
-                                echo base_url() . $product['product_image_url'][0];
-                            } else {
-                                echo base_url() . "/assets/no-image.png";
-                            } ?>" alt="product image" class="product-left-img">
+                    echo base_url() . $product['product_image_url'][0];
+                } else {
+                    echo base_url() . "/assets/no-image.png";
+                } ?>" alt="product image" class="product-left-img">
             </div>
             <div class="product-images">
                 <?php if (!empty($product['product_image_url'])) {
                     foreach ($product['product_image_url'] as $p) { ?>
                         <img src="<?php if (!empty($p)) {
-                                        echo base_url() . $p;
-                                    } else {
-                                        echo base_url() . "/assets/no-image.png";
-                                    } ?>" alt="product image" onclick="replaceImage(this);">
+                            echo base_url() . $p;
+                        } else {
+                            echo base_url() . "/assets/no-image.png";
+                        } ?>" alt="product image" onclick="replaceImage(this);">
                     <?php }
                 } else { ?>
-                    <img src="<?php echo base_url() . "/assets/no-image.png"; ?>" alt="product image" onclick="replaceImage(this);">
+                    <img src="<?php echo base_url() . "/assets/no-image.png"; ?>" alt="product image"
+                        onclick="replaceImage(this);">
                 <?php } ?>
             </div>
         </div>
@@ -341,13 +345,23 @@
                                 <li>
                                     <?php $pd = str_replace(';', ',', $pd);
                                     $pd = str_replace('|', '"', $pd);
-                                    echo $pd; ?>
+                                    $pd = str_replace('^', "'", $pd);
+                                    $pd = str_replace('1001', '+', $pd);
+                                    $pd = str_replace('1002', '-', $pd);
+                                    $pd = str_replace('1003', '*', $pd);
+                                    $pd = str_replace('1004', '/', $pd);
+                                    echo substr($pd, 1); ?>
                                 </li>
                             </ul>
                         <?php } else { ?>
                             <p>
                                 <?php $pd = str_replace(';', ',', $pd);
                                 $pd = str_replace('|', '"', $pd);
+                                $pd = str_replace('^', "'", $pd);
+                                $pd = str_replace('1001', '+', $pd);
+                                $pd = str_replace('1002', '-', $pd);
+                                $pd = str_replace('1003', '*', $pd);
+                                $pd = str_replace('1004', '/', $pd);
                                 echo $pd; ?>
                             </p>
                         <?php } ?>
@@ -427,19 +441,23 @@
         </div>
         <div class="form-group">
             <label for="fullname" class="form-label">Full Name</label>
-            <input type="name" class="form-control" id="fullname" name="name" Required=true placeholder="Enter your name (Required)">
+            <input type="name" class="form-control" id="fullname" name="name" Required=true
+                placeholder="Enter your name (Required)">
         </div>
         <div class="form-group">
             <label for="Email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" name="Email" Required=true aria-describedby="emailHelp" placeholder="Enter Your Email (Required)">
+            <input type="email" class="form-control" name="Email" Required=true aria-describedby="emailHelp"
+                placeholder="Enter Your Email (Required)">
         </div>
         <div class="form-group">
             <label for="contact" class="form-label">Contact Number</label>
-            <input type="number" class="form-control" name="contact" Required=true placeholder="Enter your Phone no (Required)">
+            <input type="number" class="form-control" name="contact" Required=true
+                placeholder="Enter your Phone no (Required)">
         </div>
         <div class="form-group">
             <label for="requirments" class="form-label">Requirments</label>
-            <textarea placeholder="Please tell us about your Requirments" class="form-control" name="requirments" id="exampleFormControlTextarea1" rows="5"></textarea>
+            <textarea placeholder="Please tell us about your Requirments" class="form-control" name="requirments"
+                id="exampleFormControlTextarea1" rows="5"></textarea>
         </div>
         <div class="form-group">
             <label for="company" class="form-label">Company</label>
@@ -466,7 +484,7 @@
     var i;
 
     for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
+        acc[i].addEventListener("click", function () {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
             if (panel.style.display === "block") {
@@ -496,8 +514,8 @@
         $('#myForm')[0].reset();
         document.getElementById("query").style.display = "none";
     }
-    $(document).ready(function() {
-        $('#myForm').submit(function(event) {
+    $(document).ready(function () {
+        $('#myForm').submit(function (event) {
             event.preventDefault();
 
             var formData = $(this).serialize();
@@ -506,13 +524,13 @@
                 type: 'POST',
                 url: "<?php echo base_url('product/send_enquiry'); ?>",
                 data: formData,
-                success: function(response) {
+                success: function (response) {
                     console.log('query submitted successfully');
                     console.log(response);
                     showSuccessMessage();
                     clearForm();
                 },
-                error: function(error) {
+                error: function (error) {
                     console.error('query submission failed');
                 }
             });
@@ -521,7 +539,7 @@
         function showSuccessMessage() {
             var toastMessage = $('#toast-message');
             toastMessage.show();
-            setTimeout(function() {
+            setTimeout(function () {
                 toastMessage.hide();
             }, 2000);
         }
