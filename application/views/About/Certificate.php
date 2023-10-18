@@ -46,18 +46,23 @@
 
     .certificate img {
         height: 300px;
+        margin-top: 1rem;
+        border: 0.5px solid black;
+        border-radius: 8px;
     }
+
 
     .certificate p {
         text-align: center;
         font-weight: bold;
         font-size: 20px;
-        color:black;
-        text-decoration:none;
+        color: black;
+        text-decoration: none;
     }
-    .certificate:hover{
-        text-decoration:none;
-        color:black;
+
+    .certificate:hover {
+        text-decoration: none;
+        color: black;
     }
 </style>
 <div class="center" id="center">
