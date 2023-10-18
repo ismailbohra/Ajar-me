@@ -74,7 +74,7 @@
     .product-left-img {
         width: 100%;
         object-fit: contain;
-
+        aspect-ratio: 1/1;
         @media screen and (max-width:768px) {
             max-height: 500px;
         }
@@ -131,12 +131,12 @@
         margin-top: 10px;
     }
 
-    .active,
+    .active-panel,
     .accordion:hover {
         background-color: #ccc;
     }
 
-    .active {
+    .active-panel {
         border-radius: 10px 10px 0px 0px;
     }
 
@@ -158,7 +158,7 @@
         margin-left: 5px;
     }
 
-    .active:after {
+    .active-panel:after {
         content: "\2796";
         /* Unicode character for "minus" sign (-) */
     }
@@ -286,7 +286,7 @@
         font-size: 13px;
     }
 
-    ul {
+    .ul-desc {
         padding-left: 40px;
 
         @media screen and (max-width:768px) {
@@ -295,7 +295,7 @@
         }
     }
 
-    li::marker {
+    .li-desc::marker {
         font-size: 20px;
     }
 </style>
@@ -341,8 +341,8 @@
                 <div class="panel">
                     <?php foreach ($product['product_description'] as $pd) { ?>
                         <?php if ($pd[0] == '#') { ?>
-                            <ul>
-                                <li>
+                            <ul class="ul-desc">
+                                <li class="li-desc">
                                     <?php $pd = str_replace(';', ',', $pd);
                                     $pd = str_replace('|', '"', $pd);
                                     $pd = str_replace('^', "'", $pd);
@@ -479,13 +479,13 @@
 </div>
 <script>
     var acc = document.getElementsByClassName("accordion");
-    acc[0].classList.toggle("active");
+    acc[0].classList.toggle("active-panel");
     acc[0].nextElementSibling.style.display = "block";
     var i;
 
     for (i = 0; i < acc.length; i++) {
         acc[i].addEventListener("click", function () {
-            this.classList.toggle("active");
+            this.classList.toggle("active-panel");
             var panel = this.nextElementSibling;
             if (panel.style.display === "block") {
                 panel.style.display = "none";

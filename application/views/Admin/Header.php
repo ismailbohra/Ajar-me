@@ -1,3 +1,17 @@
+<?php
+$this->load->model('HomeM');
+$products = $this->HomeM->get_products();
+$i = 0;
+foreach ($products as $p) {
+  $product_image = $this->HomeM->get_product_image($p['id']);
+  if (!empty($product_image)) {
+    $products[$i]['product_image_url'] = $product_image[0]['product_image_url'];
+  } else {
+    $products[$i]['product_image_url'] = "assets/no-image.png";
+  }
+  $i++;
+}
+?>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <link rel="preconnect" href="https://fonts.googleapis.com">

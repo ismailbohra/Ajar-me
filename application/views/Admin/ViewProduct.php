@@ -71,6 +71,7 @@
     .product-left-img {
         width: 100%;
         object-fit: contain;
+        aspect-ratio: 1/1;
 
         @media screen and (max-width:768px) {
             max-height: 500px;
