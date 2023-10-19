@@ -1,2 +1,2 @@
 # PHP-commerce
-E-Commerce Web App built using PHP CodeIgniter 3
+E-Commerce Web App built using HTML, CSS, Javascript and PHP CodeIgniter 3
