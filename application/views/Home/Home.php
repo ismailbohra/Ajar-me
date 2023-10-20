@@ -155,7 +155,9 @@
     position: absolute;
     top: -20;
     left: 20;
+    background-color: white;
   }
+ 
 
   .featured-description {
     margin-left: 5rem;
@@ -665,10 +667,9 @@
     <div class="mySlides">
       <img src="<?php echo base_url('/assets/Home-img.png'); ?>" style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
     </div> -->
-    <?php foreach ($slider_image as $image): ?>
+    <?php foreach ($slider_image as $image) : ?>
       <div class="mySlides">
-        <img src="<?php echo base_url($image['slider_image_url']); ?>"
-          style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
+        <img src="<?php echo base_url($image['slider_image_url']); ?>" style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
       </div>
     <?php endforeach; ?>
 
@@ -681,19 +682,16 @@
     <h1>Featured Projects</h1>
     <div class="featured-div">
       <div class="featured-img-div">
-        <img src="<?php echo base_url($featured_product[0]['product_image_url']); ?>" alt="featured product"
-          class="featured-img">
+        <img src="<?php echo base_url($featured_product[0]['product_image_url']); ?>" alt="featured product" class="featured-img">
       </div>
       <div class="featured-description">
         <p>
           <?php echo $featured_product[0]['product_description'] ?>
         </p>
         <div class="featured-buttons">
-          <a style="margin-right:3rem;"><img src="<?php echo base_url('/assets/icons/arrow-left.svg') ?>"
-              alt="left arrow icon">&nbsp;&nbsp;Previous</a>
+          <a style="margin-right:3rem;"><img onclick="featuredprevious();" src="<?php echo base_url('/assets/icons/arrow-left.svg') ?>" alt="left arrow icon">&nbsp;&nbsp;Previous</a>
           <!-- <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Previous</a> -->
-          <a>Next&nbsp;&nbsp;<img src="<?php echo base_url('/assets/icons/arrow-right.svg') ?>"
-              alt="right arrow icon"></a>
+          <a>Next&nbsp;&nbsp;<img onclick="featurednext();" src="<?php echo base_url('/assets/icons/arrow-right.svg') ?>" alt="right arrow icon"></a>
           <!-- <a>Next&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
         </div>
       </div>
@@ -708,13 +706,11 @@
     </div>
     <div class="simplify-cards">
       <div class="simplify-card">
-        <img src="<?php echo base_url('/assets/simplify1.png'); ?>" alt="simplify product image"
-          class="simplify-card-img">
+        <img src="<?php echo base_url('/assets/simplify1.png'); ?>" alt="simplify product image" class="simplify-card-img">
         <p>Architectural Hardware</p>
       </div>
       <div class="simplify-card">
-        <img src="<?php echo base_url('/assets/simplify2.png'); ?>" alt="simplify product image"
-          class="simplify-card-img">
+        <img src="<?php echo base_url('/assets/simplify2.png'); ?>" alt="simplify product image" class="simplify-card-img">
         <p>Furniture Fitings</p>
       </div>
     </div>
@@ -762,31 +758,27 @@
     <div class="products-cards">
       <div class="products-card">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="products product image"
-            style="height:90px;width:90px;object-fit: cover;margin-left:30px;">
+          <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="products product image" style="height:90px;width:90px;object-fit: cover;margin-left:30px;">
         </div>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum aliquid saepe rem provident, rerum ullam.</p>
       </div>
       <div class="products-card products-card-upper">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product2.png'); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: cover;">
+          <img src="<?php echo base_url('/assets/product2.png'); ?>" alt="products product image" style="height:100px;width:100px;object-fit: cover;">
         </div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, esse quaerat veritatis voluptates quasi
           rerum.</p>
       </div>
       <div class="products-card">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product3.png'); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: contain;">
+          <img src="<?php echo base_url('/assets/product3.png'); ?>" alt="products product image" style="height:100px;width:100px;object-fit: contain;">
         </div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, esse quaerat veritatis voluptates quasi
           rerum.</p>
       </div>
       <div class="products-card products-card-upper">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product4.png'); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: contain;">
+          <img src="<?php echo base_url('/assets/product4.png'); ?>" alt="products product image" style="height:100px;width:100px;object-fit: contain;">
         </div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, esse quaerat veritatis voluptates quasi
           rerum.</p>
@@ -855,6 +847,42 @@
         slides[i].style.display = "none";
       }
       slides[slideIndex - 1].style.display = "block";
+    }
+
+
+    let featuredIndex = 0;
+
+    let featured_product = [];
+    <?php
+    foreach ($featured_product as $p) {
+    ?>
+      featured_product.push({product_description:'<?php echo $p['product_description']; ?>',product_image_url:'<?php echo $p['product_image_url']; ?>'});
+      console.log(featured_product)
+      
+    <?php } ?>
+
+    function featurednext() {
+      featuredIndex++;
+      if (featuredIndex >= featured_product.length) {
+        featuredIndex = 0;
+      }
+      updateFeatured();
+    }
+
+    function featuredprevious() {
+      featuredIndex--;
+      if (featuredIndex < 0) {
+        featuredIndex = featured_product.length - 1;
+      }
+      updateFeatured();
+    }
+
+    function updateFeatured() {
+      const featuredImage = document.querySelector(".featured-img");
+      const featuredDescription = document.querySelector(".featured-description p");
+
+      featuredImage.src = "<?php echo base_url(); ?>"+featured_product[featuredIndex]['product_image_url'];
+      featuredDescription.textContent = featured_product[featuredIndex]['product_description'];
     }
   </script>
 </div>
