@@ -85,6 +85,7 @@ class Admin extends CI_Controller
                 $desc = str_replace('1002', '-', $desc);
                 $desc = str_replace('1003', '*', $desc);
                 $desc = str_replace('1004', '/', $desc);
+                $desc = str_replace('1005', '$', $desc);
             }
             $data['products'][$j]['product_description'] = $desc;
         }
@@ -168,6 +169,7 @@ class Admin extends CI_Controller
                 $pds = str_replace('1002', '-', $pd);
                 $pds = str_replace('1003', '*', $pd);
                 $pds = str_replace('1004', '/', $pd);
+                $pds = str_replace('1005', '$', $pd);
                 $data['product']['product_description'][$i] = $pds;
                 $i++;
             }
@@ -228,6 +230,7 @@ class Admin extends CI_Controller
             }
             $product_id = $_POST['product-id'];
             $product_name = $_POST['product-name'];
+            $product_code = $_POST['product-code'];
             $i = 0;
             foreach ($_POST['product-desc'] as $pd) {
                 $_POST['product-desc'][$i] = str_replace(',', ';', $pd);
@@ -237,12 +240,13 @@ class Admin extends CI_Controller
                 $_POST['product-desc'][$i] = str_replace('-', '1002', $pd);
                 $_POST['product-desc'][$i] = str_replace('*', '1003', $pd);
                 $_POST['product-desc'][$i] = str_replace('/', '1004', $pd);
+                $_POST['product-desc'][$i] = str_replace('$', '1005', $pd);
                 $i++;
             }
             $product_desc = json_encode($_POST['product-desc']);
             $product_category = $_POST['product-category'];
 
-            $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category, $header, $row);
+            $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category, $header, $row ,$product_code);
 
             $product = array();
             if (isset($_POST['previous'])) {
@@ -320,6 +324,7 @@ class Admin extends CI_Controller
                 $_POST['product-desc'][$i] = str_replace('-', '1002', $pd);
                 $_POST['product-desc'][$i] = str_replace('*', '1003', $pd);
                 $_POST['product-desc'][$i] = str_replace('/', '1004', $pd);
+                $_POST['product-desc'][$i] = str_replace('$', '1005', $pd);
                 $i++;
             }
             $desc = str_replace("'", '^', $_POST['product-desc']);

@@ -257,6 +257,10 @@
                         <label for="product-name">Product Name</label>
                         <input type="text" name="product-name" value="<?php echo $product['product_name']; ?>" required>
                     </div>
+                    <div class="input-field">
+                        <label for="product-code">Product Code</label>
+                        <input type="text" name="product-code" value="<?php echo $product['product_code']; ?>" required>
+                    </div>
                     <div class="input-field product-desc-array" id="input-description">
                         <label for="product-desc">Product Description</label>
                         <?php foreach ($product['product_description'] as $pd) { ?>
@@ -265,7 +269,8 @@
                     </div>
                     <div class="buttons">
                         <input type="button" class="addbutton" value="Add Points" onclick="addDescritpion();">
-                        <input type="button" value="Remove" id="remvoebtn" class="removebutton" onclick="removeDescription();">
+                        <input type="button" value="Remove" id="remvoebtn" class="removebutton"
+                            onclick="removeDescription();">
                     </div>
                 </div>
             </div>
@@ -277,8 +282,8 @@
                         <select name="product-category" required>
 
                             <?php foreach ($product_category as $pc) { ?>
-                                <option value="1" <?php if ($product['product_category'] == $pc['id'])
-                                                        echo "selected"; ?>><?php echo $pc['name'] ?>
+                                <option value="<?php echo $pc['id'] ?>" <?php if ($product['product_category'] == $pc['id'])
+                                       echo "selected"; ?>><?php echo $pc['name'] ?>
                                 </option>
                             <?php } ?>
                         </select>
@@ -299,13 +304,13 @@
                             <tr>
                                 <?php
                                 foreach ($header as $h) {
-                                ?>
+                                    ?>
                                     <td>
                                         <input type="text" placeholder="Header1" name="header[]" <?php if (!empty($h)) {
-                                                                                                        echo 'value="' . $h . '"';
-                                                                                                    } ?> />
+                                            echo 'value="' . $h . '"';
+                                        } ?> />
                                     </td>
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </tr>
@@ -336,19 +341,26 @@
                         <div class="product-images-div">
                             <?php $i = 0;
                             foreach ($product['product_image_url'] as $p) { ?>
-                                <div class="product_images" id="product-images-<?php echo $i; ?>" style="max-width: 200px; max-height: 150px; border: 2px solid #D9D9D9; padding: 1rem; border-radius: 10px;">
-                                    <img src="<?php echo base_url() . $p; ?>" alt="uploaded image" style="width: 100%;height: 80%;">
-                                    <p id="<?php echo $i; ?>" style="height: 20%; width: 100%; text-align: center;  padding-top: 1rem;cursor:pointer;" onclick="removeElement(this.id);">Remove</p>
-                                    <input type="hidden" name="previous[]" id="prev-image-<?php echo $i; ?>" value="<?php echo $p; ?>">
+                                <div class="product_images" id="product-images-<?php echo $i; ?>"
+                                    style="max-width: 200px; max-height: 150px; border: 2px solid #D9D9D9; padding: 1rem; border-radius: 10px;">
+                                    <img src="<?php echo base_url() . $p; ?>" alt="uploaded image"
+                                        style="width: 100%;height: 80%;">
+                                    <p id="<?php echo $i; ?>"
+                                        style="height: 20%; width: 100%; text-align: center;  padding-top: 1rem;cursor:pointer;"
+                                        onclick="removeElement(this.id);">Remove</p>
+                                    <input type="hidden" name="previous[]" id="prev-image-<?php echo $i; ?>"
+                                        value="<?php echo $p; ?>">
                                 </div>
-                            <?php $i++;
+                                <?php $i++;
                             } ?>
                         </div>
                         <div class="add-images">
                             <div class="add-image">
                                 <div class="drop-zone-small">
                                     <span class="drop-zone-text">Drop file here or click to upload</span>
-                                    <input type="file" name="product-image[]" class="drop-zone-input" id="drop-zone-input-<?php echo count($product['product_image_url']); ?>" onchange="previewImage(this.files)">
+                                    <input type="file" name="product-image[]" class="drop-zone-input"
+                                        id="drop-zone-input-<?php echo count($product['product_image_url']); ?>"
+                                        onchange="previewImage(this.files)">
                                 </div>
                             </div>
                         </div>
@@ -369,7 +381,7 @@
         const file = input[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const newImage = document.createElement("div");
                 newImage.className = "product-images";
                 newImage.id = `product-images-${i - 1}`;
@@ -401,7 +413,7 @@
         newInput.name = "product-image[]";
         newInput.className = "drop-zone-input";
         newInput.id = `drop-zone-input-${i}`;
-        newInput.addEventListener("change", function() {
+        newInput.addEventListener("change", function () {
             previewImage(this.files);
         });
         document.querySelector(".drop-zone-small").appendChild(newInput);

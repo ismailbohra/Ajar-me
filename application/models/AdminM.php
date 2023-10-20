@@ -138,9 +138,9 @@ class AdminM extends CI_Model
         return;
     }
 
-    function update_product_details($product_id, $product_name, $product_desc, $product_category, $header, $row)
+    function update_product_details($product_id, $product_name, $product_desc, $product_category, $header, $row, $product_code)
     {
-        $sql = "UPDATE `products` SET `product_name` = '$product_name', `product_description`='$product_desc', `table_header`='$header', `table_row`='$row', `product_category`=$product_category WHERE `id` = $product_id ";
+        $sql = "UPDATE `products` SET `product_name` = '$product_name', `product_description`='$product_desc', `table_header`='$header', `table_row`='$row', `product_code`='$product_code', `product_category`=$product_category WHERE `id` = $product_id ";
         $query = $this->db->query($sql);
         return;
     }
