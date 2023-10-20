@@ -338,7 +338,7 @@
                         </svg></div>
                     <div class="text">
                         <p class="detail-heading">Head Office</p>
-                        <p>Alumtec Glazing Solutions Inc.Address: 104-3300 Hwy 7,Suit #348Concord ON. L4K 0G2</p>
+                        <p>Office no. 13, Aswaaq Warehouse </p>
                     </div>
                 </div>
                 <div class="details">

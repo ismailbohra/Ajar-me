@@ -155,9 +155,7 @@
     position: absolute;
     top: -20;
     left: 20;
-    background-color: white;
   }
- 
 
   .featured-description {
     margin-left: 5rem;
@@ -453,6 +451,11 @@
     margin: auto;
     margin-top: 2rem;
     padding: 0;
+
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 9;
   }
 
   .more-products {
@@ -667,9 +670,10 @@
     <div class="mySlides">
       <img src="<?php echo base_url('/assets/Home-img.png'); ?>" style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
     </div> -->
-    <?php foreach ($slider_image as $image) : ?>
+    <?php foreach ($slider_image as $image): ?>
       <div class="mySlides">
-        <img src="<?php echo base_url($image['slider_image_url']); ?>" style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
+        <img src="<?php echo base_url($image['slider_image_url']); ?>"
+          style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
       </div>
     <?php endforeach; ?>
 
@@ -682,16 +686,20 @@
     <h1>Featured Projects</h1>
     <div class="featured-div">
       <div class="featured-img-div">
-        <img src="<?php echo base_url($featured_product[0]['product_image_url']); ?>" alt="featured product" class="featured-img">
+        <img src="<?php echo base_url($featured_product[0]['product_image_url']); ?>" alt="featured product"
+          class="featured-img">
       </div>
       <div class="featured-description">
         <p>
           <?php echo $featured_product[0]['product_description'] ?>
         </p>
         <div class="featured-buttons">
-          <a style="margin-right:3rem;"><img onclick="featuredprevious();" src="<?php echo base_url('/assets/icons/arrow-left.svg') ?>" alt="left arrow icon">&nbsp;&nbsp;Previous</a>
+          <a style="margin-right:3rem;"><img onclick="featuredprevious();"
+              src="<?php echo base_url('/assets/icons/arrow-left.svg') ?>"
+              alt="left arrow icon">&nbsp;&nbsp;Previous</a>
           <!-- <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Previous</a> -->
-          <a>Next&nbsp;&nbsp;<img onclick="featurednext();" src="<?php echo base_url('/assets/icons/arrow-right.svg') ?>" alt="right arrow icon"></a>
+          <a>Next&nbsp;&nbsp;<img onclick="featurednext();"
+              src="<?php echo base_url('/assets/icons/arrow-right.svg') ?>" alt="right arrow icon"></a>
           <!-- <a>Next&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
         </div>
       </div>
@@ -706,11 +714,13 @@
     </div>
     <div class="simplify-cards">
       <div class="simplify-card">
-        <img src="<?php echo base_url('/assets/simplify1.png'); ?>" alt="simplify product image" class="simplify-card-img">
+        <img src="<?php echo base_url('/assets/simplify1.png'); ?>" alt="simplify product image"
+          class="simplify-card-img">
         <p>Architectural Hardware</p>
       </div>
       <div class="simplify-card">
-        <img src="<?php echo base_url('/assets/simplify2.png'); ?>" alt="simplify product image" class="simplify-card-img">
+        <img src="<?php echo base_url('/assets/simplify2.png'); ?>" alt="simplify product image"
+          class="simplify-card-img">
         <p>Furniture Fitings</p>
       </div>
     </div>
@@ -758,36 +768,47 @@
     <div class="products-cards">
       <div class="products-card">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product1.png'); ?>" alt="products product image" style="height:90px;width:90px;object-fit: cover;margin-left:30px;">
+          <img src="<?php echo base_url($featured_product[0]['product_image_url']); ?>" alt="featured product"
+            style="height:100px;width:100px;object-fit: contain;">
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum aliquid saepe rem provident, rerum ullam.</p>
+        <p>
+          <?php echo $featured_product[0]['product_description'] ?>
+        </p>
       </div>
       <div class="products-card products-card-upper">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product2.png'); ?>" alt="products product image" style="height:100px;width:100px;object-fit: cover;">
+          <img src="<?php echo base_url($featured_product[1]['product_image_url']); ?>" alt="products product image"
+            style="height:100px;width:100px;object-fit: contain;">
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, esse quaerat veritatis voluptates quasi
-          rerum.</p>
+        <p>
+          <?php echo $featured_product[1]['product_description'] ?>
+        </p>
       </div>
       <div class="products-card">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product3.png'); ?>" alt="products product image" style="height:100px;width:100px;object-fit: contain;">
+          <img src="<?php echo base_url($featured_product[2]['product_image_url']); ?>" alt="products product image"
+            style="height:100px;width:100px;object-fit: contain;">
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, esse quaerat veritatis voluptates quasi
-          rerum.</p>
+        <p>
+          <?php echo $featured_product[2]['product_description'] ?>
+        </p>
       </div>
       <div class="products-card products-card-upper">
         <div class="products-card-img">
-          <img src="<?php echo base_url('/assets/product4.png'); ?>" alt="products product image" style="height:100px;width:100px;object-fit: contain;">
+          <img src="<?php echo base_url($featured_product[3]['product_image_url']); ?>" alt="products product image"
+            style="height:100px;width:100px;object-fit: contain;">
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, esse quaerat veritatis voluptates quasi
-          rerum.</p>
+        <p>
+          <?php echo $featured_product[3]['product_description'] ?>
+        </p>
       </div>
     </div>
     <div class="more-products">
-      <div class="more-products-button">
-        View More
-      </div>
+      <a href="<?php echo base_url('/product') ?>" class="href">
+        <div class="more-products-button">
+          View More
+        </div>
+      </a>
     </div>
   </div>
 
@@ -798,10 +819,15 @@
     <div class="partners-div">
       <div class="partners-circle">
         <div class="partners-logo">
-          <img src="<?php echo base_url('/assets/partner1.png'); ?>" alt="partner brand logo">
+          <a href="https://ebco.in/">
+            <img src="<?php echo base_url('/assets/partner1.png'); ?>" alt="partner brand logo">
+          </a>
         </div>
         <div class="partners-logo">
-          <img src="<?php echo base_url('/assets/partner2.png'); ?>" alt="partner brand logo">
+          <a href="https://www.norseal.co.uk/">
+
+            <img src="<?php echo base_url('/assets/partner2.png'); ?>" alt="partner brand logo">
+          </a>
         </div>
         <div class="partners-logo">
           <img src="<?php echo base_url('/assets/partner3.png'); ?>" alt="partner brand logo">
@@ -810,10 +836,15 @@
           <img src="<?php echo base_url('/assets/partner4.png'); ?>" alt="partner brand logo">
         </div>
         <div class="partners-logo">
-          <img src="<?php echo base_url('/assets/partner5.png'); ?>" alt="partner brand logo">
+          <a href="https://www.fsb.de/en/">
+            <img src="<?php echo base_url('/assets/partner5.png'); ?>" alt="partner brand logo">
+          </a>
         </div>
         <div class="partners-logo">
-          <img src="<?php echo base_url('/assets/partner6.png'); ?>" alt="partner brand logo">
+          <a href="https://www.ces.eu/">
+
+            <img src="<?php echo base_url('/assets/partner6.png'); ?>" alt="partner brand logo">
+          </a>
         </div>
         <div class="partners-logo self">
           <img src="<?php echo base_url('/assets/ajar-logo.png'); ?>" alt="brand logo">
@@ -848,17 +879,17 @@
       }
       slides[slideIndex - 1].style.display = "block";
     }
-
-
+  </script>
+  <script>
     let featuredIndex = 0;
 
     let featured_product = [];
     <?php
     foreach ($featured_product as $p) {
-    ?>
-      featured_product.push({product_description:'<?php echo $p['product_description']; ?>',product_image_url:'<?php echo $p['product_image_url']; ?>'});
+      ?>
+      featured_product.push({ product_description: "<?php echo $p['product_description']; ?>", product_image_url: '<?php echo $p['product_image_url']; ?>' });
       console.log(featured_product)
-      
+
     <?php } ?>
 
     function featurednext() {
@@ -881,7 +912,7 @@
       const featuredImage = document.querySelector(".featured-img");
       const featuredDescription = document.querySelector(".featured-description p");
 
-      featuredImage.src = "<?php echo base_url(); ?>"+featured_product[featuredIndex]['product_image_url'];
+      featuredImage.src = "<?php echo base_url(); ?>" + featured_product[featuredIndex]['product_image_url'];
       featuredDescription.textContent = featured_product[featuredIndex]['product_description'];
     }
   </script>

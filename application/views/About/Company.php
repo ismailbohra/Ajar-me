@@ -235,8 +235,9 @@
     }
 
     .foundation-card-body {
-        padding: 2rem 1.5rem 10rem 1.5rem;
+        padding: 2rem 1.5rem 2.5rem 1.5rem;
         font-size: 18px;
+        text-align: justify;
     }
 
     .company-founder {
@@ -440,8 +441,8 @@
                     Trust
                 </div>
                 <div class="foundation-card-body">
-                    Passion is the energy, commitment and enthusiasm that inspire us to achieve the never-ending pursuit
-                    of excellence.
+                    Reliability and trust between our company and customers manifests itself through common goals,
+                    respect and fulfilment of our commitments.
                 </div>
             </div>
         </div>
