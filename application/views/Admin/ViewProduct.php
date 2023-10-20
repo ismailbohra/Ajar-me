@@ -51,7 +51,7 @@
         border-radius: 10px;
         margin: auto;
         padding: 3rem;
-        background-color: #D9D9D9;
+        background-color: white;
         border-radius: 10px;
         display: flex;
         align-items: center;
@@ -226,6 +226,13 @@
     li::marker {
         font-size: 20px;
     }
+
+    .colour {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+    }
 </style>
 
 <div class="product-page">
@@ -233,24 +240,25 @@
         <div class="product-left">
             <div class="product-left-img-div">
                 <img src="<?php if (!empty($product['product_image_url'][0])) {
-                                echo base_url() . $product['product_image_url'][0];
-                            } else {
-                                echo base_url() . "/assets/no-image.png";
-                            } ?>" alt="product image" class="product-left-img">
+                    echo base_url() . $product['product_image_url'][0];
+                } else {
+                    echo base_url() . "/assets/no-image.png";
+                } ?>" alt="product image" class="product-left-img">
             </div>
-            <div class="product-images">
+            <!-- <div class="product-images">
                 <?php if (!empty($product['product_image_url'])) {
                     foreach ($product['product_image_url'] as $p) { ?>
                         <img src="<?php if (!empty($p)) {
-                                        echo base_url() . $p;
-                                    } else {
-                                        echo base_url() . "/assets/no-image.png";
-                                    } ?>" alt="product image" onclick="replaceImage(this);">
+                            echo base_url() . $p;
+                        } else {
+                            echo base_url() . "/assets/no-image.png";
+                        } ?>" alt="product image" onclick="replaceImage(this);">
                     <?php }
                 } else { ?>
-                    <img src="<?php echo base_url() . "/assets/no-image.png"; ?>" alt="product image" onclick="replaceImage(this);">
+                    <img src="<?php echo base_url() . "/assets/no-image.png"; ?>" alt="product image"
+                        onclick="replaceImage(this);">
                 <?php } ?>
-            </div>
+            </div> -->
         </div>
         <div class="product-right">
             <div class="product-right-heading">
@@ -258,25 +266,57 @@
                     <?php echo $product['product_name']; ?>
                 </h1>
             </div>
+            <div class="product-right-heading">
+                <h4>
+                    <?php echo '(' . $product['product_code'] . ')'; ?>
+                </h4>
+            </div>
             <div class="product-right-body">
                 <button class="accordion">DESCRIPTION</button>
                 <div class="panel">
 
-                    <?php foreach ($product['product_description'] as $pd) { ?>
-                        <?php if ($pd[0] == '#') { ?>
+                    <?php foreach ($product['product_description'] as $pd) {
+                        $pd = str_replace('1005', '$', $pd); ?>
+                        <?php if ($pd[0] == '$') { ?>
                             <ul>
                                 <li>
                                     <?php $pd = str_replace(';', ',', $pd);
                                     $pd = str_replace('|', '"', $pd);
                                     $pd = str_replace('^', "'", $pd);
+                                    $pd = str_replace('1001', '+', $pd);
+                                    $pd = str_replace('1002', '-', $pd);
+                                    $pd = str_replace('1003', '*', $pd);
+                                    $pd = str_replace('1004', '/', $pd);
                                     echo substr($pd, 1); ?>
                                 </li>
+                            </ul>
+                        <?php } elseif ($pd[0] == '#') { ?>
+                            <ul>
+                                <ol>
+                                    <div class="colour">
+                                        <?php echo '<div  style="width: 15px; height: 15px; border-radius:50px; background-color: #' . $pd[1] . $pd[2] . $pd[3] . $pd[4] . $pd[5] . $pd[6] . '"></div>'; ?>
+                                        <?php $pd = str_replace(';', ',', $pd);
+                                        $pd = str_replace('|', '"', $pd);
+                                        $pd = str_replace('^', "'", $pd);
+                                        $pd = str_replace('1001', '+', $pd);
+                                        $pd = str_replace('1002', '-', $pd);
+                                        $pd = str_replace('1003', '*', $pd);
+                                        $pd = str_replace('1004', '/', $pd);
+                                        $pd = str_replace('1005', '$', $pd);
+                                        echo substr($pd, 7); ?>
+                                    </div>
+                                </ol>
                             </ul>
                         <?php } else { ?>
                             <p>
                                 <?php $pd = str_replace(';', ',', $pd);
                                 $pd = str_replace('|', '"', $pd);
                                 $pd = str_replace('^', "'", $pd);
+                                $pd = str_replace('1001', '+', $pd);
+                                $pd = str_replace('1002', '-', $pd);
+                                $pd = str_replace('1003', '*', $pd);
+                                $pd = str_replace('1004', '/', $pd);
+                                $pd = str_replace('1005', '$', $pd);
                                 echo $pd; ?>
                             </p>
                         <?php } ?>
@@ -331,10 +371,12 @@
                 </div> -->
             </div>
             <div class="product-right-buttons">
-                <div class="send-button" onclick="redirectToUrl('<?php echo base_url('/admin/edit_product/') . $product['id']; ?>');">
+                <div class="send-button"
+                    onclick="redirectToUrl('<?php echo base_url('/admin/edit_product/') . $product['id']; ?>');">
                     <i class="fa fa-gear"></i>&nbsp;Edit Product
                 </div>
-                <div class="download-button" onclick="redirectToUrl('<?php echo base_url('/admin/delete_product/') . $product['id']; ?>');">
+                <div class="download-button"
+                    onclick="redirectToUrl('<?php echo base_url('/admin/delete_product/') . $product['id']; ?>');">
                     <i class="fa fa-trash"></i>&nbsp;Delete Product
                 </div>
             </div>
@@ -348,7 +390,7 @@
     var i;
 
     for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
+        acc[i].addEventListener("click", function () {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
             if (panel.style.display === "block") {

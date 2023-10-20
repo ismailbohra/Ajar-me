@@ -54,7 +54,7 @@
         border-radius: 10px;
         margin: auto;
         padding: 3rem;
-        background-color: #D9D9D9;
+        background-color: white;
         border-radius: 10px;
         display: flex;
         align-items: center;
@@ -75,6 +75,7 @@
         width: 100%;
         object-fit: contain;
         aspect-ratio: 1/1;
+
         @media screen and (max-width:768px) {
             max-height: 500px;
         }
@@ -295,8 +296,15 @@
         }
     }
 
-    .li-desc::marker {
+    .ul-desc li::marker {
         font-size: 20px;
+    }
+
+    .colour {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
     }
 </style>
 
@@ -310,7 +318,7 @@
                     echo base_url() . "/assets/no-image.png";
                 } ?>" alt="product image" class="product-left-img">
             </div>
-            <div class="product-images">
+            <!-- <div class="product-images">
                 <?php if (!empty($product['product_image_url'])) {
                     foreach ($product['product_image_url'] as $p) { ?>
                         <img src="<?php if (!empty($p)) {
@@ -323,7 +331,7 @@
                     <img src="<?php echo base_url() . "/assets/no-image.png"; ?>" alt="product image"
                         onclick="replaceImage(this);">
                 <?php } ?>
-            </div>
+            </div> -->
         </div>
         <div class="product-right">
             <div class="product-right-heading">
@@ -339,10 +347,11 @@
             <div class="product-right-body">
                 <button class="accordion">DESCRIPTION</button>
                 <div class="panel">
-                    <?php foreach ($product['product_description'] as $pd) { ?>
-                        <?php if ($pd[0] == '#') { ?>
+                    <?php foreach ($product['product_description'] as $pd) {
+                        $pd = str_replace('1005', '$', $pd); ?>
+                        <?php if ($pd[0] == '$') { ?>
                             <ul class="ul-desc">
-                                <li class="li-desc">
+                                <li>
                                     <?php $pd = str_replace(';', ',', $pd);
                                     $pd = str_replace('|', '"', $pd);
                                     $pd = str_replace('^', "'", $pd);
@@ -353,6 +362,23 @@
                                     echo substr($pd, 1); ?>
                                 </li>
                             </ul>
+                        <?php } elseif ($pd[0] == '#') { ?>
+                            <ul class="ul-desc">
+                                <ol>
+                                    <div class="colour">
+                                        <?php echo '<div  style="width: 15px; height: 15px; border-radius:50px; background-color: #' . $pd[1] . $pd[2] . $pd[3] . $pd[4] . $pd[5] . $pd[6] . '"></div>'; ?>
+                                        <?php $pd = str_replace(';', ',', $pd);
+                                        $pd = str_replace('|', '"', $pd);
+                                        $pd = str_replace('^', "'", $pd);
+                                        $pd = str_replace('1001', '+', $pd);
+                                        $pd = str_replace('1002', '-', $pd);
+                                        $pd = str_replace('1003', '*', $pd);
+                                        $pd = str_replace('1004', '/', $pd);
+                                        $pd = str_replace('1005', '$', $pd);
+                                        echo substr($pd, 7); ?>
+                                    </div>
+                                </ol>
+                            </ul>
                         <?php } else { ?>
                             <p>
                                 <?php $pd = str_replace(';', ',', $pd);
@@ -362,6 +388,7 @@
                                 $pd = str_replace('1002', '-', $pd);
                                 $pd = str_replace('1003', '*', $pd);
                                 $pd = str_replace('1004', '/', $pd);
+                                $pd = str_replace('1005', '$', $pd);
                                 echo $pd; ?>
                             </p>
                         <?php } ?>
