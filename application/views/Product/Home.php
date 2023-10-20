@@ -477,7 +477,7 @@
                         <div class="send-button" onclick="send_query('<?php echo $p['id']; ?>');">
                             <i class="fa fa-envelope"></i>&nbsp;Send Queries
                         </div>
-                        <div class="download-button">
+                        <div class="download-button" onclick="download_pdf('<?php echo $p['id']; ?>');">
                             <i class="fa fa-download"></i>&nbsp;Download Brochure
                         </div>
                     </div>
@@ -488,7 +488,7 @@
     </div>
     <div class="product-lists" id="product-lists">
         <?php foreach ($products as $p) { ?>
-            <div class="product-list">
+            <div class="product-list" id="<?php echo "product-".$p['id']; ?>">
                 <div class="product-list-img-div"
                     onclick="redirectToUrl('<?php echo base_url('/product/product/') . $p['id']; ?>');">
                     <img src="<?php if (!empty($p['product_image_url'])) {
@@ -694,3 +694,19 @@
         }
     }
 </script>
+<script>
+    function download_pdf(index){
+        const invoice = this.document.getElementById(`product-${index}`);
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 1,
+                filename: 'myfile.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
