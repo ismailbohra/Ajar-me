@@ -162,6 +162,9 @@
         padding-left: 2rem;
         color: white;
     }
+    .uppercase{
+        text-transform: uppercase;
+    }
 </style>
 <div class="footer">
     <div class="upper">
@@ -179,19 +182,21 @@
             <ul>
                 <li>INFORMATION</li>
                 <li><a href="<?php echo base_url(); ?>">HOME</a></li>
-                <li>ABOUT US</li>
-                <li>SHOWROOM</li>
-                <li>DOWNLOADS</li>
+                <li><a href="<?php echo base_url('about/company'); ?>"">ABOUT US</a></li>
+                <li><a href="<?php echo base_url('showroom'); ?>"">SHOWROOM</a></li>
+                <li><a href="<?php echo base_url('download'); ?>"">DOWNLOADS</a></li>
             </ul>
         </div>
         <div class="third">
             <ul>
                 <li>PRODUCTS</li>
-                <li>HANDLES</li>
-                <li>HINGES</li>
-                <li>LOCKING DEVICES</li>
-                <li>DOOR CLOSER</li>
-                <li>ACCESSORIES</li>
+                <?php foreach ($product_category as $pc) { ?>
+                    <li><a href="<?php echo base_url('/product/category/' . $pc['id'] . '/'); ?>">
+                            <span class="uppercase">
+                                <?php echo $pc['name'] ?>
+                            </span>
+                        </a></li>
+                <?php } ?>
             </ul>
         </div>
         <div class="fourth">

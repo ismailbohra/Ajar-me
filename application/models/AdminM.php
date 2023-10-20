@@ -10,12 +10,13 @@ class AdminM extends CI_Model
     }
 
     function check_user($username, $password)
-    {
+{
+    $sql = "SELECT * FROM `login` WHERE `username` = ? AND `password` = ? AND `active` = 1";
 
-        $sql = "SELECT * from `login` where `username`='$username' and `password`='$password' and `active`= 1";
-        $query = $this->db->query($sql);
-        return $query->result_array();
-    }
+    $query = $this->db->query($sql, array($username, $password));
+
+    return $query->result_array();
+}
 
     function get_products()
     {
@@ -37,7 +38,7 @@ class AdminM extends CI_Model
     }
     function get_searched_products($value)
     {
-        $sql = " SELECT * from `products` WHERE product_name LIKE '%$value%' OR product_code LIKE '%$value%' ";
+        $sql = " SELECT * from `products` WHERE product_name LIKE '%$value%' OR product_code LIKE '%$value%' LIMIT 5 ";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

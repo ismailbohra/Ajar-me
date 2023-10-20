@@ -272,6 +272,7 @@
     .slider.round:before {
         border-radius: 50%;
     }
+
     .buttons {
         display: flex;
         justify-content: space-between;
@@ -307,7 +308,8 @@
                     </div>
                     <div class="buttons">
                         <input type="button" class="addbutton" value="Add Points" onclick="addDescritpion();">
-                        <input type="button" value="Remove" id="remvoebtn" class="removebutton" onclick="removeDescription();">
+                        <input type="button" value="Remove" id="remvoebtn" class="removebutton"
+                            onclick="removeDescription();">
                     </div>
                 </div>
             </div>
@@ -333,6 +335,8 @@
                     <div class="input-table">
                         <input type="button" value="Add Column" name="addcolumn" onclick="addColumnH();">
                         <input type="button" value="Add Row" name="addrow" onclick="addRowH();">
+                        <input type="button" value="Reset" name="reset" onclick="resetTable();">
+
                     </div>
                     <div>
                         <table class="horizontal-table">
@@ -360,7 +364,8 @@
                             <div class="add-image">
                                 <div class="drop-zone-small">
                                     <span class="drop-zone-text">Drop file here or click to upload</span>
-                                    <input type="file" name="product-image[]" class="drop-zone-input" id="drop-zone-input-1" required onchange="previewImage(this.files)">
+                                    <input type="file" name="product-image[]" class="drop-zone-input"
+                                        id="drop-zone-input-1" required onchange="previewImage(this.files)">
                                 </div>
                             </div>
                         </div>
@@ -382,7 +387,7 @@
         const file = input[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const newImage = document.createElement("div");
                 newImage.className = "product-images";
                 newImage.id = `product-images-${i - 1}`;
@@ -411,7 +416,7 @@
         newInput.name = "product-image[]";
         newInput.className = "drop-zone-input";
         newInput.id = `drop-zone-input-${i}`;
-        newInput.addEventListener("change", function() {
+        newInput.addEventListener("change", function () {
             previewImage(this.files);
         });
         document.querySelector(".drop-zone-small").appendChild(newInput);
@@ -471,5 +476,22 @@
     if (descripiton_length < 2) {
         var btn = document.getElementById("remvoebtn");
         btn.style.display = "none";
+    }
+    function resetTable() {
+        var table = document.querySelector(".horizontal-table");
+        var rowCount = table.rows.length;
+
+        // Start from the second row and remove all rows
+        for (var i = rowCount - 1; i > 0; i--) {
+            table.deleteRow(i);
+        }
+
+        // Restore the initial header and data row
+        var headerRow = table.rows[0];
+        headerRow.innerHTML = '<td><input type="text" placeholder="Header1" name="header[]" /></td>';
+
+        var dataRow = document.createElement("tr");
+        dataRow.innerHTML = '<td><input type="text" placeholder="Row1" name="row[]" /></td>';
+        table.appendChild(dataRow);
     }
 </script>

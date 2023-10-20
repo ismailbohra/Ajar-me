@@ -18,7 +18,7 @@ class About extends CI_Controller
 		$data2['product_category'] = $this->AdminM->get_category();
 		$this->load->view('Home/Header', $data2);
 		$this->load->view('About/Certificate');
-		$this->load->view('Home/Footer');
+		$this->load->view('Home/Footer',$data2);
 	}
 	public function Company()
 	{
@@ -26,7 +26,7 @@ class About extends CI_Controller
 		$data2['product_category'] = $this->AdminM->get_category();
 		$this->load->view('Home/Header', $data2);
 		$this->load->view('About/Company');
-		$this->load->view('Home/Footer');
+		$this->load->view('Home/Footer',$data2);
 	}
 
 }

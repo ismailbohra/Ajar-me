@@ -321,8 +321,12 @@
             </div>
         </div>
         <div class="map">
-            <iframe
+            <!-- <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14723.810715326064!2d75.86225!3d22.69280545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fcfb09a33bc9%3A0x5433542158562a00!2sIndore%2C%20Madhya%20Pradesh%20452014!5e0!3m2!1sen!2sin!4v1696521109522!5m2!1sen!2sin"
+                width="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46300.26504240684!2d55.36514295645879!3d25.27616215552678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f917e701c6b%3A0x535f35b03c2d1aca!2sAswaaq%20warehouse!5e0!3m2!1sen!2sin!4v1697810264917!5m2!1sen!2sin"
                 width="100%" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
@@ -338,7 +342,8 @@
                         </svg></div>
                     <div class="text">
                         <p class="detail-heading">Head Office</p>
-                        <p>Office no. 13, Aswaaq Warehouse </p>
+                        <p style="font-size:20px;">Aswaaq Warehouse #13, Industrial Area 5, Al Qusais.
+                            Dubai U.A.E </p>
                     </div>
                 </div>
                 <div class="details">
@@ -349,10 +354,7 @@
                         </svg></div>
                     <div class="text">
                         <p class="detail-heading">E-mail</p>
-                        <p>Email
-                            General Enquiries: info@ebco.in
-                            Service & Quality: csc@ebco.in
-                            Online Orders (https://shop.ebco.in): online.sales@ebco.in</p>
+                        <p style="font-size:20px;">sales@ajar-me.com</p>
                     </div>
                 </div>
                 <div class="details">
@@ -363,11 +365,8 @@
                         </svg></div>
                     <div class="text">
                         <p class="detail-heading">Call-us</p>
-                        <p>Call Us
-                            General Enquiries:
-                            +91-22-6783 7777 / +91 22 67837788
-                            Service & Quality:
-                            +91-22-6783 7700/+91-92233 90501</p>
+                        <p style="font-size:20px;">
+                            Tel. Number - +971 4 229 4540</p>
                     </div>
                 </div>
                 <div class="icons">
