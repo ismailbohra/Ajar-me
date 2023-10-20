@@ -176,6 +176,7 @@
     .product-card-img {
         width: 70%;
         object-fit: contain;
+        height: 100%;
     }
 
     .product-card-heading {

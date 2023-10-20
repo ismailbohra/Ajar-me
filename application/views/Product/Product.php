@@ -350,18 +350,19 @@
                 <button class="accordion">DESCRIPTION</button>
                 <div class="panel">
                     <?php foreach ($product['product_description'] as $pd) {
-                        $pd = str_replace('1005', '$', $pd); ?>
+                        $pd = str_replace('10005', '$', $pd); ?>
                         <?php if ($pd[0] == '$') { ?>
                             <ul class="ul-desc">
                                 <li>
                                     <?php
-                                    $pd = str_replace(';', ',', $pd);
-                                    $pd = str_replace('|', '"', $pd);
-                                    $pd = str_replace('^', "'", $pd);
-                                    $pd = str_replace('1001', '+', $pd);
-                                    $pd = str_replace('1002', '-', $pd);
-                                    $pd = str_replace('1003', '*', $pd);
-                                    $pd = str_replace('1004', '/', $pd);
+                                    $pd = str_replace('10008', ',', $pd);
+                                    $pd = str_replace('10007', '"', $pd);
+                                    $pd = str_replace('10006', "'", $pd);
+                                    $pd = str_replace('10001', '+', $pd);
+                                    $pd = str_replace('10002', '-', $pd);
+                                    $pd = str_replace('10003', '*', $pd);
+                                    $pd = str_replace('10004', '/', $pd);
+                                    $pd = str_replace('10005', '$', $pd);
 
                                     if (str_contains($pd, ':')) {
                                         $parts = explode(':', $pd);
@@ -379,28 +380,30 @@
                                 <ol>
                                     <div class="colour">
                                         <?php echo '<div  style="width: 15px; height: 15px; border-radius:50px; background-color: #' . $pd[1] . $pd[2] . $pd[3] . $pd[4] . $pd[5] . $pd[6] . '"></div>'; ?>
-                                        <?php $pd = str_replace(';', ',', $pd);
-                                        $pd = str_replace('|', '"', $pd);
-                                        $pd = str_replace('^', "'", $pd);
-                                        $pd = str_replace('1001', '+', $pd);
-                                        $pd = str_replace('1002', '-', $pd);
-                                        $pd = str_replace('1003', '*', $pd);
-                                        $pd = str_replace('1004', '/', $pd);
-                                        $pd = str_replace('1005', '$', $pd);
+                                        <?php 
+                                        $pd = str_replace('10008', ',', $pd);
+                                        $pd = str_replace('10007', '"', $pd);
+                                        $pd = str_replace('10006', "'", $pd);
+                                        $pd = str_replace('10001', '+', $pd);
+                                        $pd = str_replace('10002', '-', $pd);
+                                        $pd = str_replace('10003', '*', $pd);
+                                        $pd = str_replace('10004', '/', $pd);
+                                        $pd = str_replace('10005', '$', $pd);
                                         echo substr($pd, 7); ?>
                                     </div>
                                 </ol>
                             </ul>
                         <?php } else { ?>
                             <p>
-                                <?php $pd = str_replace(';', ',', $pd);
-                                $pd = str_replace('|', '"', $pd);
-                                $pd = str_replace('^', "'", $pd);
-                                $pd = str_replace('1001', '+', $pd);
-                                $pd = str_replace('1002', '-', $pd);
-                                $pd = str_replace('1003', '*', $pd);
-                                $pd = str_replace('1004', '/', $pd);
-                                $pd = str_replace('1005', '$', $pd);
+                                <?php 
+                                $pd = str_replace('10008', ',', $pd);
+                                $pd = str_replace('10007', '"', $pd);
+                                $pd = str_replace('10006', "'", $pd);
+                                $pd = str_replace('10001', '+', $pd);
+                                $pd = str_replace('10002', '-', $pd);
+                                $pd = str_replace('10003', '*', $pd);
+                                $pd = str_replace('10004', '/', $pd);
+                                $pd = str_replace('10005', '$', $pd);
                                 echo $pd; ?>
                             </p>
                         <?php } ?>

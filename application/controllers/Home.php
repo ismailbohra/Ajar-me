@@ -36,13 +36,14 @@ class Home extends CI_Controller
                 } else {
                     $desc = $desc . " " . $pd;
                 }
-                $desc = str_replace(';', ',', $desc);
-                $desc = str_replace('|', '"', $desc);
-                $desc = str_replace('^', "'", $desc);
-                $desc = str_replace('1001', '+', $desc);
-                $desc = str_replace('1002', '-', $desc);
-                $desc = str_replace('1003', '*', $desc);
-                $desc = str_replace('1004', '/', $desc);
+                $desc = str_replace('10008', ',', $desc);
+                $desc = str_replace('10007', '"', $desc);
+                $desc = str_replace('10006', "'", $desc);
+                $desc = str_replace('10001', '+', $desc);
+                $desc = str_replace('10002', '-', $desc);
+                $desc = str_replace('10003', '*', $desc);
+                $desc = str_replace('10004', '/', $desc);
+                $desc = str_replace('10005', '$', $desc);
             }
             $data['featured_product'][$j]['product_description'] = $desc;
         }
