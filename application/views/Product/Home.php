@@ -145,7 +145,7 @@
         height: 170px;
         margin: 15px;
         border-radius: 10px;
-        background-color: #D9D9D9;
+        background-color: white;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -236,7 +236,7 @@
         height: 150px;
         margin: 10px;
         border-radius: 10px;
-        background-color: #D9D9D9;
+        background-color: white;
         display: flex;
         justify-content: center;
         align-items: center;

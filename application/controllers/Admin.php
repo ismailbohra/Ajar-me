@@ -165,11 +165,11 @@ class Admin extends CI_Controller
                 $pds = str_replace(';', ',', $pd);
                 $pds = str_replace('|', '"', $pds);
                 $pds = str_replace('^', "'", $pds);
-                $pds = str_replace('1001', '+', $pd);
-                $pds = str_replace('1002', '-', $pd);
-                $pds = str_replace('1003', '*', $pd);
-                $pds = str_replace('1004', '/', $pd);
-                $pds = str_replace('1005', '$', $pd);
+                $pds = str_replace('1001', '+', $pds);
+                $pds = str_replace('1002', '-', $pds);
+                $pds = str_replace('1003', '*', $pds);
+                $pds = str_replace('1004', '/', $pds);
+                $pds = str_replace('1005', '$', $pds);
                 $data['product']['product_description'][$i] = $pds;
                 $i++;
             }
@@ -234,13 +234,13 @@ class Admin extends CI_Controller
             $i = 0;
             foreach ($_POST['product-desc'] as $pd) {
                 $_POST['product-desc'][$i] = str_replace(',', ';', $pd);
-                $_POST['product-desc'][$i] = str_replace("'", '^', $pd);
-                $_POST['product-desc'][$i] = str_replace('"', '|', $pd);
-                $_POST['product-desc'][$i] = str_replace('+', '1001', $pd);
-                $_POST['product-desc'][$i] = str_replace('-', '1002', $pd);
-                $_POST['product-desc'][$i] = str_replace('*', '1003', $pd);
-                $_POST['product-desc'][$i] = str_replace('/', '1004', $pd);
-                $_POST['product-desc'][$i] = str_replace('$', '1005', $pd);
+                $_POST['product-desc'][$i] = str_replace('"', '|', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace("'", '^', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace('+', '1001', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace('-', '1002', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace('*', '1003', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace('/', '1004', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace('$', '1005', $_POST['product-desc'][$i]);
                 $i++;
             }
             $product_desc = json_encode($_POST['product-desc']);
@@ -318,13 +318,13 @@ class Admin extends CI_Controller
             $i = 0;
             foreach ($_POST['product-desc'] as $pd) {
                 $_POST['product-desc'][$i] = str_replace(',', ';', $pd);
-                $_POST['product-desc'][$i] = str_replace('"', '|', $pd);
-                $_POST['product-desc'][$i] = str_replace("'", '^', $pd);
-                $_POST['product-desc'][$i] = str_replace('+', '1001', $pd);
-                $_POST['product-desc'][$i] = str_replace('-', '1002', $pd);
-                $_POST['product-desc'][$i] = str_replace('*', '1003', $pd);
-                $_POST['product-desc'][$i] = str_replace('/', '1004', $pd);
-                $_POST['product-desc'][$i] = str_replace('$', '1005', $pd);
+                $_POST['product-desc'][$i] = str_replace('"', '|', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace("'", '^', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace('+', '1001', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace('-', '1002', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace('*', '1003', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace('/', '1004', $_POST['product-desc'][$i]);
+                $_POST['product-desc'][$i] = str_replace('$', '1005', $_POST['product-desc'][$i]);
                 $i++;
             }
             $desc = str_replace("'", '^', $_POST['product-desc']);
