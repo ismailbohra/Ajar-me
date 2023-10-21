@@ -24,6 +24,24 @@
     vertical-align: middle;
   }
 
+  .slider-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    animation: enlargeAnimation 5s ease-in-out forwards;
+  }
+
+  @keyframes enlargeAnimation {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.05);
+    }
+  }
+
   /* Slideshow container */
   .slideshow-container {
     width: calc(100vw - 50px);
@@ -672,8 +690,7 @@
     </div> -->
     <?php foreach ($slider_image as $image): ?>
       <div class="mySlides">
-        <img src="<?php echo base_url($image['slider_image_url']); ?>"
-          style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
+        <img src="<?php echo base_url($image['slider_image_url']); ?>" class="slider-image">
       </div>
     <?php endforeach; ?>
 
@@ -879,6 +896,9 @@
       }
       slides[slideIndex - 1].style.display = "block";
     }
+    setInterval(function () {
+      plusSlides(1);
+    }, 4000);
   </script>
   <script>
     let featuredIndex = 0;
