@@ -29,7 +29,7 @@
     width: 100%;
     object-fit: cover;
     overflow: hidden;
-    animation: enlargeAnimation 5s ease-in-out forwards;
+    animation: enlargeAnimation 7s ease-in-out forwards;
   }
 
   @keyframes enlargeAnimation {
@@ -38,7 +38,7 @@
     }
 
     100% {
-      transform: scale(1.05);
+      transform: scale(1.07);
     }
   }
 
@@ -898,7 +898,7 @@
     }
     setInterval(function () {
       plusSlides(1);
-    }, 4000);
+    }, 7000);
   </script>
   <script>
     let featuredIndex = 0;
