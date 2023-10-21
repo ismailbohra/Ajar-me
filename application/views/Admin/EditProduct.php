@@ -296,7 +296,7 @@
                     <div class="input-table">
                         <input type="button" value="Add Column" name="addcolumn" onclick="addColumnH();">
                         <input type="button" value="Add Row" name="addrow" onclick="addRowH();">
-                        <input type="button" value="Reset" name="resettable" onclick="resetTable();">
+                        <input type="button" value="Reset" name="reset" onclick="resetTable();">
                     </div>
                     <div>
                         <table class="horizontal-table">
@@ -473,5 +473,22 @@
     if (descripiton_length < 2) {
         var btn = document.getElementById("remvoebtn");
         btn.style.display = "none";
+    }
+    function resetTable() {
+        var table = document.querySelector(".horizontal-table");
+        var rowCount = table.rows.length;
+
+        // Start from the second row and remove all rows
+        for (var i = rowCount - 1; i > 0; i--) {
+            table.deleteRow(i);
+        }
+
+        // Restore the initial header and data row
+        var headerRow = table.rows[0];
+        headerRow.innerHTML = '<td><input type="text" placeholder="Header1" name="header[]" /></td>';
+
+        var dataRow = document.createElement("tr");
+        dataRow.innerHTML = '<td><input type="text" placeholder="Row1" name="row[]" /></td>';
+        table.appendChild(dataRow);
     }
 </script>

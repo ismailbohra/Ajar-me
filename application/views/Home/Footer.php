@@ -162,6 +162,10 @@
         padding-left: 2rem;
         color: white;
     }
+
+    .uppercase {
+        text-transform: uppercase;
+    }
 </style>
 <div class="footer">
     <div class="upper">
@@ -179,20 +183,36 @@
             <ul>
                 <li>INFORMATION</li>
                 <li><a href="<?php echo base_url(); ?>">HOME</a></li>
-                <li>ABOUT US</li>
-                <li>SHOWROOM</li>
-                <li>DOWNLOADS</li>
+                <li><a href="<?php echo base_url('about/company'); ?>"">ABOUT US</a></li>
+                <li><a href=" <?php echo base_url('showroom'); ?>"">SHOWROOM</a></li>
+                <li><a href="<?php echo base_url('download'); ?>"">DOWNLOADS</a></li>
             </ul>
         </div>
-        <div class="third">
-            <ul>
-                <li>PRODUCTS</li>
-                <li>HANDLES</li>
-                <li>HINGES</li>
-                <li>LOCKING DEVICES</li>
-                <li>DOOR CLOSER</li>
-                <li>ACCESSORIES</li>
-            </ul>
+        <div class=" third">
+                        <ul>
+                            <li>PRODUCTS</li>
+                            <li><a href="<?php echo base_url('/product/category/' . 1 . '/'); ?>">
+                                    <span class="uppercase">
+                                        Handle
+                                    </span>
+                                </a></li>
+                            <li><a href="<?php echo base_url('/product/category/' . 3 . '/'); ?>">
+                                    <span class="uppercase">
+                                        Hinges
+                                    </span>
+                                </a></li>
+                            <li><a href="<?php echo base_url('/product/category/' . 7 . '/'); ?>">
+                                    <span class="uppercase">
+                                        Lock
+                                    </span>
+                                </a></li>
+                            <li><a href="<?php echo base_url('/product/category/' . 11 . '/'); ?>">
+                                    <span class="uppercase">
+                                        Door closer
+                                    </span>
+                                </a></li>
+
+                        </ul>
         </div>
         <div class="fourth">
             <ul>

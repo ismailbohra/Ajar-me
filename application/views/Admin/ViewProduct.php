@@ -30,7 +30,7 @@
         width: 30%;
         min-width: 400px;
 
-        @media screen and (max-width:900px) {
+        @media screen and (max-width:1100px) {
             min-width: 300px;
 
             @media screen and (max-width:768px) {
@@ -57,7 +57,7 @@
         align-items: center;
         justify-content: center;
 
-        @media screen and (max-width:900px) {
+        @media screen and (max-width:1100px) {
             min-width: 300px;
             min-height: 300px;
 
@@ -150,7 +150,7 @@
         /* padding: 10px 18px; */
         display: none;
         background-color: white;
-        overflow: hidden;
+        overflow-x: scroll;
         border-radius: 0px 0px 10px 10px;
     }
 
@@ -203,6 +203,7 @@
         border: 1px solid #ddd;
         padding: 8px;
         text-align: center;
+        min-width: 120px;
     }
 
     #customers tr:nth-child(even) {
@@ -287,7 +288,14 @@
                                     $pd = str_replace('1002', '-', $pd);
                                     $pd = str_replace('1003', '*', $pd);
                                     $pd = str_replace('1004', '/', $pd);
-                                    echo substr($pd, 1); ?>
+                                    if (str_contains($pd, ':')) {
+                                        $parts = explode(':', $pd);
+                                        $part1=$parts[0];
+                                        echo '<strong>' . substr($part1,1) . '</strong>' . ':' . $parts[1];
+                                    } else {
+                                        echo substr($pd, 1);
+                                    } ?>
+                                    
                                 </li>
                             </ul>
                         <?php } elseif ($pd[0] == '#') { ?>

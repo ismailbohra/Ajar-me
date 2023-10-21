@@ -44,7 +44,8 @@ class Product extends CI_Controller
             $desc = "";
             $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
             foreach ($data['products'][$j]['product_description'] as $pd) {
-                if ($pd[0] == "#") {
+                $pd=str_replace('1005','$',$pd);
+                if ($pd[0] == "$") {
                     $desc = $desc . " " . substr($pd, 1);
                 } else {
                     $desc = $desc . " " . $pd;
@@ -56,6 +57,7 @@ class Product extends CI_Controller
                 $desc = str_replace('1002', '-', $desc);
                 $desc = str_replace('1003', '*', $desc);
                 $desc = str_replace('1004', '/', $desc);
+                $desc = str_replace('1005', '$', $desc);
             }
             $data['products'][$j]['product_description'] = $desc;
         }
@@ -122,11 +124,13 @@ class Product extends CI_Controller
             $desc = "";
             $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
             foreach ($data['products'][$j]['product_description'] as $pd) {
-                if ($pd[0] == "#") {
+                $pd=str_replace('1005','$',$pd);
+                if ($pd[0] == "$") {
                     $desc = $desc . " " . substr($pd, 1);
                 } else {
                     $desc = $desc . " " . $pd;
                 }
+                
                 $desc = str_replace(';', ',', $desc);
                 $desc = str_replace('|', '"', $desc);
                 $desc = str_replace('^', "'", $desc);
@@ -134,6 +138,7 @@ class Product extends CI_Controller
                 $desc = str_replace('1002', '-', $desc);
                 $desc = str_replace('1003', '*', $desc);
                 $desc = str_replace('1004', '/', $desc);
+                $desc = str_replace('1005', '$', $desc);
             }
             $data['products'][$j]['product_description'] = $desc;
         }
@@ -186,7 +191,8 @@ class Product extends CI_Controller
             $desc = "";
             $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
             foreach ($data['products'][$j]['product_description'] as $pd) {
-                if ($pd[0] == "#") {
+                $pd=str_replace('1005','$',$pd);
+                if ($pd[0] == "$") {
                     $desc = $desc . " " . substr($pd, 1);
                 } else {
                     $desc = $desc . " " . $pd;
@@ -198,6 +204,7 @@ class Product extends CI_Controller
                 $desc = str_replace('1002', '-', $desc);
                 $desc = str_replace('1003', '*', $desc);
                 $desc = str_replace('1004', '/', $desc);
+                $desc = str_replace('1005', '$', $desc);
             }
             $data['products'][$j]['product_description'] = $desc;
         }

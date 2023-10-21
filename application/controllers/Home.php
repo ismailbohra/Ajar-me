@@ -31,7 +31,8 @@ class Home extends CI_Controller
             $desc = "";
             $data['featured_product'][$j]['product_description'] = json_decode($data['featured_product'][$j]['product_description'], true);
             foreach ($data['featured_product'][$j]['product_description'] as $pd) {
-                if ($pd[0] == "#") {
+                $pd = str_replace('1005', '$', $pd);
+                if ($pd[0] == "$") {
                     $desc = $desc . " " . substr($pd, 1);
                 } else {
                     $desc = $desc . " " . $pd;
@@ -51,7 +52,7 @@ class Home extends CI_Controller
 		// die();
 		$this->load->view('Home/Header',$data2);
 		$this->load->view('Home/Home',$data);
-		$this->load->view('Home/Footer');
+		$this->load->view('Home/Footer',$data2);
 	}
 	
 }
