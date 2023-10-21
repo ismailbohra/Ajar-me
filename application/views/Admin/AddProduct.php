@@ -335,7 +335,7 @@
                     <div class="input-table">
                         <input type="button" value="Add Column" name="addcolumn" onclick="addColumnH();">
                         <input type="button" value="Add Row" name="addrow" onclick="addRowH();">
-                        <input type="button" value="Reset" name="reset" onclick="resetTable();">
+                        <input type="button" value="Reset" name="resetTable" onclick="resetTable();">
 
                     </div>
                     <div>
