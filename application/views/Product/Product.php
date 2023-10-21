@@ -307,6 +307,80 @@
         align-items: center;
         gap: 1rem;
     }
+
+    .brochre {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: space-between; */
+    }
+
+    .brochres {
+        display: none;
+    }
+
+    .bheader {
+        background: darkred;
+        color: white;
+        width: 100%;
+        text-align: center;
+    }
+
+
+    .bimage {
+        margin-top: 1rem;
+        width: 80%;
+        aspect-ratio: 16/9;
+        object-fit: contain;
+    }
+
+    .bbody {
+        margin: 5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bproductname {
+        margin-top;
+        : 5rem
+    }
+
+    #specification_table {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+    }
+
+    #specification_table td,
+    #specification_table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        min-width: 130px;
+    }
+
+    #specification_table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #specification_table tr:hover {
+        background-color: #ddd;
+    }
+
+    #specification_table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: darkgrey;
+        color: black;
+        text-transform: uppercase;
+        font-size: 13px;
+    }
+    .panel-table-specification {
+        display: flex;
+        justify-content: center;
+    }
 </style>
 
 <div class="product-page">
@@ -365,8 +439,8 @@
 
                                     if (str_contains($pd, ':')) {
                                         $parts = explode(':', $pd);
-                                        $part1=$parts[0];
-                                        echo '<strong>' . substr($part1,1) . '</strong>' . ':' . $parts[1];
+                                        $part1 = $parts[0];
+                                        echo '<strong>' . substr($part1, 1) . '</strong>' . ':' . $parts[1];
                                     } else {
                                         echo substr($pd, 1);
                                     }
@@ -457,7 +531,7 @@
                 <div class="send-button" onclick="send_query('<?php echo $product['id']; ?>');">
                     <i class="fa fa-envelope"></i>&nbsp;Send Queries
                 </div>
-                <div class="download-button">
+                <div class="download-button" onclick="download_pdf('<?php echo $product['id']; ?>');">
                     <i class="fa fa-download"></i>&nbsp;Download Brochure
                 </div>
             </div>
@@ -516,6 +590,141 @@
     Thank you for Enquiy!<br />
     We will contact you Shortly
 </div>
+<div class="brochres">
+    <?php $p = $product ?>
+    <div class="brochre" id="<?php echo "bproduct-" . $p['id']; ?>">
+        <div class="bheader">
+            <h1>AJAR</h1>
+            <p>Aswaaq Warehouse #13, Industrial Area 5, Al Qusais. Dubai U.A.E | E-mail:sales@ajar-me.com
+            </p>
+            <p>Tel.Number - +971 4 229 4540</p>
+        </div>
+        <div class="bbody">
+            <img src="<?php if (!empty($p['product_image_url'][0])) {
+                echo base_url() . $p['product_image_url'][0];
+            } else {
+                echo base_url() . "/assets/no-image.png";
+            } ?>" alt="product image" class="bimage">
+
+            <h1 class="bproductname">
+                <?php echo $p['product_name']; ?>
+            </h1>
+            <div class="bproductdesc">
+                <?php foreach ($p['product_description'] as $pd) {
+                    $pd = str_replace('1005', '$', $pd); ?>
+                    <?php if ($pd[0] == '$') { ?>
+                        <ul class="ul-desc">
+                            <ol>
+                                <div class="colour">
+                                    <?php echo '<div  style="width: 7px; height: 7px; border-radius:50px; background-color: black"></div>'; ?>
+                                    <?php
+                                    $pd = str_replace(';', ',', $pd);
+                                    $pd = str_replace('|', '"', $pd);
+                                    $pd = str_replace('^', "'", $pd);
+                                    $pd = str_replace('1001', '+', $pd);
+                                    $pd = str_replace('1002', '-', $pd);
+                                    $pd = str_replace('1003', '*', $pd);
+                                    $pd = str_replace('1004', '/', $pd);
+                                    $pd = str_replace('1005', '$', $pd);
+
+                                    if (str_contains($pd, ':')) {
+                                        $parts = explode(':', $pd);
+                                        $part1 = $parts[0];
+                                        echo '<strong>' . substr($part1, 1) . '</strong>' . ':' . $parts[1];
+                                    } else {
+                                        echo substr($pd, 1);
+                                    }
+                                    ?>
+                                </div>
+                            </ol>
+                        </ul>
+
+                    <?php } elseif ($pd[0] == '#') { ?>
+                        <ul class="ul-desc">
+                            <ol>
+                                <div class="colour">
+                                    <?php echo '<div  style="width: 15px; height: 15px; border-radius:50px; background-color: #' . $pd[1] . $pd[2] . $pd[3] . $pd[4] . $pd[5] . $pd[6] . '"></div>'; ?>
+                                    <?php $pd = str_replace(';', ',', $pd);
+                                    $pd = str_replace('|', '"', $pd);
+                                    $pd = str_replace('^', "'", $pd);
+                                    $pd = str_replace('1001', '+', $pd);
+                                    $pd = str_replace('1002', '-', $pd);
+                                    $pd = str_replace('1003', '*', $pd);
+                                    $pd = str_replace('1004', '/', $pd);
+                                    $pd = str_replace('1005', '$', $pd);
+                                    echo substr($pd, 7); ?>
+                                </div>
+                            </ol>
+                        </ul>
+                    <?php } else { ?>
+                        <p>
+                            <?php $pd = str_replace(';', ',', $pd);
+                            $pd = str_replace('|', '"', $pd);
+                            $pd = str_replace('^', "'", $pd);
+                            $pd = str_replace('1001', '+', $pd);
+                            $pd = str_replace('1002', '-', $pd);
+                            $pd = str_replace('1003', '*', $pd);
+                            $pd = str_replace('1004', '/', $pd);
+                            $pd = str_replace('1005', '$', $pd);
+                            echo $pd; ?>
+                        </p>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+            <div class="bspecification">
+                <?php if (count($header) > 1) { ?>
+                    <h3 style="margin-top:2rem;font: size 25px;">Specification</h3>
+                    <div class="panel-table-specification">
+                        <table id="specification_table">
+                            <tr>
+                                <?php
+                                foreach ($header as $h) { ?>
+                                    <th>
+                                        <?php echo $h ?>
+                                    </th>
+                                <?php } ?>
+                            </tr>
+                            <?php
+                            $i = 0;
+                            foreach ($row as $r) {
+                                if ($i % count($header) == 0) {
+                                    echo '<tr>';
+                                }
+                                echo '<td>' . $r . '</td>';
+                                if ($i % count($header) == (count($header) - 1)) {
+                                    echo '</tr>';
+                                }
+                                $i++;
+                            }
+                            ?>
+
+                        </table>
+                    </div>
+                <?php } ?>
+            </div>
+
+        </div>
+        <div class="bfooter">
+
+        </div>
+    </div>
+</div>
+<script>
+    function download_pdf(index) {
+        const invoice = this.document.getElementById(`bproduct-${index}`);
+        console.log(invoice);
+        console.log(window);
+        var opt = {
+            filename: 'Ajar_Brochre.pdf',
+            margin: [0, 0, 1, 0],
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+        };
+        html2pdf().from(invoice).set(opt).save();
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 <script>
     var acc = document.getElementsByClassName("accordion");
     acc[0].classList.toggle("active-panel");

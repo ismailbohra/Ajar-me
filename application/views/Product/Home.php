@@ -1,6 +1,6 @@
 <style>
     .product-home {
-        min-height:calc(100vh - 300px);
+        min-height: calc(100vh - 300px);
         width: 100%;
         background-color: #EAEAEA;
         padding-top: 90px;
@@ -308,7 +308,7 @@
         }
     }
 
-    .query-form {        
+    .query-form {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -319,17 +319,19 @@
         width: 400px;
         max-width: 400px;
         min-height: 400px;
-        max-height:95vh;
+        max-height: 95vh;
         overflow-y: scroll;
         display: none;
         z-index: 12;
-        border-radius:5px;
+        border-radius: 5px;
+
         @media screen and (max-width:500px) {
-            
-            max-width:350px;
+
+            max-width: 350px;
+
             @media screen and (max-width: 374px) {
-                
-                max-width:250px;
+
+                max-width: 250px;
             }
         }
     }
@@ -340,15 +342,16 @@
         justify-content: space-between;
     }
 
-    #product-overlay{
+    #product-overlay {
         display: none;
-        top:0;
+        top: 0;
         position: fixed;
         height: 100vh;
         width: 100vw;
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 10;
     }
+
     /* Add this to your existing CSS or create a new section for toast messages */
     .toast-message {
         position: fixed;
@@ -388,6 +391,102 @@
             right: -100%;
         }
     }
+
+    .brochre {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: space-between; */
+    }
+
+    .brochres {
+        display: none;
+    }
+
+    .bheader {
+        background: darkred;
+        color: white;
+        width: 100%;
+        text-align: center;
+    }
+
+
+    .bimage {
+        margin-top: 1rem;
+        width: 80%;
+        aspect-ratio: 16/9;
+        object-fit: contain;
+    }
+
+    .bbody {
+        margin: 5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bproductname {
+        margin-top;
+        : 5rem
+    }
+
+    .bproductdesc {}
+
+    .ul-desc {
+        padding-left: 5rem;
+    }
+
+    .ul-desc li::marker {
+        font-size: 20px;
+    }
+
+    .colour {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .ul-desc:first-child {
+        padding-top: 2rem;
+    }
+
+    .panel-table {
+        display: flex;
+        justify-content: center;
+    }
+
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+    }
+
+    #customers td,
+    #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        min-width: 130px;
+    }
+
+    #customers tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #customers tr:hover {
+        background-color: #ddd;
+    }
+
+    #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: darkgrey;
+        color: black;
+        text-transform: uppercase;
+        font-size: 13px;
+    }
 </style>
 <div class="product-home">
     <div class="product-home-heading">
@@ -403,7 +502,8 @@
                     <li><input type="checkbox" class="filter-checkbox" value="<?php echo $pc['id'] ?>"
                             onchange="filter_products(this.value);" <?php if (isset($filter) && array_search($pc['id'], $filter) !== false) {
                                 echo "checked";
-                            } ?>> <?php echo $pc['name'] ?></li>
+                            } ?>> <?php echo $pc['name'] ?>
+                    </li>
                 <?php } ?>
             </ul>
         </div>
@@ -462,7 +562,7 @@
     </div>
     <div class="product-lists" id="product-lists">
         <?php foreach ($products as $p) { ?>
-            <div class="product-list" id="<?php echo "product-".$p['id']; ?>">
+            <div class="product-list" id="<?php echo "product-" . $p['id']; ?>">
                 <div class="product-list-img-div"
                     onclick="redirectToUrl('<?php echo base_url('/product/product/') . $p['id']; ?>');">
                     <img src="<?php if (!empty($p['product_image_url'])) {
@@ -483,14 +583,135 @@
                         <div class="send-button" onclick="send_query('<?php echo $p['id']; ?>');">
                             <i class="fa fa-envelope"></i>&nbsp;Send Queries
                         </div>
-                        <div class="download-button">
+                        <div class="download-button" onclick="download_pdf('<?php echo $p['id']; ?>');">
                             <i class="fa fa-download"></i>&nbsp;Download Brochure
                         </div>
                     </div>
                 </div>
             </div>
+
         <?php } ?>
     </div>
+</div>
+<div class="brochres">
+    <?php foreach ($products as $p) { ?>
+        <div class="brochre" id="<?php echo "bproduct-" . $p['id']; ?>">
+            <div class="bheader">
+                <h1>AJAR</h1>
+                <p>Aswaaq Warehouse #13, Industrial Area 5, Al Qusais. Dubai U.A.E | E-mail:sales@ajar-me.com
+                </p>
+                <p>Tel.Number - +971 4 229 4540</p>
+            </div>
+            <div class="bbody">
+                <img src="<?php if (!empty($p['product_image_url'])) {
+                    echo base_url() . $p['product_image_url'];
+                } else {
+                    echo base_url() . "/assets/no-image.png";
+                } ?>" alt="product image" class="bimage">
+
+                <h1 class="bproductname">
+                    <?php echo $p['product_name']; ?>
+                </h1>
+                <div class="bproductdesc">
+                    <?php foreach ($p['product_description_brochre'] as $pd) {
+                        $pd = str_replace('1005', '$', $pd); ?>
+                        <?php if ($pd[0] == '$') { ?>
+                            <ul class="ul-desc">
+                                <ol>
+                                    <div class="colour">
+                                        <?php echo '<div  style="width: 7px; height: 7px; border-radius:50px; background-color: black"></div>'; ?>
+                                        <?php
+                                        $pd = str_replace(';', ',', $pd);
+                                        $pd = str_replace('|', '"', $pd);
+                                        $pd = str_replace('^', "'", $pd);
+                                        $pd = str_replace('1001', '+', $pd);
+                                        $pd = str_replace('1002', '-', $pd);
+                                        $pd = str_replace('1003', '*', $pd);
+                                        $pd = str_replace('1004', '/', $pd);
+                                        $pd = str_replace('1005', '$', $pd);
+
+                                        if (str_contains($pd, ':')) {
+                                            $parts = explode(':', $pd);
+                                            $part1 = $parts[0];
+                                            echo '<strong>' . substr($part1, 1) . '</strong>' . ':' . $parts[1];
+                                        } else {
+                                            echo substr($pd, 1);
+                                        }
+                                        ?>
+                                    </div>
+                                </ol>
+                            </ul>
+
+                        <?php } elseif ($pd[0] == '#') { ?>
+                            <ul class="ul-desc">
+                                <ol>
+                                    <div class="colour">
+                                        <?php echo '<div  style="width: 15px; height: 15px; border-radius:50px; background-color: #' . $pd[1] . $pd[2] . $pd[3] . $pd[4] . $pd[5] . $pd[6] . '"></div>'; ?>
+                                        <?php $pd = str_replace(';', ',', $pd);
+                                        $pd = str_replace('|', '"', $pd);
+                                        $pd = str_replace('^', "'", $pd);
+                                        $pd = str_replace('1001', '+', $pd);
+                                        $pd = str_replace('1002', '-', $pd);
+                                        $pd = str_replace('1003', '*', $pd);
+                                        $pd = str_replace('1004', '/', $pd);
+                                        $pd = str_replace('1005', '$', $pd);
+                                        echo substr($pd, 7); ?>
+                                    </div>
+                                </ol>
+                            </ul>
+                        <?php } else { ?>
+                            <p>
+                                <?php $pd = str_replace(';', ',', $pd);
+                                $pd = str_replace('|', '"', $pd);
+                                $pd = str_replace('^', "'", $pd);
+                                $pd = str_replace('1001', '+', $pd);
+                                $pd = str_replace('1002', '-', $pd);
+                                $pd = str_replace('1003', '*', $pd);
+                                $pd = str_replace('1004', '/', $pd);
+                                $pd = str_replace('1005', '$', $pd);
+                                echo $pd; ?>
+                            </p>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+                <div class="bspecification">
+                    <?php if (count($p['header']) > 1) { ?>
+                        <h3 style="margin-top:2rem;font: size 25px;">Specification</h3>
+                        <div class="panel-table">
+                            <table id="customers">
+                                <tr>
+                                    <?php
+                                    foreach ($p['header'] as $h) { ?>
+                                        <th>
+                                            <?php echo $h ?>
+                                        </th>
+                                    <?php } ?>
+                                </tr>
+                                <?php
+                                $i = 0;
+                                foreach ($p['row'] as $r) {
+                                    if ($i % count($p['header']) == 0) {
+                                        echo '<tr>';
+                                    }
+                                    echo '<td>' . $r . '</td>';
+                                    if ($i % count($p['header']) == (count($p['header']) - 1)) {
+                                        echo '</tr>';
+                                    }
+                                    $i++;
+                                }
+                                ?>
+
+                            </table>
+                        </div>
+                    <?php } ?>
+                </div>
+
+            </div>
+            <div class="bfooter">
+
+            </div>
+        </div>
+    <?php } ?>
 </div>
 <div id="query" class="query-form">
     <form class="myForm" id="myForm">
@@ -569,7 +790,7 @@
             dropdown.style.display = "block";
         }
     }
-    
+
     function redirectToUrl(url) {
         window.location.href = url;
     }
@@ -669,18 +890,18 @@
     }
 </script>
 <script>
-    function download_pdf(index){
-        const invoice = this.document.getElementById(`product-${index}`);
-            console.log(invoice);
-            console.log(window);
-            var opt = {
-                margin: 1,
-                filename: 'myfile.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            html2pdf().from(invoice).set(opt).save();
+    function download_pdf(index) {
+        const invoice = this.document.getElementById(`bproduct-${index}`);
+        console.log(invoice);
+        console.log(window);
+        var opt = {
+            filename: 'Ajar_Brochre.pdf',
+            margin: [0, 0, 1, 0],
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+        };
+        html2pdf().from(invoice).set(opt).save();
     }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
