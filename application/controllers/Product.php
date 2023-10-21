@@ -43,7 +43,7 @@ class Product extends CI_Controller
         for ($j = 0; $j < count($data['products']); $j++) {
             $desc = "";
             $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
-            
+
             $data['products'][$j]['header'] = json_decode($data['products'][$j]['table_header'], true);
             $data['products'][$j]['row'] = json_decode($data['products'][$j]['table_row'], true);
             $data['products'][$j]['product_description_brochre'] = $data['products'][$j]['product_description'];
@@ -130,6 +130,9 @@ class Product extends CI_Controller
         for ($j = 0; $j < count($data['products']); $j++) {
             $desc = "";
             $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
+            $data['products'][$j]['header'] = json_decode($data['products'][$j]['table_header'], true);
+            $data['products'][$j]['row'] = json_decode($data['products'][$j]['table_row'], true);
+            $data['products'][$j]['product_description_brochre'] = $data['products'][$j]['product_description'];
             foreach ($data['products'][$j]['product_description'] as $pd) {
                 $pd = str_replace('1005', '$', $pd);
                 if ($pd[0] == "$") {
@@ -150,10 +153,6 @@ class Product extends CI_Controller
             $pattern = '/#[a-fA-F0-9]{6}/';
             $cleanedString = preg_replace($pattern, '', $desc);
             $data['products'][$j]['product_description'] = $cleanedString;
-            
-            $data['products'][$j]['header'] = json_decode($data['product'][$j]['table_header'], true);
-            $data['products'][$j]['row'] = json_decode($data['product'][$j]['table_row'], true);
-            $data['products'][$j]['product_description_brochure'] = json_decode($data['products'][$j]['product_description'], true);
         }
         $i = 0;
         foreach ($data['products'] as $p) {
@@ -203,6 +202,9 @@ class Product extends CI_Controller
         for ($j = 0; $j < count($data['products']); $j++) {
             $desc = "";
             $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
+            $data['products'][$j]['header'] = json_decode($data['products'][$j]['table_header'], true);
+            $data['products'][$j]['row'] = json_decode($data['products'][$j]['table_row'], true);
+            $data['products'][$j]['product_description_brochre'] = $data['products'][$j]['product_description'];
             foreach ($data['products'][$j]['product_description'] as $pd) {
                 $pd = str_replace('1005', '$', $pd);
                 if ($pd[0] == "$") {
@@ -222,10 +224,6 @@ class Product extends CI_Controller
             $pattern = '/#[a-fA-F0-9]{6}/';
             $cleanedString = preg_replace($pattern, '', $desc);
             $data['products'][$j]['product_description'] = $cleanedString;
-            
-            $data['products'][$j]['header'] = json_decode($data['product'][$j]['table_header'], true);
-            $data['products'][$j]['row'] = json_decode($data['product'][$j]['table_row'], true);
-            $data['products'][$j]['product_description_brochure'] = json_decode($data['products'][$j]['product_description'], true);
         }
         $i = 0;
         foreach ($data['products'] as $p) {
@@ -237,8 +235,14 @@ class Product extends CI_Controller
             }
             $i++;
         }
-
         $data['product_category'] = $this->AdminM->get_category();
+        $name = "";
+        foreach ($data['product_category'] as $pc) {
+            if ($pc['id'] == $id) {
+                $name = $pc['name'];
+            }
+        }
+        $data['product_category_name'] = $name;
         $this->load->view('Home/Header', $data);
         $this->load->view('Product/Home', $data);
         $this->load->view('Home/Footer');

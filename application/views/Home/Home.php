@@ -734,23 +734,23 @@
     <div class="find-cards">
       <div class="find-card">
         <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <p>Residential</p>
+      </div>
+      <div class="find-card">
+        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
         <p>Commercial</p>
       </div>
       <div class="find-card">
         <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
-        <p>Government</p>
+        <p>Health Care</p>
       </div>
       <div class="find-card">
         <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
-        <p>Government</p>
+        <p>Education</p>
       </div>
       <div class="find-card">
         <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
-        <p>Government</p>
-      </div>
-      <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
-        <p>Government</p>
+        <p>Hotels </p>
       </div>
       <div class="find-card">
         <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">

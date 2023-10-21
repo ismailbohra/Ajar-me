@@ -490,7 +490,13 @@
 </style>
 <div class="product-home">
     <div class="product-home-heading">
-        <h1>PRODUCTS</h1>
+        <h1>
+            <?php if ($product_category_name) {
+                echo $product_category_name;
+            } else {
+                echo 'PRODUCTS';
+            } ?>
+        </h1>
     </div>
     <div class="product-navbar">
         <div class="left">
