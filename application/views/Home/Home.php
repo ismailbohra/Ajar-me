@@ -898,7 +898,7 @@
     }
     setInterval(function () {
       plusSlides(1);
-    }, 7000);
+    }, 5000);
   </script>
   <script>
     let featuredIndex = 0;
