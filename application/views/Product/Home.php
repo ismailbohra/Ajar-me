@@ -405,33 +405,6 @@
                                 echo "checked";
                             } ?>> <?php echo $pc['name'] ?></li>
                 <?php } ?>
-                <!-- <li><input type="checkbox" class="filter-checkbox" value="2" onchange="filter_products(this.value);" <?php if (isset($filter) && array_search(2, $filter) !== false) {
-                    echo "checked";
-                } ?>> Knob Handles</li>
-                <li><input type="checkbox" class="filter-checkbox" value="3" onchange="filter_products(this.value);" <?php if (isset($filter) && array_search(3, $filter) !== false) {
-                    echo "checked";
-                } ?>> Pull Handles</li>
-                <li><input type="checkbox" class="filter-checkbox" value="4" onchange="filter_products(this.value);" <?php if (isset($filter) && array_search(4, $filter) !== false) {
-                    echo "checked";
-                } ?>> Hinges</li>
-                <li><input type="checkbox" class="filter-checkbox" value="5" onchange="filter_products(this.value);" <?php if (isset($filter) && array_search(5, $filter) !== false) {
-                    echo "checked";
-                } ?>> Locking Devices</li>
-                <li><input type="checkbox" class="filter-checkbox" value="6" onchange="filter_products(this.value);" <?php if (isset($filter) && array_search(6, $filter) !== false) {
-                    echo "checked";
-                } ?>> Europrofile Cylinder</li>
-                <li><input type="checkbox" class="filter-checkbox" value="7" onchange="filter_products(this.value);" <?php if (isset($filter) && array_search(7, $filter) !== false) {
-                    echo "checked";
-                } ?>> Master Key</li>
-                <li><input type="checkbox" class="filter-checkbox" value="8" onchange="filter_products(this.value);" <?php if (isset($filter) && array_search(8, $filter) !== false) {
-                    echo "checked";
-                } ?>> Panic Exit</li>
-                <li><input type="checkbox" class="filter-checkbox" value="9" onchange="filter_products(this.value);" <?php if (isset($filter) && array_search(9, $filter) !== false) {
-                    echo "checked";
-                } ?>> Door Closer</li>
-                <li><input type="checkbox" class="filter-checkbox" value="10" onchange="filter_products(this.value);" <?php if (isset($filter) && array_search(10, $filter) !== false) {
-                    echo "checked";
-                } ?>> Door Accessories</li>  -->
             </ul>
         </div>
         <div class="right">
