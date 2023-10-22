@@ -24,6 +24,24 @@
     vertical-align: middle;
   }
 
+  .slider-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    animation: enlargeAnimation 7s ease-in-out forwards;
+  }
+
+  @keyframes enlargeAnimation {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.07);
+    }
+  }
+
   /* Slideshow container */
   .slideshow-container {
     width: calc(100vw - 50px);
@@ -672,8 +690,7 @@
     </div> -->
     <?php foreach ($slider_image as $image): ?>
       <div class="mySlides">
-        <img src="<?php echo base_url($image['slider_image_url']); ?>"
-          style="height:100%;width:100%;object-fit:cover;overflow:hidden;">
+        <img src="<?php echo base_url($image['slider_image_url']); ?>" class="slider-image">
       </div>
     <?php endforeach; ?>
 
@@ -734,23 +751,23 @@
     <div class="find-cards">
       <div class="find-card">
         <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <p>Residential</p>
+      </div>
+      <div class="find-card">
+        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
         <p>Commercial</p>
       </div>
       <div class="find-card">
         <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
-        <p>Government</p>
+        <p>Health Care</p>
       </div>
       <div class="find-card">
         <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
-        <p>Government</p>
+        <p>Education</p>
       </div>
       <div class="find-card">
         <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
-        <p>Government</p>
-      </div>
-      <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
-        <p>Government</p>
+        <p>Hotels </p>
       </div>
       <div class="find-card">
         <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
@@ -879,6 +896,9 @@
       }
       slides[slideIndex - 1].style.display = "block";
     }
+    setInterval(function () {
+      plusSlides(1);
+    }, 5000);
   </script>
   <script>
     let featuredIndex = 0;

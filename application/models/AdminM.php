@@ -38,7 +38,7 @@ class AdminM extends CI_Model
     }
     function get_searched_products($value)
     {
-        $sql = " SELECT * from `products` WHERE product_name LIKE '%$value%' OR product_code LIKE '%$value%' LIMIT 5 ";
+        $sql = " SELECT * from `products` WHERE product_name LIKE '%$value%' OR product_code LIKE '%$value%' ";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
