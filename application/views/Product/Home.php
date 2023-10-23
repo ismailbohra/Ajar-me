@@ -491,7 +491,7 @@
 <div class="product-home">
     <div class="product-home-heading">
         <h1>
-            <?php if ($product_category_name) {
+            <?php if (!empty($product_category_name)) {
                 echo $product_category_name;
             } else {
                 echo 'PRODUCTS';
