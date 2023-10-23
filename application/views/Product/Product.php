@@ -196,10 +196,24 @@
         background-color: white;
         border: 1px solid lightgrey;
         padding: 2rem;
-        width: 350px;
-        height: 400px;
+        width: 400px;
+        max-width: 400px;
+        min-height: 400px;
+        max-height: 95vh;
         overflow-y: scroll;
         display: none;
+        z-index: 12;
+        border-radius: 5px;
+
+        @media screen and (max-width:500px) {
+
+            max-width: 350px;
+
+            @media screen and (max-width: 374px) {
+
+                max-width: 250px;
+            }
+        }
     }
 
     .submit {
@@ -208,6 +222,15 @@
         justify-content: space-between;
     }
 
+    #product-overlay {
+        display: none;
+        top: 0;
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+    }
     /* Add this to your existing CSS or create a new section for toast messages */
     .toast-message {
         position: fixed;
@@ -586,6 +609,7 @@
         </div>
     </form>
 </div>
+<div id="product-overlay"></div>
 <div id="toast-message" class="toast-message">
     Thank you for Enquiy!<br />
     We will contact you Shortly
@@ -753,6 +777,7 @@
 
     function send_query(id) {
         document.getElementById("query").style.display = "block";
+        document.getElementById("product-overlay").style.display = "block";
         const newInput = document.createElement("div");
         newInput.innerHTML = `<input type="text" hidden name="product_id" value=${id} Required=true>`;
         document.querySelector(".myForm").appendChild(newInput);
@@ -761,6 +786,7 @@
     function clearForm() {
         $('#myForm')[0].reset();
         document.getElementById("query").style.display = "none";
+        document.getElementById("product-overlay").style.display = "none";
     }
     $(document).ready(function () {
         $('#myForm').submit(function (event) {
