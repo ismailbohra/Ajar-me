@@ -72,7 +72,7 @@
                     </div>
                     <div class="input-field">
                         <label for="password">Password</label>
-                        <input type="text" name="password" placeholder="enter password ..." required>
+                        <input type="password" name="password" placeholder="enter password ..." required>
                     </div>
                     <div class="submit-button">
                         <input type="submit" name="submit" value="Login">

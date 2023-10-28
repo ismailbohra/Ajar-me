@@ -699,29 +699,31 @@
 
   </div>
 
-  <div class="featured">
-    <h1>Featured Projects</h1>
-    <div class="featured-div">
-      <div class="featured-img-div">
-        <img src="<?php echo base_url($featured_product[0]['product_image_url']); ?>" alt="featured product"
-          class="featured-img">
-      </div>
-      <div class="featured-description">
-        <p>
-          <?php echo $featured_product[0]['product_description'] ?>
-        </p>
-        <div class="featured-buttons">
-          <a style="margin-right:3rem;"><img onclick="featuredprevious();"
-              src="<?php echo base_url('/assets/icons/arrow-left.svg') ?>"
-              alt="left arrow icon">&nbsp;&nbsp;Previous</a>
-          <!-- <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Previous</a> -->
-          <a>Next&nbsp;&nbsp;<img onclick="featurednext();"
-              src="<?php echo base_url('/assets/icons/arrow-right.svg') ?>" alt="right arrow icon"></a>
-          <!-- <a>Next&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
+  <?php if (!empty($featured_projects)) { ?>
+    <div class="featured">
+      <h1>Featured Projects</h1>
+      <div class="featured-div">
+        <div class="featured-img-div">
+          <img src="<?php echo base_url($featured_projects[0]['project_image_url']); ?>" alt="featured product"
+            class="featured-img">
+        </div>
+        <div class="featured-description">
+          <p>
+            <?php echo $featured_projects[0]['description'] ?>
+          </p>
+          <div class="featured-buttons">
+            <a style="margin-right:3rem;"><img onclick="featuredprevious();"
+                src="<?php echo base_url('/assets/icons/arrow-left.svg') ?>"
+                alt="left arrow icon">&nbsp;&nbsp;Previous</a>
+            <!-- <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Previous</a> -->
+            <a>Next&nbsp;&nbsp;<img onclick="featurednext();"
+                src="<?php echo base_url('/assets/icons/arrow-right.svg') ?>" alt="right arrow icon"></a>
+            <!-- <a>Next&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <?php } ?>
 
   <div class="simplify">
     <div class="simplify-text">
@@ -776,58 +778,54 @@
     </div>
   </div>
 
-  <div class="products-div">
-    <div class="products-text">
-      <h1>Products</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deserunt in accusamus excepturi, ad similique.
-      </p>
+  <?php if ($featured_products) { ?>
+    <div class="products-div">
+      <div class="products-text">
+        <h1>Products</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deserunt in accusamus excepturi, ad similique.
+        </p>
+      </div>
+      <div class="products-cards">
+        <?php $i = 1;
+        foreach ($featured_products as $product) { ?>
+          <?php if ($i % 2 == 1) { ?>
+            <div class="products-card">
+              <a href="<?php echo base_url('/product/category') . '/' . $product['product_category'] ?>">
+                <div class="products-card-img">
+                  <img src="<?php echo base_url($product['product_image_url']); ?>" alt="featured product"
+                    style="height:100px;width:100px;object-fit: contain;">
+                </div>
+              </a>
+              <p>
+                <?php echo $product['description'] ?>
+              </p>
+            </div>
+          <?php } else { ?>
+            <div class="products-card products-card-upper">
+              <a href="<?php echo base_url('/product/category') . '/' . $product['product_category'] ?>">
+                <div class="products-card-img">
+                  <img src="<?php echo base_url($product['product_image_url']); ?>" alt="products product image"
+                    style="height:100px;width:100px;object-fit: contain;">
+                </div>
+              </a>
+              <p>
+                <?php echo $product['description'] ?>
+              </p>
+            </div>
+          <?php } ?>
+          <?php $i++;
+        } ?>
+
+      </div>
+      <div class="more-products">
+        <a href="<?php echo base_url('/product') ?>" class="href">
+          <div class="more-products-button">
+            View More
+          </div>
+        </a>
+      </div>
     </div>
-    <div class="products-cards">
-      <div class="products-card">
-        <div class="products-card-img">
-          <img src="<?php echo base_url($featured_product[0]['product_image_url']); ?>" alt="featured product"
-            style="height:100px;width:100px;object-fit: contain;">
-        </div>
-        <p>
-          <?php echo $featured_product[0]['product_description'] ?>
-        </p>
-      </div>
-      <div class="products-card products-card-upper">
-        <div class="products-card-img">
-          <img src="<?php echo base_url($featured_product[1]['product_image_url']); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: contain;">
-        </div>
-        <p>
-          <?php echo $featured_product[1]['product_description'] ?>
-        </p>
-      </div>
-      <div class="products-card">
-        <div class="products-card-img">
-          <img src="<?php echo base_url($featured_product[2]['product_image_url']); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: contain;">
-        </div>
-        <p>
-          <?php echo $featured_product[2]['product_description'] ?>
-        </p>
-      </div>
-      <div class="products-card products-card-upper">
-        <div class="products-card-img">
-          <img src="<?php echo base_url($featured_product[3]['product_image_url']); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: contain;">
-        </div>
-        <p>
-          <?php echo $featured_product[3]['product_description'] ?>
-        </p>
-      </div>
-    </div>
-    <div class="more-products">
-      <a href="<?php echo base_url('/product') ?>" class="href">
-        <div class="more-products-button">
-          View More
-        </div>
-      </a>
-    </div>
-  </div>
+  <?php } ?>
 
   <div class="partners">
     <div class="partners-heading">
@@ -903,18 +901,18 @@
   <script>
     let featuredIndex = 0;
 
-    let featured_product = [];
+    let featured_projects = [];
     <?php
-    foreach ($featured_product as $p) {
+    foreach ($featured_projects as $p) {
       ?>
-      featured_product.push({ product_description: "<?php echo $p['product_description']; ?>", product_image_url: '<?php echo $p['product_image_url']; ?>' });
-      console.log(featured_product)
+      featured_projects.push({ product_description: "<?php echo $p['description']; ?>", product_image_url: '<?php echo $p['project_image_url']; ?>' });
+      console.log(featured_projects)
 
     <?php } ?>
 
     function featurednext() {
       featuredIndex++;
-      if (featuredIndex >= featured_product.length) {
+      if (featuredIndex >= featured_projects.length) {
         featuredIndex = 0;
       }
       updateFeatured();
@@ -923,7 +921,7 @@
     function featuredprevious() {
       featuredIndex--;
       if (featuredIndex < 0) {
-        featuredIndex = featured_product.length - 1;
+        featuredIndex = featured_projects.length - 1;
       }
       updateFeatured();
     }
@@ -932,8 +930,8 @@
       const featuredImage = document.querySelector(".featured-img");
       const featuredDescription = document.querySelector(".featured-description p");
 
-      featuredImage.src = "<?php echo base_url(); ?>" + featured_product[featuredIndex]['product_image_url'];
-      featuredDescription.textContent = featured_product[featuredIndex]['product_description'];
+      featuredImage.src = "<?php echo base_url(); ?>" + featured_projects[featuredIndex]['product_image_url'];
+      featuredDescription.textContent = featured_projects[featuredIndex]['product_description'];
     }
   </script>
 </div>

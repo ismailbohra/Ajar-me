@@ -13,11 +13,22 @@ class Contact extends CI_Controller
 
 	public function index()
 	{
-        
-		$data2['product_category'] = $this->AdminM->get_category();
-		$this->load->view('Home/Header',$data2);
+        $data['products'] = $this->AdminM->get_products();
+
+		$i = 0;
+		foreach ($data['products'] as $p) {
+			$product_image = $this->AdminM->get_product_image($p['id']);
+			if (!empty($product_image)) {
+				$data['products'][$i]['product_image_url'] = $product_image[0]['product_image_url'];
+			} else {
+				$data['products'][$i]['product_image_url'] = "";
+			}
+			$i++;
+		}   
+		$data['product_category'] = $this->AdminM->get_category();
+		$this->load->view('Home/Header',$data);
 		$this->load->view('Contact/Home');
-		$this->load->view('Home/Footer',$data2);
+		$this->load->view('Home/Footer',$data);
 	}
 	public function submit_message()
     {
