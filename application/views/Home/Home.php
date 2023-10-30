@@ -354,7 +354,7 @@
     margin: auto;
     margin-top: -15rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     place-items: center;
     padding: 5rem;
     grid-row-gap: 5rem;
@@ -370,11 +370,13 @@
     background-color: #717070;
     border-radius: 15px;
     padding: 1rem;
-    width: 170px;
+    width: 250px;
   }
 
   .find-card-img {
     width: 100%;
+    height: 200px;
+    border-radius: 10px;
   }
 
   .find-card p {
@@ -523,8 +525,8 @@
 
   .partners-div {
     border: 8px dashed #D9D9D9;
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     border-radius: 50%;
     margin: auto;
     position: relative;
@@ -554,7 +556,7 @@
 
   .partners-logo img {
     height: 90px;
-    width: 90px;
+    width: 110px;
     border-radius: 10px;
     object-fit: contain;
 
@@ -566,7 +568,7 @@
 
   .partners-logo:nth-child(1) {
     top: -70;
-    left: 230;
+    left: 173;
 
     @media screen and (max-width:768px) {
       top: -40;
@@ -581,10 +583,11 @@
 
   .partners-logo:nth-child(2) {
     top: 80;
-    left: -20;
+    left: -70;
 
     @media screen and (max-width:768px) {
       top: 40;
+      left: -20;
 
       @media screen and (max-width:350px) {
         top: 20;
@@ -594,9 +597,10 @@
 
   .partners-logo:nth-child(3) {
     top: 80;
-    right: -20;
+    right: -70;
 
     @media screen and (max-width:768px) {
+      right: -20;
       top: 40;
 
       @media screen and (max-width:350px) {
@@ -607,9 +611,10 @@
 
   .partners-logo:nth-child(4) {
     bottom: 80;
-    left: -20;
+    left: -70;
 
     @media screen and (max-width:768px) {
+      left: -20;
       bottom: 40;
 
       @media screen and (max-width:350px) {
@@ -620,9 +625,10 @@
 
   .partners-logo:nth-child(5) {
     bottom: 80;
-    right: -20;
+    right: -70;
 
     @media screen and (max-width:768px) {
+      right: -20;
       bottom: 40;
 
       @media screen and (max-width:350px) {
@@ -633,7 +639,7 @@
 
   .partners-logo:nth-child(6) {
     bottom: -50;
-    left: 230;
+    left: 181;
 
     @media screen and (max-width:768px) {
       bottom: -40;
@@ -648,8 +654,8 @@
 
   .self {
     background: transparent;
-    top: 182;
-    left: 182;
+    top: 85;
+    left: 106;
 
     @media screen and (max-width:768px) {
       top: 85;
@@ -663,8 +669,8 @@
   }
 
   .self img {
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
 
     @media screen and (max-width:768px) {
       height: 100px;
@@ -752,27 +758,33 @@
     </div>
     <div class="find-cards">
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/Residential.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Residential</p>
       </div>
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/commercial.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Commercial</p>
       </div>
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/HealthCare.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Health Care</p>
       </div>
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/Education.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Education</p>
       </div>
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/hotels.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Hotels </p>
       </div>
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/Government.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Government</p>
       </div>
     </div>
@@ -845,10 +857,14 @@
           </a>
         </div>
         <div class="partners-logo">
-          <img src="<?php echo base_url('/assets/partner3.png'); ?>" alt="partner brand logo">
+          <a href="https://breuerundschmitz.de/">
+            <img src="<?php echo base_url('/assets/partner3.png'); ?>" alt="partner brand logo">
+          </a>
         </div>
         <div class="partners-logo">
-          <img src="<?php echo base_url('/assets/partner4.png'); ?>" alt="partner brand logo">
+          <a href="https://www.woelm.de/en/helm-sliding-hardware.html">
+            <img src="<?php echo base_url('/assets/partner4.png'); ?>" alt="partner brand logo">
+          </a>
         </div>
         <div class="partners-logo">
           <a href="https://www.fsb.de/en/">

@@ -531,16 +531,11 @@ class Admin extends CI_Controller
             redirect('/admin');
         }
 
-        $imageUrl = $this->input->post('imageUrl');
-
-        // Implement the logic to delete the image in your model
-        $result = $this->AdminM->delete_slider_image($imageUrl);
-
-        // Return a response (success or error) to the client
+        $result = $this->AdminM->delete_slider_image($_POST['imageurl']);
         if ($result) {
-            echo json_encode(['success' => true]);
+            redirect('/admin/slider');
         } else {
-            echo json_encode(['success' => false, 'error' => 'Failed to delete image']);
+            redirect('/admin');
         }
     }
 

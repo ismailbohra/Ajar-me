@@ -162,7 +162,7 @@
     }
 </style>
 <div class="center">
-
+    <h1>Featured Products</h1>
     <?php if (!empty($featured_products)) { ?>
         <div class="products-div">
             <div class="products-cards">

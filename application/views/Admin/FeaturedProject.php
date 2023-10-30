@@ -178,14 +178,14 @@
             @media screen and (min-width:1000px) {
                 min-height: 300px;
                 max-height: 300px;
-                min-width: 600px;
-                max-width: 600px;
+                min-width: 400px;
+                max-width: 400px;
 
                 @media screen and (min-width:1200px) {
                     min-height: 400px;
                     max-height: 400px;
-                    min-width: 800px;
-                    max-width: 800px;
+                    min-width: 600px;
+                    max-width: 600px;
                 }
             }
         }
