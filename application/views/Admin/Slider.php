@@ -178,8 +178,10 @@
                 <td><img class="table-image" src="<?php echo base_url($image['slider_image_url']); ?>"></td>
                 <td>
                     <div class="submit-button-delete">
-                        <input type="submit" value="Delete" name="submit"
-                            onclick="deleteImage('<?php echo $image['slider_image_url']; ?>')">
+                        <form action="<?php echo base_url('admin/delete_slider_image/'); ?>" method="POST">
+                            <input type="hidden" name="imageurl" value="<?php echo $image['slider_image_url'] ?>">
+                            <input type="submit" value="Delete" name="submit">
+                        </form>
                     </div>
                 </td>
             </tr>
@@ -216,24 +218,3 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    function deleteImage(imageUrl) {
-        $.ajax({
-            type: "POST",
-            url: "<?php echo base_url('admin/delete_slider_image'); ?>",
-            data: { imageUrl: imageUrl },
-            dataType: "json",
-            success: function (data) {
-                if (data.success) {
-                    const element = document.getElementById(imageUrl);
-                    element.remove();
-                } else {
-                    console.log('Failed to delete image:', data.error);
-                }
-            },
-            error: function (error) {
-                console.error('Error:', error);
-            }
-        });
-    }
-</script>

@@ -28,7 +28,7 @@ foreach ($products as $p) {
     .admin-sidebar {
         position: fixed;
         min-height: 100vh;
-        max-width: 250px;
+        max-width: 270px;
         top: 0;
         left: 0;
         border-right: 2px solid rgba(0, 0, 0, 0.2);
@@ -85,6 +85,8 @@ foreach ($products as $p) {
             <a href=<?php echo base_url('admin/home')?>><i class="fa fa-gift"></i> Products</a>
             <a href=<?php echo base_url('admin/enquiry')?>><i class="fa fa-envelope"></i> Enquiries</a>
             <a href=<?php echo base_url('admin/messages')?>><i class="fa fa-comments"></i> Messages</a>
+            <a href=<?php echo base_url('admin/featuredProject')?>><i class="fa fa-envelope"></i> Featured Project</a>
+            <a href=<?php echo base_url('admin/featuredProduct')?>><i class="fa fa-comments"></i> Featured Products</a>
         </div>
     </div>
 </div>

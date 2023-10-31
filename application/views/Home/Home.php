@@ -354,7 +354,7 @@
     margin: auto;
     margin-top: -15rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     place-items: center;
     padding: 5rem;
     grid-row-gap: 5rem;
@@ -370,11 +370,13 @@
     background-color: #717070;
     border-radius: 15px;
     padding: 1rem;
-    width: 170px;
+    width: 250px;
   }
 
   .find-card-img {
     width: 100%;
+    height: 200px;
+    border-radius: 10px;
   }
 
   .find-card p {
@@ -523,8 +525,8 @@
 
   .partners-div {
     border: 8px dashed #D9D9D9;
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     border-radius: 50%;
     margin: auto;
     position: relative;
@@ -554,7 +556,7 @@
 
   .partners-logo img {
     height: 90px;
-    width: 90px;
+    width: 110px;
     border-radius: 10px;
     object-fit: contain;
 
@@ -566,7 +568,7 @@
 
   .partners-logo:nth-child(1) {
     top: -70;
-    left: 230;
+    left: 173;
 
     @media screen and (max-width:768px) {
       top: -40;
@@ -581,10 +583,11 @@
 
   .partners-logo:nth-child(2) {
     top: 80;
-    left: -20;
+    left: -70;
 
     @media screen and (max-width:768px) {
       top: 40;
+      left: -20;
 
       @media screen and (max-width:350px) {
         top: 20;
@@ -594,9 +597,10 @@
 
   .partners-logo:nth-child(3) {
     top: 80;
-    right: -20;
+    right: -70;
 
     @media screen and (max-width:768px) {
+      right: -20;
       top: 40;
 
       @media screen and (max-width:350px) {
@@ -607,9 +611,10 @@
 
   .partners-logo:nth-child(4) {
     bottom: 80;
-    left: -20;
+    left: -70;
 
     @media screen and (max-width:768px) {
+      left: -20;
       bottom: 40;
 
       @media screen and (max-width:350px) {
@@ -620,9 +625,10 @@
 
   .partners-logo:nth-child(5) {
     bottom: 80;
-    right: -20;
+    right: -70;
 
     @media screen and (max-width:768px) {
+      right: -20;
       bottom: 40;
 
       @media screen and (max-width:350px) {
@@ -633,7 +639,7 @@
 
   .partners-logo:nth-child(6) {
     bottom: -50;
-    left: 230;
+    left: 181;
 
     @media screen and (max-width:768px) {
       bottom: -40;
@@ -648,8 +654,8 @@
 
   .self {
     background: transparent;
-    top: 182;
-    left: 182;
+    top: 85;
+    left: 106;
 
     @media screen and (max-width:768px) {
       top: 85;
@@ -663,8 +669,8 @@
   }
 
   .self img {
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
 
     @media screen and (max-width:768px) {
       height: 100px;
@@ -699,29 +705,31 @@
 
   </div>
 
-  <div class="featured">
-    <h1>Featured Projects</h1>
-    <div class="featured-div">
-      <div class="featured-img-div">
-        <img src="<?php echo base_url($featured_product[0]['product_image_url']); ?>" alt="featured product"
-          class="featured-img">
-      </div>
-      <div class="featured-description">
-        <p>
-          <?php echo $featured_product[0]['product_description'] ?>
-        </p>
-        <div class="featured-buttons">
-          <a style="margin-right:3rem;"><img onclick="featuredprevious();"
-              src="<?php echo base_url('/assets/icons/arrow-left.svg') ?>"
-              alt="left arrow icon">&nbsp;&nbsp;Previous</a>
-          <!-- <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Previous</a> -->
-          <a>Next&nbsp;&nbsp;<img onclick="featurednext();"
-              src="<?php echo base_url('/assets/icons/arrow-right.svg') ?>" alt="right arrow icon"></a>
-          <!-- <a>Next&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
+  <?php if (!empty($featured_projects)) { ?>
+    <div class="featured">
+      <h1>Featured Projects</h1>
+      <div class="featured-div">
+        <div class="featured-img-div">
+          <img src="<?php echo base_url($featured_projects[0]['project_image_url']); ?>" alt="featured product"
+            class="featured-img">
+        </div>
+        <div class="featured-description">
+          <p>
+            <?php echo $featured_projects[0]['description'] ?>
+          </p>
+          <div class="featured-buttons">
+            <a style="margin-right:3rem;"><img onclick="featuredprevious();"
+                src="<?php echo base_url('/assets/icons/arrow-left.svg') ?>"
+                alt="left arrow icon">&nbsp;&nbsp;Previous</a>
+            <!-- <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Previous</a> -->
+            <a>Next&nbsp;&nbsp;<img onclick="featurednext();"
+                src="<?php echo base_url('/assets/icons/arrow-right.svg') ?>" alt="right arrow icon"></a>
+            <!-- <a>Next&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <?php } ?>
 
   <div class="simplify">
     <div class="simplify-text">
@@ -750,84 +758,86 @@
     </div>
     <div class="find-cards">
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/Residential.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Residential</p>
       </div>
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/commercial.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Commercial</p>
       </div>
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/HealthCare.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Health Care</p>
       </div>
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/Education.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Education</p>
       </div>
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/hotels.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Hotels </p>
       </div>
       <div class="find-card">
-        <img src="<?php echo base_url('/assets/find.png'); ?>" alt="find product image" class="find-card-img">
+        <img src="<?php echo base_url('/assets/projects/Government.jpg'); ?>" alt="find product image"
+          class="find-card-img">
         <p>Government</p>
       </div>
     </div>
   </div>
 
-  <div class="products-div">
-    <div class="products-text">
-      <h1>Products</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deserunt in accusamus excepturi, ad similique.
-      </p>
+  <?php if ($featured_products) { ?>
+    <div class="products-div">
+      <div class="products-text">
+        <h1>Products</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore deserunt in accusamus excepturi, ad similique.
+        </p>
+      </div>
+      <div class="products-cards">
+        <?php $i = 1;
+        foreach ($featured_products as $product) { ?>
+          <?php if ($i % 2 == 1) { ?>
+            <div class="products-card">
+              <a href="<?php echo base_url('/product/category') . '/' . $product['product_category'] ?>">
+                <div class="products-card-img">
+                  <img src="<?php echo base_url($product['product_image_url']); ?>" alt="featured product"
+                    style="height:100px;width:100px;object-fit: contain;">
+                </div>
+              </a>
+              <p>
+                <?php echo $product['description'] ?>
+              </p>
+            </div>
+          <?php } else { ?>
+            <div class="products-card products-card-upper">
+              <a href="<?php echo base_url('/product/category') . '/' . $product['product_category'] ?>">
+                <div class="products-card-img">
+                  <img src="<?php echo base_url($product['product_image_url']); ?>" alt="products product image"
+                    style="height:100px;width:100px;object-fit: contain;">
+                </div>
+              </a>
+              <p>
+                <?php echo $product['description'] ?>
+              </p>
+            </div>
+          <?php } ?>
+          <?php $i++;
+        } ?>
+
+      </div>
+      <div class="more-products">
+        <a href="<?php echo base_url('/product') ?>" class="href">
+          <div class="more-products-button">
+            View More
+          </div>
+        </a>
+      </div>
     </div>
-    <div class="products-cards">
-      <div class="products-card">
-        <div class="products-card-img">
-          <img src="<?php echo base_url($featured_product[0]['product_image_url']); ?>" alt="featured product"
-            style="height:100px;width:100px;object-fit: contain;">
-        </div>
-        <p>
-          <?php echo $featured_product[0]['product_description'] ?>
-        </p>
-      </div>
-      <div class="products-card products-card-upper">
-        <div class="products-card-img">
-          <img src="<?php echo base_url($featured_product[1]['product_image_url']); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: contain;">
-        </div>
-        <p>
-          <?php echo $featured_product[1]['product_description'] ?>
-        </p>
-      </div>
-      <div class="products-card">
-        <div class="products-card-img">
-          <img src="<?php echo base_url($featured_product[2]['product_image_url']); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: contain;">
-        </div>
-        <p>
-          <?php echo $featured_product[2]['product_description'] ?>
-        </p>
-      </div>
-      <div class="products-card products-card-upper">
-        <div class="products-card-img">
-          <img src="<?php echo base_url($featured_product[3]['product_image_url']); ?>" alt="products product image"
-            style="height:100px;width:100px;object-fit: contain;">
-        </div>
-        <p>
-          <?php echo $featured_product[3]['product_description'] ?>
-        </p>
-      </div>
-    </div>
-    <div class="more-products">
-      <a href="<?php echo base_url('/product') ?>" class="href">
-        <div class="more-products-button">
-          View More
-        </div>
-      </a>
-    </div>
-  </div>
+  <?php } ?>
 
   <div class="partners">
     <div class="partners-heading">
@@ -847,10 +857,14 @@
           </a>
         </div>
         <div class="partners-logo">
-          <img src="<?php echo base_url('/assets/partner3.png'); ?>" alt="partner brand logo">
+          <a href="https://breuerundschmitz.de/">
+            <img src="<?php echo base_url('/assets/partner3.png'); ?>" alt="partner brand logo">
+          </a>
         </div>
         <div class="partners-logo">
-          <img src="<?php echo base_url('/assets/partner4.png'); ?>" alt="partner brand logo">
+          <a href="https://www.woelm.de/en/helm-sliding-hardware.html">
+            <img src="<?php echo base_url('/assets/partner4.png'); ?>" alt="partner brand logo">
+          </a>
         </div>
         <div class="partners-logo">
           <a href="https://www.fsb.de/en/">
@@ -903,18 +917,18 @@
   <script>
     let featuredIndex = 0;
 
-    let featured_product = [];
+    let featured_projects = [];
     <?php
-    foreach ($featured_product as $p) {
+    foreach ($featured_projects as $p) {
       ?>
-      featured_product.push({ product_description: "<?php echo $p['product_description']; ?>", product_image_url: '<?php echo $p['product_image_url']; ?>' });
-      console.log(featured_product)
+      featured_projects.push({ product_description: "<?php echo $p['description']; ?>", product_image_url: '<?php echo $p['project_image_url']; ?>' });
+      console.log(featured_projects)
 
     <?php } ?>
 
     function featurednext() {
       featuredIndex++;
-      if (featuredIndex >= featured_product.length) {
+      if (featuredIndex >= featured_projects.length) {
         featuredIndex = 0;
       }
       updateFeatured();
@@ -923,7 +937,7 @@
     function featuredprevious() {
       featuredIndex--;
       if (featuredIndex < 0) {
-        featuredIndex = featured_product.length - 1;
+        featuredIndex = featured_projects.length - 1;
       }
       updateFeatured();
     }
@@ -932,8 +946,8 @@
       const featuredImage = document.querySelector(".featured-img");
       const featuredDescription = document.querySelector(".featured-description p");
 
-      featuredImage.src = "<?php echo base_url(); ?>" + featured_product[featuredIndex]['product_image_url'];
-      featuredDescription.textContent = featured_product[featuredIndex]['product_description'];
+      featuredImage.src = "<?php echo base_url(); ?>" + featured_projects[featuredIndex]['product_image_url'];
+      featuredDescription.textContent = featured_projects[featuredIndex]['product_description'];
     }
   </script>
 </div>

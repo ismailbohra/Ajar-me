@@ -104,15 +104,51 @@ class AdminM extends CI_Model
         $query = $this->db->query($sql);
         return $this->db->insert_id();
     }
+    function insert_featured_project($file_location,$description)
+    {
+        $sql = "INSERT INTO `featured_project` (`project_image_url`,`description`) VALUES ('$file_location','$description')";
+        $query = $this->db->query($sql);
+        return $this->db->insert_id();
+    }
+    function insert_featured_products($file_location,$description ,$product_category)
+    {
+        $sql = "INSERT INTO `featured_products` (`product_image_url`,`description`,`product_category`) VALUES ('$file_location','$description','$product_category')";
+        $query = $this->db->query($sql);
+        return $this->db->insert_id();
+    }
     function get_slider_image()
     {
         $sql = "SELECT * from `slider-images`";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+    function get_featured_project()
+    {
+        $sql = "SELECT * from `featured_project`";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+    function get_featured_products()
+    {
+        $sql = "SELECT * from `featured_products`";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
     function delete_slider_image($filename)
     {
         $sql = "DELETE FROM `slider-images` WHERE `slider_image_url` = '$filename'";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+    function delete_featured_product($filename)
+    {
+        $sql = "DELETE FROM `featured_products` WHERE `product_image_url` = '$filename'";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+    function delete_featured_project($filename)
+    {
+        $sql = "DELETE FROM `featured_project` WHERE `project_image_url` = '$filename'";
         $query = $this->db->query($sql);
         return $query;
     }

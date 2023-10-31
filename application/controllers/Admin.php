@@ -9,7 +9,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->model('AdminM');
-		$this->load->model('HomeM');
+        $this->load->model('HomeM');
     }
 
     public function index()
@@ -69,7 +69,7 @@ class Admin extends CI_Controller
         // echo '<pre>';
         // echo print_r($data);
         // die();
-        for ($j=0; $j < count($data['products']); $j++) { 
+        for ($j = 0; $j < count($data['products']); $j++) {
             $desc = "";
             $data['products'][$j]['product_description'] = json_decode($data['products'][$j]['product_description'], true);
             foreach ($data['products'][$j]['product_description'] as $pd) {
@@ -89,11 +89,14 @@ class Admin extends CI_Controller
             }
             $data['products'][$j]['product_description'] = $desc;
         }
-        
+
         // echo '<pre>';
         // echo print_r($data);
         // die();
         $i = 0;
+
+        $data['featured_projects'] = $this->AdminM->get_featured_project();
+        $data['featured_products'] = $this->AdminM->get_featured_products();
         foreach ($data['products'] as $p) {
             $product_image = $this->AdminM->get_product_image($p['id']);
             if (!empty($product_image)) {
@@ -190,6 +193,140 @@ class Admin extends CI_Controller
             redirect(base_url('/admin'));
         }
     }
+    public function featuredProduct()
+    {
+        if ($_SESSION['user']) {
+            $data['product_category'] = $this->AdminM->get_category();
+            $data['featured_products'] = $this->AdminM->get_featured_products();
+
+            foreach ($data['featured_products'] as &$fp) { // Note the & to modify the original array by reference
+                $category_id = $fp['product_category'];
+                $category_name = $this->getCategoryNameById($data['product_category'], $category_id);
+                $fp['product_category'] = $category_name;
+            }
+
+            $this->load->view('Admin/Header');
+            $this->load->view('Admin/FeaturedProduct', $data);
+        } else {
+            redirect(base_url('/admin'));
+        }
+    }
+
+    // Helper function to get category name by ID
+    private function getCategoryNameById($categories, $categoryId)
+    {
+        foreach ($categories as $category) {
+            if ($category['id'] == $categoryId) {
+                return $category['name'];
+            }
+        }
+        return ''; // Return an empty string if category ID is not found
+    }
+
+    public function submit_featured_product()
+    {
+        if (empty($_SESSION['user'])) {
+            redirect('/admin');
+        }
+        if (!empty($_POST)) {
+            $description = $_POST['description'];
+            $product_category = $_POST['product-category'];
+            if (!empty($_FILES['product-image'])) {
+                echo "file temp location => " . $_FILES['product-image']['tmp_name'];
+                echo "<br>";
+                $file_name = "/uploads/featured_product/" . $_FILES['product-image']['name'];
+                $location = pathinfo(pathinfo(__DIR__, PATHINFO_DIRNAME), PATHINFO_DIRNAME);
+                $file_location = $location . "/" . $file_name;
+                echo "file location => " . $file_location;
+                echo "<br>";
+                if (!is_dir('uploads/featured_product')) {
+                    mkdir("uploads/featured_product", 0777, true);
+                }
+                if (move_uploaded_file($_FILES['product-image']['tmp_name'], $file_location)) {
+
+                    chmod($file_location, 0777);
+                    $this->AdminM->insert_featured_products($file_name, $description, $product_category);
+                }
+            }
+        }
+
+        redirect(base_url('/admin/FeaturedProduct'));
+    }
+    public function delete_featured_product()
+    {
+
+        if (empty($_SESSION['user'])) {
+            redirect('/admin');
+        }
+
+        // echo $_POST['imageurl'];
+        // die();
+        $result = $this->AdminM->delete_featured_product($_POST['imageurl']);
+
+        if ($result) {
+            redirect('/admin/featuredProduct');
+        } else {
+            redirect('/admin');
+        }
+    }
+    public function delete_featured_project()
+    {
+
+        if (empty($_SESSION['user'])) {
+            redirect('/admin');
+        }
+
+        // echo $_POST['imageurl'];
+        // die();
+        // Implement the logic to delete the image in your model
+        $result = $this->AdminM->delete_featured_project($_POST['imageurl']);
+
+        // Return a response (success or error) to the client
+        if ($result) {
+            redirect('/admin/featuredProject');
+        } else {
+            redirect('/admin');
+        }
+    }
+    public function submit_featured_project()
+    {
+        if (empty($_SESSION['user'])) {
+            redirect('/admin');
+        }
+        if (!empty($_POST)) {
+            $description = $_POST['description'];
+            if (!empty($_FILES['product-image'])) {
+                echo "file temp location => " . $_FILES['product-image']['tmp_name'];
+                echo "<br>";
+                $file_name = "/uploads/featured_project/" . $_FILES['product-image']['name'];
+                $location = pathinfo(pathinfo(__DIR__, PATHINFO_DIRNAME), PATHINFO_DIRNAME);
+                $file_location = $location . "/" . $file_name;
+                echo "file location => " . $file_location;
+                echo "<br>";
+                if (!is_dir('uploads/featured_project')) {
+                    mkdir("uploads/featured_project", 0777, true);
+                }
+
+                if (move_uploaded_file($_FILES['product-image']['tmp_name'], $file_location)) {
+
+                    chmod($file_location, 0777);
+                    $this->AdminM->insert_featured_project($file_name, $description);
+                }
+            }
+        }
+
+        redirect(base_url('/admin/FeaturedProject'));
+    }
+    public function featuredProject()
+    {
+        if ($_SESSION['user']) {
+            $data['featured_projects'] = $this->AdminM->get_featured_project();
+            $this->load->view('Admin/Header');
+            $this->load->view('Admin/FeaturedProject', $data);
+        } else {
+            redirect(base_url('/admin'));
+        }
+    }
 
     public function enquiry()
     {
@@ -246,7 +383,7 @@ class Admin extends CI_Controller
             $product_desc = json_encode($_POST['product-desc']);
             $product_category = $_POST['product-category'];
 
-            $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category, $header, $row ,$product_code);
+            $this->AdminM->update_product_details($product_id, $product_name, $product_desc, $product_category, $header, $row, $product_code);
 
             $product = array();
             if (isset($_POST['previous'])) {
@@ -394,16 +531,11 @@ class Admin extends CI_Controller
             redirect('/admin');
         }
 
-        $imageUrl = $this->input->post('imageUrl');
-
-        // Implement the logic to delete the image in your model
-        $result = $this->AdminM->delete_slider_image($imageUrl);
-
-        // Return a response (success or error) to the client
+        $result = $this->AdminM->delete_slider_image($_POST['imageurl']);
         if ($result) {
-            echo json_encode(['success' => true]);
+            redirect('/admin/slider');
         } else {
-            echo json_encode(['success' => false, 'error' => 'Failed to delete image']);
+            redirect('/admin');
         }
     }
 
