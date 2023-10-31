@@ -1,5 +1,6 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link rel="icon" href="<?= base_url() ?>assets/fav-ajar-logo.png" type="image/gif">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -8,6 +9,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 <title>AJAR</title>
 <style>
   * {
@@ -536,7 +538,7 @@
           <li class="dropdown-item">&emsp;<a href="#">HELM</a>&emsp;</li>
           <li class="dropdown-item">&emsp;<a href="#">NORSEAL</a>&emsp;</li> -->
           <?php foreach ($product_category as $pc) { ?>
-            <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/product/category/' . $pc['id'].'/'); ?>">
+            <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/product/category/' . $pc['id'] . '/'); ?>">
                 <?php echo $pc['name'] ?>
               </a>&emsp;</li>
           <?php } ?>
@@ -725,6 +727,7 @@
 <script>
   let products = [];
   let product_images = [];
+  let product_id = [];
   <?php
   foreach ($products as $p) {
     ?>
@@ -732,9 +735,10 @@
     products.push('<?php echo $p['product_code']; ?>');
     product_images.push('<?php echo base_url() . $p['product_image_url']; ?>');
     product_images.push('<?php echo base_url() . $p['product_image_url']; ?>');
+    product_id.push('<?php echo $p['id']; ?>');
+    product_id.push('<?php echo $p['id']; ?>');
   <?php } ?>
   // console.log(products);
-  // console.log(product_images);
   function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
       the text field element and an array of possible autocompleted values:*/
@@ -765,10 +769,12 @@
           b.innerHTML += arr[i].substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
           b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          b.innerHTML += "<input type='hidden' value='" + product_id[i] + "' name='product-id'>";
           /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function (e) {
             /*insert the value for the autocomplete text field:*/
             inp.value = this.getElementsByTagName("input")[0].value;
+            submitSearchForm();
             /*close the list of autocompleted values,
             (or any other open lists of autocompleted values:*/
             closeAllLists();
@@ -843,3 +849,8 @@
     }
   });
 </script>
+<!-- <script>
+  function redirectToProductPage(product) {
+    console.log(product);
+  }
+</script> -->

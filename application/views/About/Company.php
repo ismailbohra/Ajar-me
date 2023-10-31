@@ -165,6 +165,11 @@
         }
     }
 
+    .mission-div p {
+        text-align: justify;
+        text-justify: inter-word;
+    }
+
     .company-foundation {
         margin-top: 5rem;
         padding: 0rem 5rem;
@@ -236,8 +241,9 @@
 
     .foundation-card-body {
         padding: 2rem 1.5rem 2.5rem 1.5rem;
-        font-size: 18px;
+        font-size: 16px;
         text-align: justify;
+        text-justify: inter-word;
     }
 
     .company-founder {

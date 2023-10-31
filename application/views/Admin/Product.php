@@ -441,14 +441,14 @@
                             onclick="redirectToUrl('<?php echo base_url('/admin/delete_product/') . $p['id']; ?>');">
                             <i class="fa fa-trash"></i>&nbsp;&nbsp;Delete Product
                         </div>
-                        <div class="featured-button"
+                        <!-- <div class="featured-button"
                             onclick="redirectToUrl('<?php echo base_url('/admin/featured_product/') . $p['id']; ?>');">
                             <i <?php if ($p['featured'] == 1) {
                                 echo 'class="fa fa-heart"';
                             } else {
                                 echo 'class="fa fa-heart-o"';
                             } ?>></i>&nbsp;&nbsp;Mark as Featured
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
