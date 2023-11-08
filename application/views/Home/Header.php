@@ -664,6 +664,7 @@
   <div class="search-div" id="search-div">
     <div class="search-bar">
       <form class="search" id="search-form" action="<?php echo base_url('/product/update_search'); ?>" method="POST">
+        <input type="hidden" name="product-id" id="product-id">
         <div class="autocomplete" style="width:100%">
           <input id="myInput" type="text" name="searched-product" placeholder="search here..." autocomplete="off" <?php if (isset($_SESSION['searched-product'])) {
             echo "value = '" . $_SESSION['searched-product'] . "'";
@@ -738,7 +739,7 @@
     product_id.push('<?php echo $p['id']; ?>');
     product_id.push('<?php echo $p['id']; ?>');
   <?php } ?>
-  // console.log(products);
+  // console.log(product_id);
   function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
       the text field element and an array of possible autocompleted values:*/
@@ -769,11 +770,12 @@
           b.innerHTML += arr[i].substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
           b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-          b.innerHTML += "<input type='hidden' value='" + product_id[i] + "' name='product-id'>";
+          b.innerHTML += "<input type='hidden' value='" + product_id[i] + "' >";
           /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function (e) {
             /*insert the value for the autocomplete text field:*/
             inp.value = this.getElementsByTagName("input")[0].value;
+            document.getElementById("product-id").value = this.getElementsByTagName("input")[1].value;;
             submitSearchForm();
             /*close the list of autocompleted values,
             (or any other open lists of autocompleted values:*/

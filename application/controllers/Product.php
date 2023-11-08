@@ -86,7 +86,7 @@ class Product extends CI_Controller
 
     public function update_search()
     {
-        $searched_value = "";
+
         if (isset($_POST['searched-product'])) {
             $_SESSION['searched-product'] = $_POST['searched-product'];
         }
