@@ -75,6 +75,7 @@
 
     @media screen and (max-width:768px) {
       height: 70px;
+      background-color: white;
     }
   }
 
@@ -160,11 +161,11 @@
   }
 
   #navbar li a {
-    color: black;
     text-decoration: none;
   }
 
   #navbar li a:hover {
+    color: black;
     text-decoration: none;
   }
 
@@ -188,6 +189,7 @@
 
   .navbar-headings {
     font-weight: 600;
+    color: white;
   }
 
   .dropdown {
@@ -264,6 +266,9 @@
 
   #contact:hover .dropdown-item {
     padding: 1rem 0rem;
+  }
+  .dropdown-item a{
+    color: black;
   }
 
   .contact {
@@ -410,7 +415,7 @@
   }
 
   .search-div {
-    background-color: #C4C4C4;
+    background-color: transparent;
     z-index: 7;
     position: fixed;
     top: 90;
@@ -422,6 +427,7 @@
     justify-content: center;
 
     @media screen and (max-width:768px) {
+      background-color: #C4C4C4;
       justify-content: space-between;
       padding-right: 0;
       top: 70;
@@ -451,10 +457,14 @@
   }
 
   .search-close-icon {
+    color: white;
     margin-top: -5px;
     font-size: 40px;
     padding: 0px 15px;
     cursor: pointer;
+    @media screen and (max-width:768px) {
+        color: black;
+      }
   }
 
   .search .autocomplete input {
@@ -528,12 +538,18 @@
     background-color: DodgerBlue !important;
     color: #ffffff;
   }
+  .searchicon{
+    color: white;
+    @media screen and (max-width:768px) {
+      color: black;
+    }
+  }
 </style>
 <main id="main">
   <nav>
     <ul id="navbar">
       <li>
-        <div class="logo"><img src="<?php echo base_url('/assets/ajar-logo.png') ?>" alt="brand logo"
+        <div class="logo"><img src="<?php echo base_url('/assets/ajar-logo-white.png') ?>" alt="brand logo"
             style="height:70px;">
         </div>
       </li>
@@ -602,7 +618,7 @@
       <li><a href="<?php echo base_url('download'); ?>" class="navbar-headings">DOWNLOAD</a></li>
       <li><a href="<?php echo base_url('showroom'); ?>" class="navbar-headings">EXPERIENCE CENTER</a></li>
       <li><a href="<?php echo base_url('contact'); ?>" class="navbar-headings">CONTACT US</a></li>
-      <li><span class="glyphicon glyphicon-search" onclick="showSearchBar();"></span></li>
+      <li><span class="glyphicon glyphicon-search searchicon" onclick="showSearchBar();"></span></li>
     </ul>
     <ul id="navbar-small">
       <li>
@@ -611,8 +627,8 @@
         </div>
       </li>
       <li>
-        <div class="icons" style="margin-top:0px;"><span class="glyphicon glyphicon-search"
-            onclick="showSearchBar();"></span><span class="glyphicon glyphicon-menu-hamburger"
+        <div class="icons" style="margin-top:0px;"><span class="glyphicon glyphicon-search searchicon"
+            onclick="showSearchBar();"></span><span class="glyphicon glyphicon-menu-hamburger searchicon"
             onclick="openNav()"></span></div>
       </li>
     </ul>
