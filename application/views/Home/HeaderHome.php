@@ -45,6 +45,44 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 <title>AJAR - Ajar: Furniture Fittings and Accessories in Dubai</title>
+<script>
+  // Add this script to handle the scrolling behavior
+
+  // Select the navigation bar element
+  const items = ['about', 'home', 'download', 'product', 'showroom', 'contact','searchicon']
+
+  // Function to add the 'scrolled' class when the page is scrolled
+  function handleScroll() {
+    if (window.scrollY > 0) {
+      items.forEach(element => {
+        const item = document.getElementById(element);
+        item.classList.add('blackheading');
+      });
+      const navBar = document.getElementById('nav');
+      navBar.classList.add('scrolled');
+      const searchBar = document.getElementById('search-div');
+      searchBar.classList.add('search-div_scrolled');
+      const logo = document.getElementById('logoimage');
+      logo.classList.remove('logo_img');
+      logo.classList.add('logo_img_scrolled');
+    } else {
+      const searchBar = document.getElementById('search-div');
+      searchBar.classList.remove('search-div_scrolled');
+      const navBar = document.getElementById('nav');
+      navBar.classList.remove('scrolled');
+      const logo = document.getElementById('logoimage');
+      logo.classList.add('logo_img');
+      logo.classList.remove('logo_img_scrolled');
+      items.forEach(element => {
+        const item = document.getElementById(element);
+        item.classList.remove('blackheading');
+      });
+    }
+  }
+
+  // Listen for the 'scroll' event and call the handleScroll function
+  window.addEventListener('scroll', handleScroll);
+</script>
 <style>
   * {
     margin: 0;
@@ -77,6 +115,15 @@
       height: 70px;
       background-color: white;
     }
+  }
+
+  .scrolled {
+    background-color: white;
+    transition: background-color 0.5s ease;
+  }
+
+  .blackheading {
+    color: black !important;
   }
 
   #navbar {
@@ -175,6 +222,16 @@
     align-items: center;
   }
 
+  .logo_img {
+    width: 100;
+    content: url(<?php echo base_url('/assets/ajar-logo-white.png') ?>);
+  }
+
+  .logo_img_scrolled {
+    width: 100;
+    content: url(<?php echo base_url('/assets/ajar-logo.png') ?>);
+  }
+
   .hero {
     width: 100%;
     padding-top: 60px;
@@ -267,7 +324,8 @@
   #contact:hover .dropdown-item {
     padding: 1rem 0rem;
   }
-  .dropdown-item a{
+
+  .dropdown-item a {
     color: black;
   }
 
@@ -415,7 +473,6 @@
   }
 
   .search-div {
-    background-color: transparent;
     z-index: 7;
     position: fixed;
     top: 90;
@@ -432,6 +489,10 @@
       padding-right: 0;
       top: 70;
     }
+  }
+
+  .search-div_scrolled {
+    background-color: #C4C4C4
   }
 
   .search-bar {
@@ -462,9 +523,10 @@
     font-size: 40px;
     padding: 0px 15px;
     cursor: pointer;
+
     @media screen and (max-width:768px) {
-        color: black;
-      }
+      color: black;
+    }
   }
 
   .search .autocomplete input {
@@ -538,23 +600,24 @@
     background-color: DodgerBlue !important;
     color: #ffffff;
   }
-  .searchicon{
+
+  .searchicon {
     color: white;
+
     @media screen and (max-width:768px) {
       color: black;
     }
   }
 </style>
 <main id="main">
-  <nav>
-    <ul id="navbar">
+  <nav id="nav">
+    <ul class="" id="navbar">
       <li>
-        <div class="logo"><img src="<?php echo base_url('/assets/ajar-logo-white.png') ?>" alt="brand logo"
-            style="height:70px;">
+        <div class="logo"><img id="logoimage" class="logo_img" alt="brand logo" style="height:70px;">
         </div>
       </li>
-      <li><a href="<?php echo base_url(); ?>" class="navbar-headings">HOME</a></li>
-      <li id="about" onmouseover="on();" onmouseout="off();" class="navbar-headings">ABOUT US <span
+      <li><a href="<?php echo base_url(); ?>" class="navbar-headings" id="home">HOME</a></li>
+      <li id="about" onmouseover="on();" onmouseout="off();" class="navbar-headings" id="about">ABOUT US <span
           class="glyphicon glyphicon-chevron-down"></span>
         <ul class="about dropdown">
           <li class="dropdown-item">&emsp;<a href="<?php echo base_url('/About/Company'); ?>">Company</a>&emsp;</li>
@@ -563,7 +626,7 @@
         </ul>
       </li>
       <li style="position:relative;" id="products" onmouseover="on();" onmouseout="off();" class="navbar-headings"><a
-          href="<?php echo base_url('/product'); ?>" class="navbar-headings">PRODUCTS <span
+          href="<?php echo base_url('/product'); ?>" class="navbar-headings" id="product">PRODUCTS <span
             class="glyphicon glyphicon-chevron-down"></span></a>
         <ul class="products dropdown">
           <!-- <li class="dropdown-item" id="products-submenu" style="justify-content:space-between;">&emsp;AJAR <span
@@ -615,10 +678,10 @@
             <li class="dropdown-item">&emsp;<a href="#">Office Address</a>&emsp;</li>
           </ul>
       </li> -->
-      <li><a href="<?php echo base_url('download'); ?>" class="navbar-headings">DOWNLOAD</a></li>
-      <li><a href="<?php echo base_url('showroom'); ?>" class="navbar-headings">EXPERIENCE CENTER</a></li>
-      <li><a href="<?php echo base_url('contact'); ?>" class="navbar-headings">CONTACT US</a></li>
-      <li><span class="glyphicon glyphicon-search searchicon" onclick="showSearchBar();"></span></li>
+      <li><a href="<?php echo base_url('download'); ?>" class="navbar-headings" id="download">DOWNLOAD</a></li>
+      <li><a href="<?php echo base_url('showroom'); ?>" class="navbar-headings" id="showroom">EXPERIENCE CENTER</a></li>
+      <li><a href="<?php echo base_url('contact'); ?>" class="navbar-headings" id="contact">CONTACT US</a></li>
+      <li><span id="searchicon" class="glyphicon glyphicon-search searchicon" onclick="showSearchBar();"></span></li>
     </ul>
     <ul id="navbar-small">
       <li>
