@@ -66,7 +66,7 @@
   nav {
     height: 90px;
     width: 100%;
-    background-color: white;
+    background-color: transparent;
     z-index: 10;
     display: flex;
     justify-content: center;
