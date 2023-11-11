@@ -85,7 +85,7 @@
             @media screen and (max-width:576px) {
                 flex-direction: column;
                 height: auto;
-            }
+                            }
         }
     }
 
@@ -97,6 +97,7 @@
         @media screen and (max-width:576px) {
             width: 100%;
             height: 200px;
+            text-align: center;
         }
     }
 
@@ -108,16 +109,20 @@
         @media screen and (max-width:576px) {
             width: 100%;
             height: 200px;
+            text-align: center;
         }
     }
 
     .showroom_image1 img,
     .showroom_image2 img,
     .showroom_image3 img {
-        width: 100%;
+        /* width: 100%; */
         height: 100%;
         border-radius: 15px;
         filter: drop-shadow(2px 2px 2px black);
+        @media screen and (max-width:576px) {
+            width: 225px;
+        }
     }
 
     .modal {
