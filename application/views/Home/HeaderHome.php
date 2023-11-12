@@ -916,14 +916,14 @@
         /*and and make the current item more visible:*/
         addActive(x);
       }
-      // else if (e.keyCode == 13) {
-      //   /*If the ENTER key is pressed, prevent the form from being submitted,*/
-      //   e.preventDefault();
-      //   if (currentFocus > -1) {
-      //     /*and simulate a click on the "active" item:*/
-      //     if (x) x[currentFocus].click();
-      //   }
-      // }
+      else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
     });
     function addActive(x) {
       /*a function to classify an item as "active":*/
