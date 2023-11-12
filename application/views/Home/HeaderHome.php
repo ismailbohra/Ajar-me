@@ -49,7 +49,7 @@
   // Add this script to handle the scrolling behavior
 
   // Select the navigation bar element
-  const items = ['about', 'home', 'download', 'product', 'showroom', 'contact','searchicon']
+  const items = ['about', 'home', 'download', 'product', 'showroom', 'contact', 'searchicon']
 
   // Function to add the 'scrolled' class when the page is scrolled
   function handleScroll() {
@@ -777,6 +777,7 @@
   <div class="search-div" id="search-div">
     <div class="search-bar">
       <form class="search" id="search-form" action="<?php echo base_url('/product/update_search'); ?>" method="POST">
+        <input type="hidden" id="product-id" name="product-id">
         <div class="autocomplete" style="width:100%">
           <input id="myInput" type="text" name="searched-product" placeholder="search here..." autocomplete="off" <?php if (isset($_SESSION['searched-product'])) {
             echo "value = '" . $_SESSION['searched-product'] . "'";
@@ -887,7 +888,8 @@
           b.addEventListener("click", function (e) {
             /*insert the value for the autocomplete text field:*/
             inp.value = this.getElementsByTagName("input")[0].value;
-            document.getElementById("product-id").value = this.getElementsByTagName("input")[1].value;;
+            console.log(this.getElementsByTagName("input")[1].value)
+            document.getElementById("product-id").value = this.getElementsByTagName("input")[1].value;
             submitSearchForm();
             /*close the list of autocompleted values,
             (or any other open lists of autocompleted values:*/
