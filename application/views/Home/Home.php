@@ -431,7 +431,7 @@
     margin-top: -10rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    place-items: center;
+    /* place-items: center; */
     padding: 5rem;
     grid-row-gap: 15rem;
     max-width: 1200px;
@@ -446,6 +446,7 @@
     border-radius: 15px;
     padding: 1rem;
     width: 250px;
+    min-height:400px;
     height: 400px;
     border: 8px solid #6F6868;
   }
@@ -475,8 +476,9 @@
     font-size: 22px;
     margin: auto;
     margin-top: 2rem;
-    padding: 0;
-
+    padding: 0;    
+  }
+  .short_text{
     overflow: hidden;
     -webkit-box-orient: vertical;
     display: -webkit-box;
@@ -1143,7 +1145,7 @@
                     style="height:100px;width:100px;object-fit: contain;">
                 </div>
               </a>
-              <p>
+              <p class="short_text" onclick="this.classList.toggle('short_text');toggle_text('<?php echo $i; ?>');">
                 <?php echo $product['description'] ?>
               </p>
             </div>
@@ -1155,7 +1157,7 @@
                     style="height:100px;width:100px;object-fit: contain;">
                 </div>
               </a>
-              <p>
+              <p class="short_text" onclick="this.classList.toggle('short_text');toggle_text('<?php echo $i; ?>');">
                 <?php echo $product['description'] ?>
               </p>
             </div>
@@ -1284,6 +1286,15 @@
       featuredImage.src = "<?php echo base_url(); ?>" + featured_projects[featuredIndex]['product_image_url'];
       featuredDescription.textContent = featured_projects[featuredIndex]['product_description'];
     
+    }
+
+    function toggle_text(index){
+      let featured = document.getElementsByClassName('products-card');
+      if(featured[index-1].style.height == 'auto'){
+        featured[index-1].style.height = '400px';
+      }else{
+        featured[index-1].style.height = 'auto';
+      }
     }
   </script>
 </div>
