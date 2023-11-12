@@ -8,7 +8,7 @@
 
         @media screen and (max-width:600px) {
             padding-top: 70px;
-            padding-inline: 2rem;
+            padding-inline: 3rem;
         }
     }
 
@@ -85,7 +85,8 @@
             @media screen and (max-width:576px) {
                 flex-direction: column;
                 height: auto;
-                            }
+                justify-content: center;
+            }
         }
     }
 
@@ -116,12 +117,13 @@
     .showroom_image1 img,
     .showroom_image2 img,
     .showroom_image3 img {
-        /* width: 100%; */
+        width: 100%; 
         height: 100%;
         border-radius: 15px;
         filter: drop-shadow(2px 2px 2px black);
+        
         @media screen and (max-width:576px) {
-            width: 225px;
+            width: 200px;
         }
     }
 
